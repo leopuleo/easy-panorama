@@ -9,7 +9,7 @@ namespace EasyPanorama;
  * so that it is ready for translation.
  *
  * @link            https://github.com/leopuleo/easy-panorama
- * @since           0.9
+ * @since           1.0.0
  * @package         EasyPanorama
  *
  * @subpackage      EasyPanorama/includes
@@ -30,7 +30,7 @@ class EasyPanoramai18n {
   /**
    * The domain specified for this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      string    $domain    The domain identifier for this plugin.
    */
@@ -39,7 +39,7 @@ class EasyPanoramai18n {
   /**
    * Load the plugin text domain for translation.
    *
-   * @since    0.9
+   * @since    1.0.0
    */
   public function loadPluginTextdomain() {
 
@@ -54,7 +54,7 @@ class EasyPanoramai18n {
   /**
    * Set the domain equal to that of the specified domain.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @param    string    $domain    The domain that represents the locale of this plugin.
    */
   public function setDomain($domain) {

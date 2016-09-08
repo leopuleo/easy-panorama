@@ -18,7 +18,7 @@ class EasyPanoramaAdmin {
   /**
    * The ID of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      string    $plugin_name    The ID of this plugin.
    */
@@ -27,7 +27,7 @@ class EasyPanoramaAdmin {
   /**
    * The version of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      string    $version    The current version of this plugin.
    */
@@ -36,7 +36,7 @@ class EasyPanoramaAdmin {
   /**
    * Loading the panorama options
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      array    $options_panorama    The panorama options.
    */
@@ -45,7 +45,7 @@ class EasyPanoramaAdmin {
   /**
    * Loading the lightbox options
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      array    $options_advanced    The advanced options.
    */
@@ -54,7 +54,7 @@ class EasyPanoramaAdmin {
   /**
    * Initialize the class and set its properties.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @param      string    $plugin_name       The name of this plugin.
    * @param      string    $version    The version of this plugin.
    * @param      string    $options_autodetect       The autodetection options.
@@ -72,7 +72,7 @@ class EasyPanoramaAdmin {
   /**
    * Register the JavaScript for the admin area.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function enqueueScripts() {
@@ -83,7 +83,7 @@ class EasyPanoramaAdmin {
   /**
    * Register the plugin link in plugins list page.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function addPluginLinks($links) {
@@ -96,7 +96,7 @@ class EasyPanoramaAdmin {
   /**
    * Add button to WP Editor
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function addPanoramaButton() {
@@ -106,7 +106,7 @@ class EasyPanoramaAdmin {
   /**
    * Add plugin option page
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function addSettingPage() {
@@ -123,7 +123,7 @@ class EasyPanoramaAdmin {
   /**
    * Register setting page sections and fields
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function settingsInit() {
@@ -224,7 +224,7 @@ class EasyPanoramaAdmin {
   /**
    * Render setting page sections and fields
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
 
@@ -345,7 +345,7 @@ class EasyPanoramaAdmin {
   /**
    * Render the setting form and tabs
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function easyPanoramaSettingsPage() {
@@ -401,7 +401,7 @@ class EasyPanoramaAdmin {
   /**
    * Sanitize Panorama fields
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function sanitizePanorama($input) {
@@ -431,7 +431,7 @@ class EasyPanoramaAdmin {
   /**
    * Sanitize advanced fields
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
   public function sanitizeAdvanced($input) {

@@ -6,7 +6,7 @@ namespace EasyPanorama;
  * The public-facing functionality of the plugin.
  *
  * @link            https://github.com/leopuleo/easy-panorama
- * @since           0.9
+ * @since           1.0.0
  * @package         EasyPanorama
  *
  * @subpackage    EasyPanorama/public
@@ -27,7 +27,7 @@ class EasyPanoramaPublic {
   /**
    * The ID of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      string    $plugin_name    The ID of this plugin.
    */
@@ -36,7 +36,7 @@ class EasyPanoramaPublic {
   /**
    * The version of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      string    $version    The current version of this plugin.
    */
@@ -45,7 +45,7 @@ class EasyPanoramaPublic {
   /**
    * Loading the panorama options
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      array    $options_panorama   The panorama options.
    */
@@ -54,7 +54,7 @@ class EasyPanoramaPublic {
   /**
    * Loading the advanced options
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @var      array    $options_advanced    The advanced options for the plugin.
    */
@@ -63,7 +63,7 @@ class EasyPanoramaPublic {
   /**
    * Initialize the class and set its properties.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @param    string    $plugin_name       The name of this plugin.
    * @param    string    $version    The version of this plugin.
    * @param    string    $options_panorama   The panorama options.
@@ -80,7 +80,7 @@ class EasyPanoramaPublic {
   /**
    * Register the stylesheets for the public-facing side of the site.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
   public function enqueueStyles() {
@@ -103,7 +103,7 @@ class EasyPanoramaPublic {
   /**
    * Register the JavaScript for the public-facing side of the site.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
   public function enqueueScripts() {
@@ -137,7 +137,7 @@ class EasyPanoramaPublic {
    * Localize vars for Panorama init
    * Print vars stored in db and passed to js files
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
 
@@ -158,25 +158,29 @@ class EasyPanoramaPublic {
   /**
    * Register shortcode configuration
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   public
    */
-  public function shortcodeConfig() {
+  public function shortcodeConfig($attr) {
 
     shortcode_atts(
       array(
-        'id' => '1',
-        'name' => 'default-gallery',
+        'id' => '1'
       ),
       $attr, 'easy_panorama');
 
     ob_start();
-
     //Retrieve Panorama/attachment ID
     $id = $attr['id'];
 
     //Retrieve Panorama/attachment meta
-    $title = get_post_meta($id, 'template_gallery', true);
-      return ob_get_clean();
+    $src = wp_get_attachment_url($id);
+    $title = get_the_title($id);
+    $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
+
+    echo '<div class="easy-panorama" data-meta=""><img src="' . $src . '" title="' . $title . '" alt="' . $alt . '"></div>';
+    return ob_get_clean();
+
+    add_shortcode("easy_panorama", "shortcode_atts");
   }
 }

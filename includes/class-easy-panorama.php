@@ -9,7 +9,7 @@ namespace EasyPanorama;
  * public-facing side of the site and the admin area.
  *
  * @link            https://github.com/leopuleo/easy-panorama
- * @since           0.9
+ * @since           1.0.0
  * @package         EasyPanorama
  *
  * @subpackage      EasyPanorama/includes
@@ -35,7 +35,7 @@ class EasyPanorama {
    * The loader that's responsible for maintaining and registering all hooks that power
    * the plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      EasySwipeboxLoader    $loader    Maintains and registers all hooks for the plugin.
    */
@@ -44,7 +44,7 @@ class EasyPanorama {
   /**
    * The unique identifier of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      string    $plugin_name    The string used to uniquely identify this plugin.
    */
@@ -53,7 +53,7 @@ class EasyPanorama {
   /**
    * The current version of the plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      string    $version    The current version of the plugin.
    */
@@ -62,7 +62,7 @@ class EasyPanorama {
   /**
    * The main dir of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      string    $version    The current version of the plugin.
    */
@@ -71,7 +71,7 @@ class EasyPanorama {
   /**
    * Panorama options of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      array    $options_panorama    The options for panorama behaviour and appereance.
    */
@@ -80,7 +80,7 @@ class EasyPanorama {
   /**
    * Advanced options of this plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      array    $options_advanced    The advanced options for the plugin.
    */
@@ -93,12 +93,12 @@ class EasyPanorama {
    * Load the dependencies, define the locale, and set the hooks for the admin area and
    * the public-facing side of the site.
    *
-   * @since    0.9
+   * @since    1.0.0
    */
   public function __construct() {
 
     $this->plugin_name = 'easy-panorama';
-    $this->version = '0.9';
+    $this->version = '1.0.0';
     $this->plugin_basename = plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php');
 
     // Define defaults for panorama options
@@ -138,7 +138,7 @@ class EasyPanorama {
    * Create an instance of the loader which will be used to register the hooks
    * with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
   private function loadDependencies() {
@@ -176,7 +176,7 @@ class EasyPanorama {
    * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
    * with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
   private function setLocale() {
@@ -192,7 +192,7 @@ class EasyPanorama {
    * Register all of the hooks related to the admin area functionality
    * of the plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
   private function defineAdminHooks() {
@@ -211,7 +211,7 @@ class EasyPanorama {
    * Register all of the hooks related to the public-facing functionality
    * of the plugin.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    */
   private function definePublicHooks() {
@@ -220,13 +220,14 @@ class EasyPanorama {
 
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueStyles');
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueScripts');
+    $this->loader->addShortcode('easy_panorama', $plugin_public, 'shortcodeConfig');
 
   }
 
   /**
    * Run the loader to execute all of the hooks with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    */
   public function run() {
     $this->loader->run();
@@ -236,7 +237,7 @@ class EasyPanorama {
    * The name of the plugin used to uniquely identify it within the context of
    * WordPress and to define internationalization functionality.
    *
-   * @since     0.9
+   * @since     1.0.0
    * @return    string    The name of the plugin.
    */
   public function getPluginName() {
@@ -246,7 +247,7 @@ class EasyPanorama {
   /**
    * The reference to the class that orchestrates the hooks with the plugin.
    *
-   * @since     0.9
+   * @since     1.0.0
    * @return    Plugin_Name_Loader    Orchestrates the hooks of the plugin.
    */
   public function getLoader() {
@@ -256,7 +257,7 @@ class EasyPanorama {
   /**
    * Retrieve the version number of the plugin.
    *
-   * @since     0.9
+   * @since     1.0.0
    * @return    string    The version number of the plugin.
    */
   public function getVersion() {
@@ -266,7 +267,7 @@ class EasyPanorama {
   /**
    * Retrieve the main dir of the plugin.
    *
-   * @since     0.9
+   * @since     1.0.0
    * @return    string    The version number of the plugin.
    */
   public function getPluginBasename() {
@@ -276,7 +277,7 @@ class EasyPanorama {
   /**
    * Retrieve the options for panorama settings.
    *
-   * @since     0.9
+   * @since     1.0.0
    * @return    array    The options for panorama setting.
    */
   public function getOptionsPanorama() {
@@ -286,7 +287,7 @@ class EasyPanorama {
   /**
    * Retrieve the options for advanced settings.
    *
-   * @since     0.9
+   * @since     1.0.0
    * @return    array    The options for advanced setting.
    */
   public function getOptionsAdvanced() {

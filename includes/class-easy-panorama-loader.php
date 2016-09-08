@@ -29,7 +29,7 @@ class EasyPanoramaLoader {
   /**
    * The array of actions registered with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
    */
@@ -38,7 +38,7 @@ class EasyPanoramaLoader {
   /**
    * The array of filters registered with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   protected
    * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
    */
@@ -47,19 +47,20 @@ class EasyPanoramaLoader {
   /**
    * Initialize the collections used to maintain the actions and filters.
    *
-   * @since    0.9
+   * @since    1.0.0
    */
   public function __construct() {
 
     $this->actions = array();
     $this->filters = array();
+    $this->shortcodes = array();
 
   }
 
   /**
    * Add a new action to the collection to be registered with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @param    string               $hook             The name of the WordPress action that is being registered.
    * @param    object               $component        A reference to the instance of the object on which the action is defined.
    * @param    string               $callback         The name of the function definition on the $component.
@@ -73,7 +74,7 @@ class EasyPanoramaLoader {
   /**
    * Add a new filter to the collection to be registered with WordPress.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @param    string               $hook             The name of the WordPress filter that is being registered.
    * @param    object               $component        A reference to the instance of the object on which the filter is defined.
    * @param    string               $callback         The name of the function definition on the $component.
@@ -85,10 +86,23 @@ class EasyPanoramaLoader {
   }
 
   /**
+   * Add a new shortcode to the collection to be registered with WordPress
+   *
+   * @since     1.0.0
+   * @param     string        $tag            The name of the new shortcode.
+   * @param     object        $component      A reference to the instance of the object on which the shortcode is defined.
+   * @param     string        $callback       The name of the function that defines the shortcode.
+   */
+  public function addShortcode( $tag, $component, $callback, $priority = 10, $accepted_args = 2 ) {
+      $this->shortcodes = $this->add( $this->shortcodes, $tag, $component, $callback, $priority, $accepted_args );
+  }
+
+
+  /**
    * A utility function that is used to register the actions and hooks into a single
    * collection.
    *
-   * @since    0.9
+   * @since    1.0.0
    * @access   private
    * @param    array                $hooks            The collection of hooks that is being registered (that is, actions or filters).
    * @param    string               $hook             The name of the WordPress filter that is being registered.
@@ -125,6 +139,10 @@ class EasyPanoramaLoader {
 
     foreach ($this->actions as $hook) {
       add_action($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
+    }
+
+    foreach ( $this->shortcodes as $hook ) {
+      add_shortcode( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
     }
 
   }

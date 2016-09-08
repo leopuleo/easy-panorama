@@ -69,22 +69,13 @@ class EasyPanorama {
   protected $plugin_basename;
 
   /**
-   * Autodetect options of this plugin.
+   * Panorama options of this plugin.
    *
    * @since    0.9
    * @access   protected
-   * @var      array    $options_autodetect    The options for autodetect functionalies.
+   * @var      array    $options_panorama    The options for panorama behaviour and appereance.
    */
-  protected $options_autodetect;
-
-  /**
-   * Lightbox options of this plugin.
-   *
-   * @since    0.9
-   * @access   protected
-   * @var      array    $options_lightbox    The options for lightbox behaviour and appereance.
-   */
-  protected $options_lightbox;
+  protected $options_panorama;
 
   /**
    * Advanced options of this plugin.
@@ -110,34 +101,22 @@ class EasyPanorama {
     $this->version = '0.9';
     $this->plugin_basename = plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php');
 
-    // Define defaults for autodetect options
-    $this->defaults_autodetect = array (
-      'image' => 1,
-      'video' => 1,
-      'class_exclude' => '.no-panorama'
-    );
-
-    // Define defaults for lightbox options
-    $this->defaults_lightbox = array (
-      'useCSS' => 1,
-          'useSVG' => 1,
-          'removeBarsOnMobile' => 1,
-          'hideCloseButtonOnMobile' => 0,
-          'hideBarsDelay' => '3000',
-          'videoMaxWidth' => '1140',
-          'vimeoColor' => '#cccccc',
-          'loopAtEnd' => 0,
-          'autoplayVideos' => 0
+    // Define defaults for panorama options
+    $this->defaults_panorama = array (
+      'gracefulFailure' => 1,
+      'failureMessage' => __('Scroll left/right to pan through panorama.', $this->plugin_name),
+      'failureMessageInsert' => 'after',
+      'meta' => 0,
+      'minimumOverflow' => '200',
+      'startPosition' => '0.5',
     );
 
     // Define defaults for advanced options
     $this->defaults_advanced = array (
       'loadingPlace' => 'footer',
-      'debugMode' => 0
     );
 
-    $this->options_autodetect = wp_parse_args(get_option('easyPanorama_autodetect'), $this->defaults_autodetect);
-    $this->options_lightbox = wp_parse_args(get_option('easyPanorama_lightbox'), $this->defaults_lightbox);
+    $this->options_panorama = wp_parse_args(get_option('easyPanorama_panorama'), $this->defaults_panorama);
     $this->options_advanced = wp_parse_args(get_option('easyPanorama_advanced'), $this->defaults_advanced);
 
     $this->loadDependencies();
@@ -187,7 +166,7 @@ class EasyPanorama {
      */
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-easy-panorama-public.php';
 
-    $this->loader = new EasySwipeboxLoader();
+    $this->loader = new EasyPanoramaLoader();
 
   }
 
@@ -218,13 +197,12 @@ class EasyPanorama {
    */
   private function defineAdminHooks() {
 
-    $plugin_admin = new EasySwipeboxAdmin($this->getPluginName(), $this->getVersion(), $this->getOptionsAutodetect(), $this->getOptionsLightbox(), $this->getOptionsAdvanced(), $this->getPluginBasename());
+    $plugin_admin = new EasyPanoramaAdmin($this->getPluginName(), $this->getVersion(), $this->getOptionsPanorama(), $this->getOptionsAdvanced(), $this->getPluginBasename());
 
-    $this->loader->addAction('admin_enqueue_scripts', $plugin_admin, 'EnqueueStyles');
     $this->loader->addAction('admin_enqueue_scripts', $plugin_admin, 'enqueueScripts');
-    $this->loader->addAction('admin_menu', $plugin_admin, 'AddSettingPage');
-    $this->loader->addAction('admin_init', $plugin_admin, 'SettingsInit');
-    $this->loader->addAction('media_buttons', $plugin_admin, 'AddPanoramaButton');
+    $this->loader->addAction('admin_menu', $plugin_admin, 'addSettingPage');
+    $this->loader->addAction('admin_init', $plugin_admin, 'settingsInit');
+    $this->loader->addAction('media_buttons', $plugin_admin, 'addPanoramaButton');
     $this->loader->addFilter('plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'addPluginLinks');
 
   }
@@ -238,7 +216,7 @@ class EasyPanorama {
    */
   private function definePublicHooks() {
 
-    $plugin_public = new EasyPanoramaPublic($this->getPluginName(), $this->getVersion(), $this->getOptionsAutodetect(), $this->getOptionsLightbox(), $this->getOptionsAdvanced());
+    $plugin_public = new EasyPanoramaPublic($this->getPluginName(), $this->getVersion(), $this->getOptionsPanorama(), $this->getOptionsAdvanced());
 
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueStyles');
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueScripts');
@@ -296,23 +274,13 @@ class EasyPanorama {
   }
 
   /**
-   * Retrieve the options for autodetect.
+   * Retrieve the options for panorama settings.
    *
    * @since     0.9
-   * @return    array    The options for autodetect.
+   * @return    array    The options for panorama setting.
    */
-  public function getOptionsAutodetect() {
-    return $this->options_autodetect;
-  }
-
-  /**
-   * Retrieve the options for lightbox settings.
-   *
-   * @since     0.9
-   * @return    array    The options for lightbox setting.
-   */
-  public function getOptionsLightbox() {
-    return $this->options_lightbox;
+  public function getOptionsPanorama() {
+    return $this->options_panorama;
   }
 
   /**

@@ -1,19 +1,16 @@
 ;(function($){
   $( document ).ready(function() {
+    $('.easy-panorama').paver({
+      gracefulFailure: easyPanorama_localize_init_var.panorama.gracefulFailure,
+      failureMessage: easyPanorama_localize_init_var.panorama.failureMessage,
+      failureMessageInsert: easyPanorama_localize_init_var.panorama.failureMessageInsert,
+      meta: easyPanorama_localize_init_var.panorama.meta,
+      minimumOverflow: easyPanorama_localize_init_var.panorama.minimumOverflow,
+      startPosition: easyPanorama_localize_init_var.panorama.startPosition
+    });
 
-    // $( ".panorama" ).each(function( index ) {
+    console.log(easyPanorama_localize_init_var.panorama);
 
-    //   var dataRepeat = $(this).attr('data-repeat');
-    //   var dataDirection = $(this).attr('data-direction');
-    //   var dataAnimation = $(this).attr('data-animation');
-    //   var dataEasing = $(this).attr('data-easing');
-    //   var dataOverlay = $(this).attr('data-overlay');
-
-
-
-    //   //console.log( index + ": " + $( this ).attr('data-repeat') );
-    // });
-
-     $('.panorama').paver();
+    $('.panorama').paver();
   });
 })(jQuery);

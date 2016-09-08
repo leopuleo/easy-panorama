@@ -24,7 +24,7 @@ namespace EasyPanorama;
  * @author        leopuleo
  */
 
-class EasySwipeboxLoader {
+class EasyPanoramaLoader {
 
   /**
    * The array of actions registered with WordPress.

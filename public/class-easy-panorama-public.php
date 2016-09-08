@@ -43,29 +43,20 @@ class EasyPanoramaPublic {
   private $version;
 
   /**
-   * Loading the autodetect options
+   * Loading the panorama options
    *
    * @since    0.9
    * @access   private
-   * @var      array    $options_autodetect    The autodetection options.
+   * @var      array    $options_panorama   The panorama options.
    */
-  private $options_autodetect;
+  private $options_panorama;
 
   /**
-   * Loading the lightbox options
+   * Loading the advanced options
    *
    * @since    0.9
    * @access   private
-   * @var      array    $options_lightbox    The lightbox options.
-   */
-  private $options_lightbox;
-
-  /**
-   * Loading the lightbox options
-   *
-   * @since    0.9
-   * @access   private
-   * @var      array    $options_lightbox    The lightbox options.
+   * @var      array    $options_advanced    The advanced options for the plugin.
    */
   private $options_advanced;
 
@@ -73,17 +64,16 @@ class EasyPanoramaPublic {
    * Initialize the class and set its properties.
    *
    * @since    0.9
-   * @param      string    $plugin_name       The name of this plugin.
-   * @param      string    $version    The version of this plugin.
-   * @param      string    $options_autodetect       The autodetection options.
-   * @param      string    $options_lightbox    The lightbox options.
+   * @param    string    $plugin_name       The name of this plugin.
+   * @param    string    $version    The version of this plugin.
+   * @param    string    $options_panorama   The panorama options.
+   * @param    string    $options_advanced   The advanced options.
    */
-  public function __construct($plugin_name, $version, $options_autodetect, $options_lightbox, $options_advanced) {
+  public function __construct($plugin_name, $version, $options_panorama, $options_advanced) {
 
     $this->plugin_name = $plugin_name;
     $this->version = $version;
-    $this->options_autodetect = $options_autodetect;
-    $this->options_lightbox = $options_lightbox;
+    $this->options_panorama = $options_panorama;
     $this->options_advanced = $options_advanced;
   }
 
@@ -107,11 +97,7 @@ class EasyPanoramaPublic {
     wp_dequeue_style('jquery_panorama');
     wp_dequeue_style('jquery-panorama');
 
-    if ($this->options_advanced['debugMode'] == 1) {
-      wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paver.min.css', array(), $this->version, 'all');
-    } else {
-      wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paver.min.css', array(), $this->version, 'all');
-    }
+    wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paver.min.css', array(), $this->version, 'all');
   }
 
   /**
@@ -141,16 +127,10 @@ class EasyPanoramaPublic {
      * 3) Localized options with vars stored in db
      */
 
-    if ($this->options_advanced['debugMode'] == 1) {
-      wp_enqueue_script($this->plugin_name . '-paver', plugin_dir_url(__FILE__) . 'js/jquery.paver.min.js', array( 'jquery'), $this->version, $jsPosition);
-    } else {
-      wp_enqueue_script($this->plugin_name . '-paver', plugin_dir_url(__FILE__) . 'js/jquery.paver.min.js', array( 'jquery'), $this->version, $jsPosition);
-    }
-
+    wp_enqueue_script($this->plugin_name . '-paver', plugin_dir_url(__FILE__) . 'js/jquery.paver.min.js', array( 'jquery'), $this->version, $jsPosition);
     wp_enqueue_script($this->plugin_name . '-debounce', plugin_dir_url(__FILE__) . 'js/jquery.ba-throttle-debounce.min.js', array( 'jquery'), $this->version, $jsPosition);
-
     wp_enqueue_script($this->plugin_name .'-init', plugin_dir_url(__FILE__) . 'js/jquery.init.js', array( 'jquery'), $this->version, $jsPosition);
-    //wp_localize_script($this->plugin_name .'-init', 'easyPanorama_localize_init_var', $this->localizeInitVar());
+    wp_localize_script($this->plugin_name .'-init', 'easyPanorama_localize_init_var', $this->localizeInitVar());
   }
 
   /**
@@ -163,52 +143,40 @@ class EasyPanoramaPublic {
 
   public function localizeInitVar() {
     $localize_var = array(
-      'lightbox' => array(
-        'useCSS' => (bool)$this->options_lightbox['useCSS'],
-        'useSVG' => (bool)$this->options_lightbox['useSVG'],
-        'removeBarsOnMobile' => (bool)$this->options_lightbox['removeBarsOnMobile'],
-        'hideCloseButtonOnMobile' => (bool)$this->options_lightbox['hideCloseButtonOnMobile'],
-        'hideBarsDelay' => absint($this->options_lightbox['hideBarsDelay']),
-        'videoMaxWidth' => absint($this->options_lightbox['videoMaxWidth']),
-        'vimeoColor' => $this->sanitizeHexColor($this->options_lightbox['vimeoColor']),
-        'loopAtEnd' => (bool)$this->options_lightbox['loopAtEnd'],
-        'autoplayVideos' => (bool)$this->options_lightbox['autoplayVideos']
-      ),
-      'autodetect' => array(
-        'autodetectImage' => (bool)$this->options_autodetect['image'],
-        'autodetectVideo' => (bool)$this->options_autodetect['video'],
-        'autodetectExclude' => sanitize_text_field($this->options_autodetect['class_exclude'])
+      'panorama' => array(
+        'gracefulFailure' => (bool)$this->options_panorama['gracefulFailure'],
+        'failureMessage' => sanitize_text_field($this->options_panorama['failureMessage']),
+        'failureMessageInsert' => sanitize_text_field($this->options_panorama['failureMessageInsert']),
+        'meta' => (bool)$this->options_panorama['meta'],
+        'minimumOverflow' => absint($this->options_panorama['minimumOverflow']),
+        'startPosition' => absint($this->options_panorama['startPosition']),
       )
     );
     return $localize_var;
   }
 
   /**
-   * Sanitize HEX Color
+   * Register shortcode configuration
    *
    * @since    0.9
-   * @access   private
+   * @access   public
    */
-  private function sanitizeHexColor($color, $hash = false) {
-    // Remove any spaces and special characters before and after the string
-    $color = trim($color);
+  public function shortcodeConfig() {
 
-    // Remove any trailing '#' symbols from the color value
-    $color = str_replace('#', '', $color);
+    shortcode_atts(
+      array(
+        'id' => '1',
+        'name' => 'default-gallery',
+      ),
+      $attr, 'easy_panorama');
 
-    // If the string is 6 characters long then use it in pairs.
-    if (3 == strlen($color)) {
-        $color = substr($color, 0, 1) . substr($color, 0, 1) . substr($color, 1, 1) . substr($color, 1, 1) . substr($color, 2, 1) . substr($color, 2, 1);
-    }
+    ob_start();
 
-    $substr = array();
-    for ($i = 0; $i <= 5; $i++) {
-        $default    = (0 == $i) ? 'F' : ($substr[$i - 1]);
-        $substr[$i] = substr($color, $i, 1);
-        $substr[$i] = (false === $substr[$i] || !ctype_xdigit($substr[$i])) ? $default : $substr[$i];
-    }
-    $hex = implode('', $substr);
+    //Retrieve Panorama/attachment ID
+    $id = $attr['id'];
 
-    return (!$hash) ? $hex : '#' . $hex;
+    //Retrieve Panorama/attachment meta
+    $title = get_post_meta($id, 'template_gallery', true);
+      return ob_get_clean();
   }
 }

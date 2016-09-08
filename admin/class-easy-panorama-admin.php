@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
  * @subpackage    EasyPanorama/includes
  * @author        leopuleo
  */
-class EasySwipeboxAdmin {
+class EasyPanoramaAdmin {
 
   /**
    * The ID of this plugin.
@@ -34,22 +34,13 @@ class EasySwipeboxAdmin {
   private $version;
 
   /**
-   * Loading the autodetect options
+   * Loading the panorama options
    *
    * @since    0.9
    * @access   private
-   * @var      array    $options_autodetect    The autodetection options.
+   * @var      array    $options_panorama    The panorama options.
    */
-  private $options_autodetect;
-
-  /**
-   * Loading the lightbox options
-   *
-   * @since    0.9
-   * @access   private
-   * @var      array    $options_lightbox    The lightbox options.
-   */
-  private $options_lightbox;
+  private $options_panorama;
 
   /**
    * Loading the lightbox options
@@ -67,26 +58,15 @@ class EasySwipeboxAdmin {
    * @param      string    $plugin_name       The name of this plugin.
    * @param      string    $version    The version of this plugin.
    * @param      string    $options_autodetect       The autodetection options.
-   * @param      string    $options_lightbox    The lightbox options.
+   * @param      string    $options_panorama    The lightbox options.
    */
-  public function __construct($plugin_name, $version, $options_autodetect, $options_lightbox, $options_advanced) {
+  public function __construct($plugin_name, $version, $options_panorama, $options_advanced) {
 
     $this->plugin_name = $plugin_name;
     $this->version = $version;
-    $this->options_autodetect = $options_autodetect;
-    $this->options_lightbox = $options_lightbox;
+    $this->options_panorama = $options_panorama;
     $this->options_advanced = $options_advanced;
 
-  }
-
-  /**
-   * Register the stylesheets for the admin area.
-   *
-   * @since    0.9
-   * @access   public
-   */
-  public function enqueueStyles() {
-    wp_enqueue_style('wp-color-picker');
   }
 
   /**
@@ -114,12 +94,12 @@ class EasySwipeboxAdmin {
   }
 
   /**
-   * Add Easy Panorama Button to WP Editor
+   * Add button to WP Editor
    *
    * @since    0.9
    * @access   public
    */
-  public function AddPanoramaButton() {
+  public function addPanoramaButton() {
     echo '<span id="insert-panorama" class="button insert-panorama"><span class="dashicons dashicons-camera"></span> ' .  __('Add Panorama', $this->plugin_name) . '</a>';
   }
 
@@ -149,32 +129,23 @@ class EasySwipeboxAdmin {
   public function settingsInit() {
 
     // Register Settings
-    register_setting('easyPanorama_autodetect', 'easyPanorama_autodetect', array($this, 'sanitizeAutodetect'));
-    register_setting('easyPanorama_lightbox', 'easyPanorama_lightbox', array($this, 'sanitizeLightbox'));
+    register_setting('easyPanorama_panorama', 'easyPanorama_panorama', array($this, 'sanitizePanorama'));
     register_setting('easyPanorama_advanced', 'easyPanorama_advanced', array($this, 'sanitizeAdvanced'));
     register_setting('easyPanorama_overview', 'easyPanorama_overview');
 
-    // Section: Lightbox Settings
+    // Section: Panorama Settings
     add_settings_section(
-      'lightbox_section',
-      __('Lightbox settings', $this->plugin_name),
-      array($this, 'lightboxSectionRender'),
-      'easyPanorama_lightbox'
-    );
-
-    // Section: Autodetect Settings
-    add_settings_section(
-      'autodetect_section',
-      __('Autodetect settings', $this->plugin_name),
-      array($this, 'autodetectSectionRender'),
-      'easyPanorama_autodetect'
+      'panorama_section',
+      __('Panorama settings', $this->plugin_name),
+      array($this, 'panoramaSectionRender'),
+      'easyPanorama_panorama'
     );
 
     // Section: Advanced Settings
     add_settings_section(
       'advanced_section',
       __('Advanced settings', $this->plugin_name),
-      array($this, 'advancedtSectionRender'),
+      array($this, 'advancedSectionRender'),
       'easyPanorama_advanced'
     );
 
@@ -186,112 +157,58 @@ class EasySwipeboxAdmin {
       'easyPanorama_overview'
     );
 
-    // Field: Lightbox Settings -> Animation
+    // Field: Panorama Settings -> gracefulFailure
     add_settings_field(
-      'animation',
-      __('Animation type', $this->plugin_name),
-      array($this, 'animationRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
+      'gracefulFailure',
+      __('Insert failure message', $this->plugin_name),
+      array($this, 'gracefulFailureRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
-    // Field: Lightbox Settings -> SVG
+    // Field: Panorama Settings -> failureMessage
     add_settings_field(
-      'svg',
-      __('Use SVG Icons', $this->plugin_name),
-      array($this, 'svgRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
+      'failureMessage',
+      __('Failure message', $this->plugin_name),
+      array($this, 'failureMessageRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
-    // Field: Lightbox Settings -> Navigation Mobile
+    // Field: Panorama Settings -> failureMessageInsert
     add_settings_field(
-      'remove_navigation_mobile',
-      __('Navigation bar', $this->plugin_name),
-      array($this, 'removeNavigationMobileRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
+      'failureMessageInsert',
+      __('Failure message position', $this->plugin_name),
+      array($this, 'failureMessageInsertRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
-    // Field: Lightbox Settings -> Close Button Mobile
+    // Field: Panorama Settings -> meta
     add_settings_field(
-      'remove_close_button_mobile',
-      __('Close button', $this->plugin_name),
-      array($this, 'removeCloseButtonMobileRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
+      'meta',
+      __('Show image meta', $this->plugin_name),
+      array($this, 'metaRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
-    // Field: Lightbox Settings -> Hide Bar Delay
+    // Field: Panorama Settings -> minimumOverflow
     add_settings_field(
-      'hide_bars_delay',
-      __('Hide Bars', $this->plugin_name),
-      array($this, 'hideBarsDelayRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
+      'minimumOverflow',
+      __('Minimum overflow', $this->plugin_name),
+      array($this, 'minimumOverflowRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
-    // Field: Lightbox Settings -> Video Max Width
+    // Field: Panorama Settings -> startPosition
     add_settings_field(
-      'video_max_width',
-      __('Video max width', $this->plugin_name),
-      array($this, 'videoMaxWidthRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
-    );
-
-    // Field: Lightbox Settings -> Vimeo Color
-    add_settings_field(
-      'vimeo_color',
-      __('Vimeo controllers color', $this->plugin_name),
-      array($this, 'vimeoColorRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
-    );
-
-    // Field: Lightbox Settings -> Loop at the end
-    add_settings_field(
-      'loop_at_end',
-      __('Loop at the end', $this->plugin_name),
-      array($this, 'loopAtEndRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
-    );
-
-    // Field: Lightbox Settings -> Autoplay Video
-    add_settings_field(
-      'autoplay_videos',
-      __('Autoplay videos', $this->plugin_name),
-      array($this, 'autoplayVideosRender'),
-      'easyPanorama_lightbox',
-      'lightbox_section'
-    );
-
-    // Field: General Settings -> Autodetect Image
-    add_settings_field(
-      'autodetect_image',
-      __('Image links', $this->plugin_name),
-      array( $this, 'autodetectImageRender' ),
-      'easyPanorama_autodetect',
-      'autodetect_section'
-    );
-
-    // Field: General Settings -> Autodetect Video
-    add_settings_field(
-      'autodetect_video',
-      __('Video links', $this->plugin_name),
-      array($this, 'autodetectVideoRender'),
-      'easyPanorama_autodetect',
-      'autodetect_section'
-    );
-
-    // Field: General Settings -> Autodetect Exclude
-    add_settings_field(
-      'autodetect_exclude',
-      __('Exclude links', $this->plugin_name),
-      array($this, 'autodetectExcludeRender'),
-      'easyPanorama_autodetect',
-      'autodetect_section'
+      'startPosition',
+      __('Start position', $this->plugin_name),
+      array($this, 'startPositionRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
     // Field: Advanced Settings -> Loading Place
@@ -299,15 +216,6 @@ class EasySwipeboxAdmin {
       'loading_place',
       __('Loading place', $this->plugin_name),
       array($this, 'loadingPlaceRender'),
-      'easyPanorama_advanced',
-      'advanced_section'
-    );
-
-    // Field: Advanced Settings -> Debug Mode
-    add_settings_field(
-      'debug_mode',
-      __('Debug Mode', $this->plugin_name),
-      array($this, 'debugModeRender'),
       'easyPanorama_advanced',
       'advanced_section'
     );
@@ -320,152 +228,76 @@ class EasySwipeboxAdmin {
    * @access   public
    */
 
-  // Section: Lightbox Settings
-  public function lightboxSectionRender() {
+  // Section: Panorama Settings
+  public function panoramaSectionRender() {
     ?>
-      <p><?php _e('In this page you can customize the Panorama lightbox behaviour. Discover more about <strong><a href="http://brutaldesign.github.io/panorama/?source=easy-panorama-wp-plugin" target="_blank">Panorama options</a></strong>.', $this->plugin_name); ?><br>
+      <p><?php _e('This plugin uses <strong><a href="http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin" target="_blank">Paver</a></strong> In this page you can customize Paver behaviour. Discover more about <strong><a href="http://terrymun.github.io/paver/demo/usage-notes.html?source=easy-panorama-wp-plugin" target="_blank">Paver configuration options</a></strong>.', $this->plugin_name); ?><br>
       </p>
     <?php
   }
 
-  public function animationRender() {
-    ?>
-      <input id="easyPanorama_lightbox[useCSS]" type="radio" name="easyPanorama_lightbox[useCSS]" value="1" <?php if ($this->options_lightbox['useCSS'] == 1) {echo 'checked="checked"';} ?> /><?php _e('CSS', $this->plugin_name); ?>
-      <input id="easyPanorama_lightbox[useJquery]" type="radio" name="easyPanorama_lightbox[useCSS]" value="0" <?php if ($this->options_lightbox['useCSS'] == 0) {echo 'checked="checked"';} ?> /><?php _e('Jquery', $this->plugin_name); ?><br>
-      <em><?php _e('Select the method used to render the animations. Use jQuery if you are having problems with old browsers (Default: CSS).', $this->plugin_name); ?></em>
-    <?php
-  }
-
-  public function svgRender() {
+  public function gracefulFailureRender() {
     ?>
     <label>
-      <input type="hidden" id="hidden_easyPanorama_lightbox[useSVG]" name="easyPanorama_lightbox[useSVG]" value="0" />
-      <input id="easyPanorama_lightbox[useSVG]" type="checkbox" name="easyPanorama_lightbox[useSVG]" value="1" <?php if ($this->options_lightbox['useSVG'] == 1) {echo 'checked="checked"';} ?> />
-      <strong><?php _e('Use SVG Icons', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Disable this option if you are having problems with navigation icons not visible on some devices (Default: true).', $this->plugin_name); ?></em>
+      <input type="hidden" id="hidden_easyPanorama_panorama[gracefulFailure]" name="easyPanorama_panorama[gracefulFailure]" value="0" />
+      <input id="easyPanorama_panorama[gracefulFailure]" type="checkbox" name="easyPanorama_panorama[gracefulFailure]" value="1" <?php if ($this->options_panorama['gracefulFailure'] == 1) {echo 'checked="checked"';} ?> />
+      <?php _e('Insert failure message', $this->plugin_name); ?><br>
+      <em><?php _e('Allows the display of failure message at the desired DOM insertion location (Default: true).', $this->plugin_name); ?></em>
     </label>
     <?php
   }
 
-  public function removeNavigationMobileRender() {
+  public function failureMessageRender() {
     ?>
     <label>
-      <input type="hidden" id="hidden_easyPanorama_lightbox[removeBarsOnMobile]" name="easyPanorama_lightbox[removeBarsOnMobile]" value="0" />
-      <input id="easyPanorama_lightbox[removeBarsOnMobile]" type='checkbox' name='easyPanorama_lightbox[removeBarsOnMobile]' value='1' <?php if ($this->options_lightbox['removeBarsOnMobile'] == 1) {echo 'checked="checked"';} ?> />
-      <strong><?php _e('Hide navigation bar on mobile', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Select this options if you like to hide the navigation bar on mobile devices (Default: true).', $this->plugin_name); ?></em>
+      <input id="easyPanorama_panorama[failureMessage]" type="text" name="easyPanorama_panorama[failureMessage]" value="<?php echo $this->options_panorama['failureMessage']; ?>" /><br>
+      <em><?php _e('This message will appear in mobile devices with no gyroscopic data or no physical orientation support. (Default: <code>Scroll left/right to pan through panorama.</code>).', $this->plugin_name); ?></em>
     </label>
     <?php
   }
 
-  public function removeCloseButtonMobileRender() {
+  public function failureMessageInsertRender() {
+    ?>
+    <input id="easyPanorama_panorama[failureMessageInsert]" type="radio" name="easyPanorama_panorama[failureMessageInsert]" value="after" <?php if ($this->options_panorama['failureMessageInsert'] == 'after') {echo 'checked="checked"';} ?> /><?php _e('After', $this->plugin_name); ?>
+    <input id="easyPanorama_panorama[failureMessageInsert]" type="radio" name="easyPanorama_panorama[failureMessageInsert]" value="before" <?php if ($this->options_panorama['failureMessageInsert'] == 'before') {echo 'checked="checked"';} ?> /><?php _e('Before', $this->plugin_name); ?><br>
+    <em><?php _e('Select the location where the failure message will be inserted. (Default: After).', $this->plugin_name); ?></em>
+    <?php
+  }
+
+  public function metaRender() {
     ?>
     <label>
-      <input type="hidden" id="hidden_easyPanorama_lightbox[hideCloseButtonOnMobile]" name="easyPanorama_lightbox[hideCloseButtonOnMobile]" value="0" />
-      <input id="easyPanorama_lightbox[hideCloseButtonOnMobile]" type='checkbox' name='easyPanorama_lightbox[hideCloseButtonOnMobile]' value='1' <?php if ($this->options_lightbox['hideCloseButtonOnMobile'] == 1) {echo 'checked="checked"';} ?> />
-      <strong><?php _e('Hide close button on mobile', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Select this options if you like to hide the close button on mobile devices (Default: false).', $this->plugin_name); ?></em>
+      <input type="hidden" id="hidden_easyPanorama_panorama[meta]" name="easyPanorama_panorama[meta]" value="0" />
+      <input id="easyPanorama_panorama[meta]" type="checkbox" name="easyPanorama_panorama[meta]" value="1" <?php if ($this->options_panorama['meta'] == 1) {echo 'checked="checked"';} ?> />
+      <?php _e('Show alt/title meta on overlay', $this->plugin_name); ?><br>
+      <em><?php _e('Determines whether a metadata overlay should be displayed. When enabled, the plugin will retrieve the value(s) of the title and/or alt and inject them into the Paver container. (Default: false).', $this->plugin_name); ?></em>
     </label>
     <?php
   }
 
-  public function hideBarsDelayRender() {
+  public function minimumOverflowRender() {
     ?>
     <label>
-      <input id="easyPanorama_lightbox[hideBarsDelay]" type="number" name="easyPanorama_lightbox[hideBarsDelay]" value="<?php echo $this->options_lightbox['hideBarsDelay'];?>" />
-      <strong><?php _e('ms', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Enter the value in milliseconds after you want to hide the navigation bar (Default: 3000 ms).', $this->plugin_name); ?></em>
+      <input id="easyPanorama_panorama[minimumOverflow]" type="number" name="easyPanorama_panorama[minimumOverflow]" value="<?php echo $this->options_panorama['minimumOverflow'];?>" />
+      <?php _e('px', $this->plugin_name); ?><br>
+      <em><?php _e('The excess width the picture must have before Paver kicks in (Default: 200 px).', $this->plugin_name); ?></em>
     </label>
     <?php
   }
 
-  public function videoMaxWidthRender() {
+  public function startPositionRender() {
     ?>
-    <label>
-      <input id="easyPanorama_lightbox[videoMaxWidth]" type='number' name='easyPanorama_lightbox[videoMaxWidth]' value="<?php echo $this->options_lightbox['videoMaxWidth'];?>" />
-      <strong><?php _e('px', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Enter the video max width opened in the lightbox (Default: 1140 px).', $this->plugin_name); ?></em>
-    </label>
+    <input id="easyPanorama_panorama[startPosition]" type="radio" name="easyPanorama_panorama[startPosition]" value="0" <?php if ($this->options_panorama['startPosition'] == '0') {echo 'checked="checked"';} ?> /><?php _e('Left', $this->plugin_name); ?>
+    <input id="easyPanorama_panorama[startPosition]" type="radio" name="easyPanorama_panorama[startPosition]" value="0.5" <?php if ($this->options_panorama['startPosition'] == '0.5') {echo 'checked="checked"';} ?> /><?php _e('Center', $this->plugin_name); ?>
+    <input id="easyPanorama_panorama[startPosition]" type="radio" name="easyPanorama_panorama[startPosition]" value="1" <?php if ($this->options_panorama['startPosition'] == '1') {echo 'checked="checked"';} ?> /><?php _e('Right', $this->plugin_name); ?><br>
+    <em><?php _e('Determines the start position of the panorama (Default: Center).', $this->plugin_name); ?></em>
     <?php
   }
 
-  public function vimeoColorRender() {
-    ?>
-    <label>
-      <input id="easyPanorama_lightbox[vimeoColor]" class="color-field" type='text' name='easyPanorama_lightbox[vimeoColor]' value="<?php echo empty($this->options_lightbox['vimeoColor']) ? '#cccccc' : $this->options_lightbox['vimeoColor'];?>" /><br>
-      <em><?php _e('Select the color used for Vimeo controllers (Default: #cccccc).', $this->plugin_name); ?></em>
-    </label>
-    <?php
-  }
 
-  public function loopAtEndRender() {
-    ?>
-    <label>
-      <input type="hidden" id="hidden_easyPanorama_lightbox[loopAtEnd]" name="easyPanorama_lightbox[loopAtEnd]" value="0" />
-      <input id="easyPanorama_lightbox[loopAtEnd]" type="checkbox" name="easyPanorama_lightbox[loopAtEnd]" value="1" <?php if ($this->options_lightbox['loopAtEnd'] == 'true') {echo 'checked="checked"';} ?> />
-      <strong><?php _e('Loop', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Select this options if you like to loop back to the first image after the last is reached (Default: false).', $this->plugin_name); ?></em>
-    </label>
-    <?php
-  }
-
-  public function autoplayVideosRender() {
-    ?>
-    <label>
-      <input type="hidden" id="hidden_easyPanorama_lightbox[autoplayVideos]" name="easyPanorama_lightbox[autoplayVideos]" value="0" />
-      <input id="easyPanorama_lightbox[autoplayVideos]" type='checkbox' name='easyPanorama_lightbox[autoplayVideos]' value='1' <?php if ($this->options_lightbox['autoplayVideos'] == 1) {echo 'checked="checked"';} ?> />
-      <strong><?php _e('Play video at opening', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Select this options if you like to autoplay video at opening (Default: false).', $this->plugin_name); ?></em>
-    </label>
-    <?php
-  }
-
-  // Section: Autodetect
-  public function autodetectSectionRender() {
-    ?>
-      <p>
-        <?php _e('Select one or more options, <strong>Easy Panorama</strong> automatically detects the media type and add <code>class="panorama"</code> to their links.', $this->plugin_name); ?><br>
-              <?php _e('By default, <strong>Easy Panorama</strong> detects automatically links to <strong>images</strong> (jpg / jpeg / gif / png) and <strong>videos</strong> (Youtube / Vimeo).', $this->plugin_name); ?><br><br>
-              <?php _e('If you like to exclude some images or videos from autodetection enter the selector that groups these elements.', $this->plugin_name); ?><br>
-              <?php _e('By default, <strong>Easy Panorama</strong> uses <code>.no-panorama</code>.', $this->plugin_name); ?><br>
-      </p>
-    <?php
-  }
-
-  public function autodetectImageRender() {
-    ?>
-    <label>
-      <input type="hidden" id="hidden_easyPanorama_autodetect[image]" name="easyPanorama_autodetect[image]" value="0" />
-      <input id="easyPanorama_autodetect[image]" type="checkbox" name="easyPanorama_autodetect[image]" value="1" <?php if ($this->options_autodetect['image'] == 1) {echo 'checked="checked"';}?>
-      />
-      <?php _e('Add Panorama to image links by default', $this->plugin_name); ?>
-      <em>(<?php _e('jpg / jpeg / gif / png', $this->plugin_name); ?>)</em>
-    </label>
-    <?php
-  }
-
-  public function autodetectVideoRender() {
-    ?>
-    <label>
-      <input type="hidden" id="hidden_easyPanorama_autodetect[video]" name="easyPanorama_autodetect[video]" value="0" />
-      <input id="easyPanorama_autodetect[video]" type="checkbox" name="easyPanorama_autodetect[video]" value="1" <?php if ($this->options_autodetect['video'] == 1) {echo 'checked="checked"';} ?> />
-      <?php _e('Add Panorama to video links by default', $this->plugin_name); ?>
-        <em>(<?php _e('Youtube / Vimeo', $this->plugin_name); ?>)</em>
-    </label>
-    <?php
-  }
-
-  public function autodetectExcludeRender() {
-    ?>
-    <label>
-      <input id="easyPanorama_autodetect[class_exclude]" type="text" name="easyPanorama_autodetect[class_exclude]" value="<?php echo $this->options_autodetect['class_exclude']; ?>" /><br>
-      <em><?php _e('Enter the selector that groups the media you would like to exclude from autodetection. Use commas to separate multiple selectors (Default: <code>.no-panorama</code>).', $this->plugin_name); ?></em>
-    </label>
-    <?php
-  }
 
   // Section: Advanced Settings
-  public function advancedtSectionRender() {
+  public function advancedSectionRender() {
     ?>
       <p><?php _e('In this page you can customize the Easy Panorama advanced settings.', $this->plugin_name); ?> <?php _e('Please be carefull, the wrong settings combination can break your site.', $this->plugin_name); ?><br>
       </p>
@@ -474,35 +306,22 @@ class EasySwipeboxAdmin {
 
   public function loadingPlaceRender() {
     ?>
-      <input id="easyPanorama_advanced[loadingPlace]" type="radio" name="easyPanorama_advanced[loadingPlace]" value="header" <?php if ($this->options_advanced['loadingPlace'] == 'header') {echo 'checked="checked"';} ?> /><?php _e('Header', $this->plugin_name); ?>
-      <input id="easyPanorama_advanced[loadingPlace]" type="radio" name="easyPanorama_advanced[loadingPlace]" value="footer" <?php if ($this->options_advanced['loadingPlace'] == 'footer') {echo 'checked="checked"';} ?> /><?php _e('Footer', $this->plugin_name); ?><br>
+      <input id="easySwipeBox_advanced[loadingPlace]" type="radio" name="easySwipeBox_advanced[loadingPlace]" value="header" <?php if ($this->options_advanced['loadingPlace'] == 'header') {echo 'checked="checked"';} ?> /><?php _e('Header', $this->plugin_name); ?>
+      <input id="easySwipeBox_advanced[loadingPlace]" type="radio" name="easySwipeBox_advanced[loadingPlace]" value="footer" <?php if ($this->options_advanced['loadingPlace'] == 'footer') {echo 'checked="checked"';} ?> /><?php _e('Footer', $this->plugin_name); ?><br>
       <em><?php _e('Select where all the lightbox scripts should be placed. (Default: Footer).', $this->plugin_name); ?></em>
-    <?php
-  }
-
-  public function debugModeRender() {
-    ?>
-    <label>
-      <input type="hidden" id="hidden_easyPanorama_advanced[debugMode]" name="easyPanorama_advanced[debugMode]" value="0" />
-      <input id="easyPanorama_advanced[debugMode]" type='checkbox' name='easyPanorama_advanced[debugMode]' value='1' <?php if ($this->options_advanced['debugMode'] == 1) {echo 'checked="checked"';} ?> />
-      <strong><?php _e('Enable Debug', $this->plugin_name); ?></strong><br>
-      <em><?php _e('Select this options if you like to enqueue uncompressed CSS and JavaScript files (Default: false).', $this->plugin_name); ?></em>
-    </label>
     <?php
   }
 
   // Section: Overview
   public function descriptionSectionRender() {
     ?>
-      <p><?php _e('The options in this section are provided by the plugin <strong>Easy Swipebox</strong> and determines the Media Lightbox behaviour controlled by <strong><a href="http://brutaldesign.github.io/panorama/?source=easy-panorama-wp-plugin" target="_blank">Panorama</a></strong>.
+      <p><?php _e('The options in this section are provided by the plugin Easy Panorama and determine the panoramic view behaviour controlled by <strong><a href="http://terrymun.github.io/paver/demo/usage-notes.html?source=easy-panorama-wp-plugin" target="_blank">Paver</a></strong>.
 ', $this->plugin_name); ?></p>
       <hr>
-
       <h3><?php _e('Plugin main features', $this->plugin_name); ?></h3>
       <ol>
-        <li><?php _e('Enqueuing of Panorama Javascript and CSS files.', $this->plugin_name); ?></li>
-        <li><?php _e('Customization of Panorama lightbox appereance and behaviour from the <strong>Lightbox Settings</strong> page.', $this->plugin_name); ?></li>
-        <li><?php _e('Autodetection of links to images or videos. You can exclude/include media types from the <strong>Autodetection Settings</strong> page.', $this->plugin_name); ?></li>
+        <li><?php _e('Enqueuing of Paver Javascript and CSS files.', $this->plugin_name); ?></li>
+        <li><?php _e('Customization of Paver appearance and behaviour from the <strong>Panorama Settings</strong> page.', $this->plugin_name); ?></li>
         <li><?php _e('Other geek settings in the <strong>Advanced Settings</strong> page.', $this->plugin_name); ?></li>
       </ol>
       <hr>
@@ -511,8 +330,6 @@ class EasySwipeboxAdmin {
       <p><?php _e('There are many ways to contribute to this plugin:', $this->plugin_name); ?></p>
       <ol>
         <li><?php _e('Report a bug, submit pull request or new feature proposal: visit the <strong><a href="https://github.com/leopuleo/easy-panorama" target="_blank">Github Repo</a></strong>.', $this->plugin_name); ?></li>
-        <li><?php _e('Translate it in your language: visit the <strong><a href="https://translate.wordpress.org/projects/wp-plugins/easy-panorama" target="_blank">WordPress translation page</a></strong>.', $this->plugin_name); ?></li>
-        <li><?php _e('Rate it 5 stars on <strong><a href="https://wordpress.org/support/view/plugin-reviews/easy-panorama?filter=5#postform" target="_blank">WordPress.org</a></strong>.', $this->plugin_name); ?></li>
         <li><?php _e('<strong><a href="//paypal.me/LeonardoGiacone" target="_blank">Buy me a beer!</a></strong>', $this->plugin_name); ?></li>
 
       </ol>
@@ -520,8 +337,8 @@ class EasySwipeboxAdmin {
 
       <h3><?php _e('Support', $this->plugin_name); ?></h3>
       <p><strong><?php _e('Need help?', $this->plugin_name); ?></strong>
-      <?php _e('Read the <strong><a href="https://wordpress.org/plugins/easy-panorama/faq/" target="_blank">FAQ</a></strong> or visit the <strong><a href="https://wordpress.org/support/plugin/easy-panorama" target="_blank">WordPress.org support page</a></strong> / <strong><a href="https://github.com/leopuleo/easy-panorama/issues" target="_blank">Github Issue Tracker</a></strong>.', $this->plugin_name); ?></p>
-      <p><strong><?php _e('Note:', $this->plugin_name); ?></strong> <?php _e('this plugin use Panorama jQuery plugin as lightbox solution. For any issues or pull requests related to Panorama appereance or behaviour please visit the <strong><a href="http://brutaldesign.github.io/panorama/?source=easy-panorama-wp-plugin" target="_blank">Panorama Repo</a></strong>.', $this->plugin_name); ?></p>
+      <?php _e('Visit the <strong><a href="https://github.com/leopuleo/easy-panorama/issues" target="_blank">Github Issue Tracker</a></strong>.', $this->plugin_name); ?></p>
+      <p><strong><?php _e('Note:', $this->plugin_name); ?></strong> <?php _e('this plugin uses Paver jQuery plugin as lightbox solution. For any issues or pull requests related to Paver appereance or behaviour please visit the <strong><a href="https://github.com/terrymun/paver?source=easy-panorama-wp-plugin" target="_blank">Paver Repo</a></strong>.', $this->plugin_name); ?></p>
     <?php
   }
 
@@ -542,29 +359,22 @@ class EasySwipeboxAdmin {
     if (isset($_GET['tab'])) {
         $active_tab = $_GET['tab'];
     } else {
-      $active_tab = 'lightbox_options';
+      $active_tab = 'panorama_options';
     }
     ?>
 
     <h2 class="nav-tab-wrapper">
-        <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=lightbox_options');?>" class="nav-tab <?php echo $active_tab == 'lightbox_options' ? 'nav-tab-active' : ''; ?>"><?php _e('Lightbox', $this->plugin_name); ?></a>
-        <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=autodetect_options');?>" class="nav-tab <?php echo $active_tab == 'autodetect_options' ? 'nav-tab-active' : ''; ?>"><?php _e('Autodetect', $this->plugin_name); ?></a>
-        <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=advanced_options');?>" class="nav-tab <?php echo $active_tab == 'advanced_options' ? 'nav-tab-active' : ''; ?>"><?php _e('Advanced', $this->plugin_name); ?></a>
-        <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=overview');?>" class="nav-tab <?php echo $active_tab == 'overview' ? 'nav-tab-active' : ''; ?>"><?php _e('Overview', $this->plugin_name); ?></a>
+      <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=panorama_options');?>" class="nav-tab <?php echo $active_tab == 'panorama_options' ? 'nav-tab-active' : ''; ?>"><?php _e('Panorama', $this->plugin_name); ?></a>
+      <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=advanced_options');?>" class="nav-tab <?php echo $active_tab == 'advanced_options' ? 'nav-tab-active' : ''; ?>"><?php _e('Advanced', $this->plugin_name); ?></a>
+      <a href="<?php echo admin_url('options-general.php?page=easy-panorama-settings&tab=overview');?>" class="nav-tab <?php echo $active_tab == 'overview' ? 'nav-tab-active' : ''; ?>"><?php _e('Overview', $this->plugin_name); ?></a>
     </h2>
 
     <?php
     switch ($active_tab) {
 
-      case 'lightbox_options':
-        settings_fields('easyPanorama_lightbox');
-        do_settings_sections('easyPanorama_lightbox');
-        submit_button();
-        break;
-
-      case 'autodetect_options':
-        settings_fields('easyPanorama_autodetect');
-        do_settings_sections('easyPanorama_autodetect');
+      case 'panorama_options':
+        settings_fields('easyPanorama_panorama');
+        do_settings_sections('easyPanorama_panorama');
         submit_button();
         break;
 
@@ -589,81 +399,34 @@ class EasySwipeboxAdmin {
   }
 
   /**
-   * Sanitize lightbox fields
+   * Sanitize Panorama fields
    *
    * @since    0.9
    * @access   public
    */
-  public function sanitizeLightbox($input) {
+  public function sanitizePanorama($input) {
     $valid_input = array();
 
-    if (isset($input['useCSS'])) {
-      $valid_input['useCSS'] = (bool)($input['useCSS']);
+    if (isset($input['gracefulFailure'])) {
+      $valid_input['gracefulFailure'] = (bool)($input['gracefulFailure']);
     }
-    if (isset($input['useSVG'])) {
-      $valid_input['useSVG'] = (bool)($input['useSVG']);
+    if (isset($input['failureMessage'])) {
+      $valid_input['failureMessage'] = sanitize_text_field($input['failureMessage']);
     }
-    if (isset($input['removeBarsOnMobile'])) {
-      $valid_input['removeBarsOnMobile'] = (bool)($input['removeBarsOnMobile']);
+    if (isset($input['failureMessageInsert'])) {
+      $valid_input['failureMessageInsert'] = sanitize_text_field($input['failureMessageInsert']);
     }
-    if (isset($input['hideCloseButtonOnMobile'])) {
-      $valid_input['hideCloseButtonOnMobile'] = (bool)($input['hideCloseButtonOnMobile']);
+    if (isset($input['meta'])) {
+      $valid_input['meta'] = (bool)($input['meta']);
     }
-    if (isset($input['hideBarsDelay'])) {
-      $valid_input['hideBarsDelay'] = absint($input['hideBarsDelay']);
+    if (isset($input['minimumOverflow'])) {
+      $valid_input['minimumOverflow'] = absint($input['minimumOverflow']);
     }
-    if (isset($input['videoMaxWidth'])) {
-      $valid_input['videoMaxWidth'] = absint($input['videoMaxWidth']);
-    }
-    if (isset($input['vimeoColor'])) {
-
-      $vimeo_color = strip_tags(stripslashes($input['vimeoColor']));
-
-      //Check if is a valid hex color
-      if (false === $this->checkColor($vimeo_color)) {
-
-        // Set the error message
-        add_settings_error('easyPanorama_lightbox', 'easySwipebox_vimeo_error', __('Insert a valid color for Vimeo controllers', $this->plugin_name), 'error'); // $setting, $code, $message, $type
-
-        // Get the previous valid value
-        $valid_input['vimeoColor'] = $this->options_lightbox['vimeoColor'];
-
-      } else {
-        $valid_input['vimeoColor'] = $vimeo_color;
-      }
-    }
-    if (isset($input['loopAtEnd'])) {
-      $valid_input['loopAtEnd'] = (bool)($input['loopAtEnd']);
-    }
-    if (isset($input['autoplayVideos'])) {
-      $valid_input['autoplayVideos'] = (bool)($input['autoplayVideos']);
+    if (isset($input['startPosition'])) {
+      $valid_input['startPosition'] = filter_var($input['startPosition'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
     return $valid_input;
   }
-
-  /**
-   * Sanitize autodetect fields
-   *
-   * @since    0.9
-   * @access   public
-   */
-  public function sanitizeAutodetect($input) {
-    $valid_input = array();
-
-    if (isset($input['image'])) {
-      $valid_input['image'] = (bool)($input['image']);
-    }
-
-    if (isset($input['video'])) {
-      $valid_input['video'] = (bool)($input['video']);
-    }
-
-    if (isset($input['class_exclude'])) {
-      $valid_input['class_exclude'] = sanitize_text_field($input['class_exclude']);
-    }
-    return $valid_input;
-  }
-
 
   /**
    * Sanitize advanced fields
@@ -677,26 +440,6 @@ class EasySwipeboxAdmin {
     if (isset($input['loadingPlace'])) {
       $valid_input['loadingPlace'] = sanitize_text_field($input['loadingPlace']);
     }
-
-    if (isset($input['debugMode'])) {
-      $valid_input['debugMode'] = (bool)($input['debugMode']);
-    }
-
     return $valid_input;
-  }
-
-
-  /**
-   * Check if color is a valid HEX.
-   *
-   * @since    0.9
-   * @access   public
-   */
-  public function checkColor($value) {
-
-    if (preg_match('/^#?(?:[0-9a-f]{3}){1,2}$/i', $value)) { // if user insert a HEX color with #
-        return true;
-    }
-    return false;
   }
 }

@@ -1,0 +1,256 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Panorama\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-09 01:00+0100\n"
+"PO-Revision-Date: 2016-09-09 01:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: LeoPeo <leonardo.giacone@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/"
+"htdocs/wp-content/plugins/easy-panorama\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Users/gleonardo/Documents/my-vagrant/www/xeasy-"
+"panorama/htdocs/wp-content/plugins/easy-panorama\n"
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:91
+msgid "Settings"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:103
+msgid "Add Panorama"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:115
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:356
+msgid "Easy Panorama Settings"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:116
+msgid "Easy Panorama"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:139
+msgid "Panorama settings"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:147
+msgid "Advanced settings"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:155
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:369
+msgid "Overview"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:163
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:244
+msgid "Insert failure message"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:172
+msgid "Failure message"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:181
+msgid "Failure message position"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:190
+msgid "Show image meta"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:199
+msgid "Minimum overflow"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:208
+msgid "Start position"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:217
+msgid "Loading place"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:234
+msgid ""
+"This plugin uses <strong><a href=\"http://terrymun.github.io/paver/?"
+"source=easy-panorama-wp-plugin\" target=\"_blank\">Paver</a></strong> In "
+"this page you can customize Paver behaviour. Discover more about <strong><a "
+"href=\"http://terrymun.github.io/paver/demo/usage-notes.html?source=easy-"
+"panorama-wp-plugin\" target=\"_blank\">Paver configuration options</a></"
+"strong>."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:245
+msgid ""
+"Allows the display of failure message at the desired DOM insertion location "
+"(Default: true)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:254
+msgid ""
+"This message will appear in mobile devices with no gyroscopic data or no "
+"physical orientation support. (Default: <code>Scroll left/right to pan "
+"through panorama.</code>)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:261
+msgid "After"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:262
+msgid "Before"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:263
+msgid ""
+"Select the location where the failure message will be inserted. (Default: "
+"After)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:272
+msgid "Show alt/title meta on overlay"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:273
+msgid ""
+"Determines whether a metadata overlay should be displayed. When enabled, the "
+"plugin will retrieve the value(s) of the title and/or alt and inject them "
+"into the Paver container. (Default: false)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:282
+msgid "px"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:283
+msgid ""
+"The excess width the picture must have before Paver kicks in (Default: 200 "
+"px)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:290
+msgid "Left"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:291
+msgid "Center"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:292
+msgid "Right"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:293
+msgid "Determines the start position of the panorama (Default: Center)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:302
+msgid "In this page you can customize the Easy Panorama advanced settings."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:302
+msgid "Please be carefull, the wrong settings combination can break your site."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:309
+msgid "Header"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:310
+msgid "Footer"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:311
+msgid ""
+"Select where all the lightbox scripts should be placed. (Default: Footer)."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:318
+msgid ""
+"The options in this section are provided by the plugin Easy Panorama and "
+"determine the panoramic view behaviour controlled by <strong><a href="
+"\"http://terrymun.github.io/paver/demo/usage-notes.html?source=easy-panorama-"
+"wp-plugin\" target=\"_blank\">Paver</a></strong>.\n"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:321
+msgid "Plugin main features"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:323
+msgid "Enqueuing of Paver Javascript and CSS files."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:324
+msgid ""
+"Customization of Paver appearance and behaviour from the <strong>Panorama "
+"Settings</strong> page."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:325
+msgid "Other geek settings in the <strong>Advanced Settings</strong> page."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:329
+msgid "Contribution"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:330
+msgid "There are many ways to contribute to this plugin:"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:332
+msgid ""
+"Report a bug, submit pull request or new feature proposal: visit the "
+"<strong><a href=\"https://github.com/leopuleo/easy-panorama\" target=\"_blank"
+"\">Github Repo</a></strong>."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:333
+msgid ""
+"<strong><a href=\"//paypal.me/LeonardoGiacone\" target=\"_blank\">Buy me a "
+"beer!</a></strong>"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:338
+msgid "Support"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:339
+msgid "Need help?"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:340
+msgid ""
+"Visit the <strong><a href=\"https://github.com/leopuleo/easy-panorama/issues"
+"\" target=\"_blank\">Github Issue Tracker</a></strong>."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:341
+msgid "Note:"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:341
+msgid ""
+"this plugin uses Paver jQuery plugin as lightbox solution. For any issues or "
+"pull requests related to Paver appereance or behaviour please visit the "
+"<strong><a href=\"https://github.com/terrymun/paver?source=easy-panorama-wp-"
+"plugin\" target=\"_blank\">Paver Repo</a></strong>."
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:367
+msgid "Panorama"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/admin/class-easy-panorama-admin.php:368
+msgid "Advanced"
+msgstr ""
+
+#: /Users/gleonardo/Documents/my-vagrant/www/xeasy-panorama/htdocs/wp-content/plugins/easy-panorama/includes/class-easy-panorama.php:107
+msgid "Scroll left/right to pan through panorama."
+msgstr ""

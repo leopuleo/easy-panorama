@@ -8,7 +8,7 @@ Easy Panorama plugin for WordPress websites allows you to display wide/panoramic
 
 The plugin provides you with a handy shortcode: insert panorama images in your content is so easy, just 3 clicks.
 
-Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin) :smile: .
+Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin) :smile:.
 
 ## Main features
 

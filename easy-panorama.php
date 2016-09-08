@@ -4,14 +4,14 @@
  * Easy Panorama bootstrap file
  *
  * @link              https://github.com/leopuleo/easy-panorama
- * @since             0.9
+ * @since             1.0.0
  * @package           EasyPanorama
  *
  * @wordpress-plugin
  * Plugin Name: Easy Panorama
  * Plugin URI: https://github.com/leopuleo
- * Description: Easily enable <a href="http://brutaldesign.github.io/panorama/">Panorama jQuery extension</a> on all links to image or video (Youtube / Vimeo). Optimized for responsive layouts and touch devices.
- * Version:           0.9
+ * Description: Embed interactive wide/panoramic images on your site. Optimised for responsive layouts, it works great with devices equipped with motion sensors.
+ * Version:           1.0.0
  * Author: Leonardo Giacone
  * Author URI: https://github.com/leopuleo
  * License:           GPL-2.0+
@@ -38,7 +38,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-easy-panorama.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    0.9
+ * @since    1.0.0
  */
 function run_easy_panorama() {
 

@@ -1,36 +1,27 @@
-# Easy Panorama (Wordpress Plugin)
-[![Build Status](https://travis-ci.org/leopuleo/easy-panorama.svg?branch=easy-panorama-1.1)](https://travis-ci.org/leopuleo/easy-panorama)
+# Easy Panorama (WordPress Plugin)
 
-Easily enable Panorama jQuery extension on all links to image or video (Youtube / Vimeo). Optimized for responsive layouts and touch devices.
+Embed interactive wide/panoramic images on your site. Optimised for responsive layouts, it works great with devices equipped with motion sensors.
 
 ## Description
 
-Easy Panorama plugin for WordPress websites gives you a flexible, aesthetic and mobile-friendly Lightbox solution for just about all media links on your website. Easy Panorama uses the packed [Panorama](http://brutaldesign.github.io/panorama/?source=easy-panorama-wp-plugin) and is multisite compatible.
+Easy Panorama plugin for WordPress websites allows you to display wide/panoramic images in a more accessible way: enjoy your panoramic photos scrolling them on the x-axis or moving your mobile device.
+
+The plugin provides you with a handy shortcode: insert panorama images in your content is so easy, just 3 clicks.
+
+Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin) :simple_smile:.
 
 ## Main features
 
-1. Enqueuing of Panorama Javascript and CSS files.
-2. Customization of Panorama lightbox appereance and behaviour from the Lightbox Settings page.
-3. Autodetection of links to images or videos. You can exclude/include media types from the Autodetection Settings page.
-4. Other geek settings in the Advanced Settings page.
-
-## Autodetection
-
-Select one or more options from Autodetection setting page, Easy Panorama automatically detects the media type and add `class="panorama"` to their links.
-Otherwise, add `class="panorama"` yourself to make the magic happen.
-
-If you like to exclude some images or videos from autodetection enter the selector that groups these elements.
-By default, Easy Panorama uses `.no-panorama`.
+1. Enqueuing of Paver Javascript and CSS files.
+2. Customization of Paver appearance and behaviour from the Panorama Settings page.
+3. Other geek settings in the Advanced Settings page.
+4. Add [easy_panorama] shortcode to embed panoramic images with no hassle.
 
 ## Contribution
 There are many ways to contribute to this plugin:
 
 1. Report a bug, submit pull request or new feature proposal: visit the [Github repo](https://github.com/leopuleo/easy-panorama).
-2. Translate it in your language: visit the [WordPress translation page](https://translate.wordpress.org/projects/wp-plugins/easy-panorama).
-3. Rate it 5 stars on [WordPress.org](https://wordpress.org/support/view/plugin-reviews/easy-panorama?filter=5#postform).
-4. [Buy me a beer! :beer:](//paypal.me/LeonardoGiacone)
+2. [Buy me a beer! :beer:](//PayPal.me/LeonardoGiacone)
 
 ## Support
-Need help? Read the [FAQ](https://wordpress.org/plugins/easy-panorama/faq/) or visit the [WordPress.org](https://wordpress.org/support/plugin/easy-panorama) support page / [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).
-
-Note: this plugin use Panorama jQuery plugin as Lightbox solution. For any issues and pull requests related to Panorama functionalities please visit the [Panorama Repo](https://github.com/brutaldesign/panorama).
+Visit the [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).

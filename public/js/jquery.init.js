@@ -8,9 +8,5 @@
       minimumOverflow: easyPanorama_localize_init_var.panorama.minimumOverflow,
       startPosition: easyPanorama_localize_init_var.panorama.startPosition
     });
-
-    console.log(easyPanorama_localize_init_var.panorama);
-
-    $('.panorama').paver();
   });
 })(jQuery);

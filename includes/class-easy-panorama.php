@@ -103,11 +103,12 @@ class EasyPanorama {
 
     // Define defaults for panorama options
     $this->defaults_panorama = array (
+      'containerHeight' => '400',
       'gracefulFailure' => 1,
       'failureMessage' => __('Scroll left/right to pan through panorama.', $this->plugin_name),
       'failureMessageInsert' => 'after',
       'meta' => 0,
-      'minimumOverflow' => '200',
+      'minimumOverflow' => '0',
       'startPosition' => '0.5',
     );
 

@@ -299,7 +299,7 @@ class EasyPanoramaAdmin {
     <label>
       <input id="easyPanorama_panorama[minimumOverflow]" type="number" name="easyPanorama_panorama[minimumOverflow]" value="<?php echo $this->options_panorama['minimumOverflow'];?>" />
       <?php _e('px', $this->plugin_name); ?><br>
-      <em><?php _e('The excess width the picture must have before Paver kicks in (Default: 10 px).', $this->plugin_name); ?></em>
+      <em><?php _e('The excess width the picture must have before Paver kicks in (Default: 0px).', $this->plugin_name); ?></em>
     </label>
     <?php
   }

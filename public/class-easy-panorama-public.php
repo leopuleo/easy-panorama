@@ -177,8 +177,9 @@ class EasyPanoramaPublic {
     $src = wp_get_attachment_url($id);
     $title = get_the_title($id);
     $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
+    $height = absint($this->options_panorama['containerHeight']);
 
-    echo '<div class="easy-panorama" data-meta=""><img src="' . $src . '" title="' . $title . '" alt="' . $alt . '"></div>';
+    echo '<div class="easy-panorama" style="height:' . $height . 'px"><img src="' . $src . '" title="' . $title . '" alt="' . $alt . '"></div>';
     return ob_get_clean();
 
     add_shortcode("easy_panorama", "shortcode_atts");

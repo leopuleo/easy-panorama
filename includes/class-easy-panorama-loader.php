@@ -93,7 +93,7 @@ class EasyPanoramaLoader {
    * @param     string        $callback       The name of the function that defines the shortcode.
    */
   public function addShortcode($tag, $component, $callback, $priority = 10, $accepted_args = 2) {
-    $this->shortcodes = $this->add( $this->shortcodes, $tag, $component, $callback, $priority, $accepted_args);
+    $this->shortcodes = $this->add($this->shortcodes, $tag, $component, $callback, $priority, $accepted_args);
   }
 
 

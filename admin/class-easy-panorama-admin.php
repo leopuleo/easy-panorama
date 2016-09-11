@@ -389,7 +389,6 @@ class EasyPanoramaAdmin {
 
     <?php
     switch ($active_tab) {
-
       case 'panorama_options':
         settings_fields('easyPanorama_panorama');
         do_settings_sections('easyPanorama_panorama');

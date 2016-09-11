@@ -163,11 +163,7 @@ class EasyPanoramaPublic {
    */
   public function shortcodeConfig($attr) {
 
-    shortcode_atts(
-      array(
-        'id' => '1'
-      ),
-      $attr, 'easy_panorama');
+    shortcode_atts(array('id' => '1'), $attr, 'easy_panorama');
 
     ob_start();
     //Retrieve Panorama/attachment ID

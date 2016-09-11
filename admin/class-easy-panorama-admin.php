@@ -66,7 +66,6 @@ class EasyPanoramaAdmin {
     $this->version = $version;
     $this->options_panorama = $options_panorama;
     $this->options_advanced = $options_advanced;
-
   }
 
   /**

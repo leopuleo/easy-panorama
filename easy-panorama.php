@@ -41,9 +41,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-easy-panorama.php';
  * @since    1.0.0
  */
 function run_easy_panorama() {
-
   $plugin = new EasyPanorama\EasyPanorama();
   $plugin->run();
-
 }
 run_easy_panorama();

@@ -168,7 +168,6 @@ class EasyPanorama {
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-easy-panorama-public.php';
 
     $this->loader = new EasyPanoramaLoader();
-
   }
 
   /**
@@ -186,7 +185,6 @@ class EasyPanorama {
     $plugin_i18n->setDomain($this->getPluginName());
 
     $this->loader->addAction('plugins_loaded', $plugin_i18n, 'loadPluginTextdomain');
-
   }
 
   /**
@@ -205,7 +203,6 @@ class EasyPanorama {
     $this->loader->addAction('admin_init', $plugin_admin, 'settingsInit');
     $this->loader->addAction('media_buttons', $plugin_admin, 'addPanoramaButton');
     $this->loader->addFilter('plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'addPluginLinks');
-
   }
 
   /**
@@ -222,7 +219,6 @@ class EasyPanorama {
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueStyles');
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueScripts');
     $this->loader->addShortcode('easy_panorama', $plugin_public, 'shortcodeConfig');
-
   }
 
   /**

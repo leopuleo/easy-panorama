@@ -100,7 +100,7 @@ class EasyPanoramaAdmin {
    * @access   public
    */
   public function addPanoramaButton() {
-    echo '<span id="insert-panorama" class="button insert-panorama"><span class="dashicons dashicons-camera"></span> ' .  __('Add Panorama', $this->plugin_name) . '</a>';
+    echo '<span id="insert-panorama" class="button insert-panorama"><span class="dashicons dashicons-camera" style="color:#82878c; vertical-align:text-top;"></span> ' .  __('Add Panorama', $this->plugin_name) . '</a>';
   }
 
   /**
@@ -155,6 +155,15 @@ class EasyPanoramaAdmin {
       __('Overview', $this->plugin_name),
       array($this, 'descriptionSectionRender'),
       'easyPanorama_overview'
+    );
+
+    // Field: Panorama Settings -> containerHeight
+    add_settings_field(
+      'containerHeight',
+      __('Panorama height', $this->plugin_name),
+      array($this, 'containerHeightRender'),
+      'easyPanorama_panorama',
+      'panorama_section'
     );
 
     // Field: Panorama Settings -> gracefulFailure
@@ -236,6 +245,16 @@ class EasyPanoramaAdmin {
     <?php
   }
 
+  public function containerHeightRender() {
+    ?>
+    <label>
+      <input id="easyPanorama_panorama[containerHeight]" type="number" name="easyPanorama_panorama[containerHeight]" value="<?php echo $this->options_panorama['containerHeight']; ?>" />
+      <?php _e('px', $this->plugin_name); ?><br>
+      <em><?php _e('Insert the height for all panoramic images container (Default: 400px).', $this->plugin_name); ?></em>
+    </label>
+    <?php
+  }
+
   public function gracefulFailureRender() {
     ?>
     <label>
@@ -280,7 +299,7 @@ class EasyPanoramaAdmin {
     <label>
       <input id="easyPanorama_panorama[minimumOverflow]" type="number" name="easyPanorama_panorama[minimumOverflow]" value="<?php echo $this->options_panorama['minimumOverflow'];?>" />
       <?php _e('px', $this->plugin_name); ?><br>
-      <em><?php _e('The excess width the picture must have before Paver kicks in (Default: 200 px).', $this->plugin_name); ?></em>
+      <em><?php _e('The excess width the picture must have before Paver kicks in (Default: 10 px).', $this->plugin_name); ?></em>
     </label>
     <?php
   }
@@ -406,6 +425,10 @@ class EasyPanoramaAdmin {
    */
   public function sanitizePanorama($input) {
     $valid_input = array();
+
+    if (isset($input['containerHeight'])) {
+      $valid_input['containerHeight'] = absint($input['containerHeight']);
+    }
 
     if (isset($input['gracefulFailure'])) {
       $valid_input['gracefulFailure'] = (bool)($input['gracefulFailure']);

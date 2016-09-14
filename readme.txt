@@ -30,13 +30,14 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 There are many ways to contribute to this plugin:
 
 1. Report a bug, submit pull request or new feature proposal: visit the [Github repo](https://github.com/leopuleo/easy-panorama).
-2. [Buy me a beer!](//PayPal.me/LeonardoGiacone)
+2. Translate it in your language: visit the [WordPress translation page](https://translate.wordpress.org/projects/wp-plugins/easy-panorama).
+3. Rate it 5 stars on [WordPress.org](https://wordpress.org/support/view/plugin-reviews/easy-panorama?filter=5#postform).
+4. [Buy me a beer!](//paypal.me/LeonardoGiacone)
 
 
 = Support =
 
-Visit the [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).
-
+Need help? Read the [FAQ](https://wordpress.org/plugins/easy-panorama/faq/) or visit the [WordPress.org](https://wordpress.org/support/plugin/easy-panorama) support page / [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).
 
 == Installation ==
 

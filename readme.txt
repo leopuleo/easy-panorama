@@ -1,8 +1,8 @@
 === Plugin Name ===
 Contributors: LeoPeo
 Donate link: https://paypal.me/LeonardoGiacone
-Tags: image, video, gallery, fancybox, panorama, lightbox, images, video, responsive, mobile, vimeo, youtube
-Requires at least: 3.0.1
+Tags: image, panorama, panoramic image, shortcode, responsive, mobile
+Requires at least: 3.5.1
 Tested up to: 4.6.1
 Stable tag: 1.0.0
 License:  GPL-2.0+
@@ -44,7 +44,7 @@ Visit the [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issue
 1. Upload the plugin folder in `/plugins/`.
 1. Activate the plugin.
 
-Done! Now you can embed panoramic pictures into WordPress editor clicking on the "Add panorama" button and choosing the image.
+Done! Now you can embed panoramic pictures into WordPress editor clicking on the "Add panorama" button. Choose the image and insert into the post/page: this will be rendered as panorama image.
 Visit the new admin page (Settings > Easy Panorama) to customize Paver scripts behaviour.
 
 

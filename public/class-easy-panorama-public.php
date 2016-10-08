@@ -149,7 +149,7 @@ class EasyPanoramaPublic {
         'failureMessageInsert' => sanitize_text_field($this->options_panorama['failureMessageInsert']),
         'meta' => (bool)$this->options_panorama['meta'],
         'minimumOverflow' => absint($this->options_panorama['minimumOverflow']),
-        'startPosition' => absint($this->options_panorama['startPosition']),
+        'startPosition' => (float)$this->options_panorama['startPosition'],
       )
     );
     return $localize_var;

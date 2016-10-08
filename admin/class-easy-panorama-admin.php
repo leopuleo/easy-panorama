@@ -341,6 +341,7 @@ class EasyPanoramaAdmin {
         <li><?php _e('Enqueuing of Paver Javascript and CSS files.', $this->plugin_name); ?></li>
         <li><?php _e('Customization of Paver appearance and behaviour from the <strong>Panorama Settings</strong> page.', $this->plugin_name); ?></li>
         <li><?php _e('Other geek settings in the <strong>Advanced Settings</strong> page.', $this->plugin_name); ?></li>
+        <li><?php _e('<code>[easy_panorama]</code> shortcode to embed panoramic images with no hassle.', $this->plugin_name); ?></li>
       </ol>
       <hr>
 
@@ -348,15 +349,16 @@ class EasyPanoramaAdmin {
       <p><?php _e('There are many ways to contribute to this plugin:', $this->plugin_name); ?></p>
       <ol>
         <li><?php _e('Report a bug, submit pull request or new feature proposal: visit the <strong><a href="https://github.com/leopuleo/easy-panorama" target="_blank">Github Repo</a></strong>.', $this->plugin_name); ?></li>
+        <li><?php _e('Translate it in your language: visit the <strong><a href="https://translate.wordpress.org/projects/wp-plugins/easy-panorama" target="_blank">WordPress translation page</a></strong>.', $this->plugin_name); ?></li>
+        <li><?php _e('Rate it 5 stars on <strong><a href="https://wordpress.org/support/view/plugin-reviews/easy-panorama?filter=5#postform" target="_blank">WordPress.org</a></strong>.', $this->plugin_name); ?></li>
         <li><?php _e('<strong><a href="//paypal.me/LeonardoGiacone" target="_blank">Buy me a beer!</a></strong>', $this->plugin_name); ?></li>
-
       </ol>
       <hr>
 
       <h3><?php _e('Support', $this->plugin_name); ?></h3>
       <p><strong><?php _e('Need help?', $this->plugin_name); ?></strong>
-      <?php _e('Visit the <strong><a href="https://github.com/leopuleo/easy-panorama/issues" target="_blank">Github Issue Tracker</a></strong>.', $this->plugin_name); ?></p>
-      <p><strong><?php _e('Note:', $this->plugin_name); ?></strong> <?php _e('this plugin uses Paver jQuery plugin as lightbox solution. For any issues or pull requests related to Paver appereance or behaviour please visit the <strong><a href="https://github.com/terrymun/paver?source=easy-panorama-wp-plugin" target="_blank">Paver Repo</a></strong>.', $this->plugin_name); ?></p>
+      <?php _e('Visit the <strong><a href="https://wordpress.org/support/plugin/easy-panorama" target="_blank">WordPress.org support page</a></strong> /<strong><a href="https://github.com/leopuleo/easy-panorama/issues" target="_blank">Github Issue Tracker</a></strong>.', $this->plugin_name); ?></p>
+      <p><strong><?php _e('Note:', $this->plugin_name); ?></strong> <?php _e('this plugin uses Paver jQuery plugin. For any issues or pull requests related to Paver appereance or behaviour please visit the <strong><a href="https://github.com/terrymun/paver?source=easy-panorama-wp-plugin" target="_blank">Paver Repo</a></strong>.', $this->plugin_name); ?></p>
     <?php
   }
 

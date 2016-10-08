@@ -16,7 +16,7 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 1. Enqueuing of Paver Javascript and CSS files.
 2. Customization of Paver appearance and behaviour from the Panorama Settings page.
 3. Other geek settings in the Advanced Settings page.
-4. Add [easy_panorama] shortcode to embed panoramic images with no hassle.
+4. [easy_panorama] shortcode to embed panoramic images with no hassle.
 
 ## Contribution
 There are many ways to contribute to this plugin:
@@ -27,4 +27,4 @@ There are many ways to contribute to this plugin:
 4. [Buy me a beer! :beer:](//paypal.me/LeonardoGiacone)
 
 ## Support
-Visit the [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).
+Visit the [WordPress.org](https://wordpress.org/support/plugin/easy-panorama) or [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).

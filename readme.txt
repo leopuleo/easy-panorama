@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: LeoPeo
 Donate link: https://paypal.me/LeonardoGiacone
-Tags: image, panorama, panoramic image, shortcode, responsive, mobile
+Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver
 Requires at least: 3.5.1
 Tested up to: 4.6.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License:  GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -23,7 +23,7 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 1. Enqueuing of Paver Javascript and CSS files.
 2. Customization of Paver appearance and behaviour from the Panorama Settings page.
 3. Other geek settings in the Advanced Settings page.
-4. Add [easy_panorama] shortcode to embed panoramic images with no hassle.
+4. Add <code>[easy_panorama]</code> shortcode to embed panoramic images with no hassle.
 
 = Contribution =
 
@@ -51,15 +51,23 @@ Visit the new admin page (Settings > Easy Panorama) to customize Paver scripts b
 
 == Frequently Asked Questions ==
 
-Embed interactive wide/panoramic images on your site. Optimised for responsive layouts, it works great with devices equipped with motion sensors.
-
+No FAQs ready yet.
 
 == Screenshots ==
 
-Embed interactive wide/panoramic images on your site. Optimised for responsive layouts, it works great with devices equipped with motion sensors.
+1. Example of Panorama embed
 
+2. How to embed a Panorama using [easy_panorama] shortcode
+
+3. Easy Panorama settings page
 
 == Changelog ==
+
+= 1.0.1 (08/10/2016) =
+* Updated Paver to 1.3.2
+* Bug fix: <code>startPosition</code> value is sanitized correctly: from <code>absint</code> to <code>float</code>
+* Updated readme.txt
+* Updated plugin Overview page
 
 = 1.0.0 (09/09/2016) =
 * First commit

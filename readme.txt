@@ -55,11 +55,9 @@ No FAQs ready yet.
 
 == Screenshots ==
 
-1. Example of Panorama embed
+1. How to embed a Panorama using [easy_panorama] shortcode
 
-2. How to embed a Panorama using [easy_panorama] shortcode
-
-3. Easy Panorama settings page
+2. Easy Panorama settings page
 
 == Changelog ==
 

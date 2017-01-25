@@ -3,7 +3,7 @@ Contributors: LeoPeo
 Donate link: https://paypal.me/LeonardoGiacone
 Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver
 Requires at least: 3.5.1
-Tested up to: 4.6.1
+Tested up to: 4.7
 Stable tag: 1.0.1
 License:  GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt

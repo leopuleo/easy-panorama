@@ -98,7 +98,7 @@ class EasyPanorama {
   public function __construct() {
 
     $this->plugin_name = 'easy-panorama';
-    $this->version = '1.0.1';
+    $this->version = '1.0.2';
     $this->plugin_basename = plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php');
 
     // Define defaults for panorama options

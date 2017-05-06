@@ -11,7 +11,7 @@
  * Plugin Name: Easy Panorama
  * Plugin URI: https://github.com/leopuleo
  * Description: Embed interactive wide/panoramic images on your site. Optimised for responsive layouts, it works great with devices equipped with motion sensors.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author: Leonardo Giacone
  * Author URI: https://github.com/leopuleo
  * License:           GPL-2.0+

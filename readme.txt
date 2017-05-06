@@ -4,7 +4,7 @@ Donate link: https://paypal.me/LeonardoGiacone
 Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver
 Requires at least: 3.5.1
 Tested up to: 4.7
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License:  GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -60,6 +60,9 @@ No FAQs ready yet.
 2. Easy Panorama settings page
 
 == Changelog ==
+
+= 1.0.2 (06/05/2017) =
+* Bug fix: HTML error in “Add Panorama” button + changed HTML from <code><span></code> to <code><button></code>. Thanks to [icehouze](https://wordpress.org/support/users/icehouze/)
 
 = 1.0.1 (08/10/2016) =
 * Updated Paver to 1.3.2

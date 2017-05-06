@@ -99,7 +99,7 @@ class EasyPanoramaAdmin {
    * @access   public
    */
   public function addPanoramaButton() {
-    echo '<span id="insert-panorama" class="button insert-panorama"><span class="dashicons dashicons-camera" style="color:#82878c; vertical-align:text-top;"></span> ' .  __('Add Panorama', $this->plugin_name) . '</a>';
+    echo '<button type="button" id="insert-panorama" class="button insert-panorama" data-editor="content"><span class="dashicons dashicons-camera" style="color:#82878c; vertical-align:text-top;"></span> ' .  __('Add Panorama', $this->plugin_name) . '</button>';
   }
 
   /**

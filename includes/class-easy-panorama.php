@@ -124,6 +124,7 @@ class EasyPanorama {
     $this->setLocale();
     $this->defineAdminHooks();
     $this->definePublicHooks();
+    $this->defineBlockHooks();
   }
 
   /**
@@ -166,6 +167,12 @@ class EasyPanorama {
      * side of the site.
      */
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-easy-panorama-public.php';
+
+    /**
+     * The class responsible for defining all actions that occur in the Gutenberg
+     * side of the site.
+     */
+    require_once plugin_dir_path(dirname(__FILE__)) . 'block/class-easy-panorama-block.php';
 
     $this->loader = new EasyPanoramaLoader();
   }
@@ -219,6 +226,20 @@ class EasyPanorama {
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueStyles');
     $this->loader->addAction('wp_enqueue_scripts', $plugin_public, 'enqueueScripts');
     $this->loader->addShortcode('easy_panorama', $plugin_public, 'shortcodeConfig');
+  }
+
+  /**
+   * Register all of the hooks related to the Gutenberg-facing functionality
+   * of the plugin.
+   *
+   * @since    1.1.0
+   * @access   private
+   */
+  private function defineBlockHooks() {
+
+    $plugin_block = new EasyPanoramaBlock($this->getPluginName(), $this->getVersion(), $this->getOptionsPanorama(), $this->getOptionsAdvanced());
+
+    $this->loader->addAction('enqueue_block_editor_assets', $plugin_block, 'gutenbergBlockEditorAssets');
   }
 
   /**

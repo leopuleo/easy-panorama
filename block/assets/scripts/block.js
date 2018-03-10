@@ -40,14 +40,28 @@ registerBlockType( 'easy-panorama/block', {
     }
   },
   edit: props => {
-    const { isSelected, attributes, className } = props;
-    console.log(attributes);
+    const {
+      isSelected,
+      className,
+      attributes: {
+        mediaURL,
+        mediaID,
+        containerHeight,
+        startPosition,
+        gracefulFailure,
+        failureMessage
+      }
+    } = props;
 
     const onSelectImage = media => {
       props.setAttributes( {
         mediaURL: media.url,
         mediaID: media.id,
       } );
+    };
+
+    const panoramaStyle = {
+      height: containerHeight + 'px'
     };
 
     const onChangeContainerHeight = (height) => {
@@ -64,7 +78,7 @@ registerBlockType( 'easy-panorama/block', {
 
     const onChangeGracefulFailure = () => {
       props.setAttributes( {
-        gracefulFailure: !attributes.gracefulFailure
+        gracefulFailure: !gracefulFailure
       } );
     };
 
@@ -74,7 +88,7 @@ registerBlockType( 'easy-panorama/block', {
       } );
     }
 
-    if(!attributes.mediaURL) {
+    if(!mediaURL) {
       return [
         <ImagePlaceholder
           className={ className }
@@ -116,33 +130,33 @@ registerBlockType( 'easy-panorama/block', {
             label={ __( 'Panorama height' ) }
             help={ __('Insert the height for this panoramic image container.') }
             type={ 'number' }
-            value={ attributes.containerHeight }
+            value={ containerHeight }
             onChange={ onChangeContainerHeight }
           />
           <RangeControl
             label={ __( 'Start position' ) }
             help={ __( 'Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).' ) }
-            value={ attributes.startPosition }
+            value={ startPosition }
             onChange={ onChangeStartPosition }
             min={ 0 }
             max={ 10 }
           />
           <ToggleControl
             label={ __('Insert failure message') }
-            checked={ attributes.gracefulFailure }
+            checked={ gracefulFailure }
             onChange={ onChangeGracefulFailure }
           />
           <TextControl
             label={ __( 'Failure message' ) }
             help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
-            value={ attributes.failureMessage }
+            value={ failureMessage }
             onChange={ onChangeFailureMessage }
           />
         </InspectorControls>
       ),
       <div className={ className }>
-        <div className="panorama-image">
-            <img src={ attributes.mediaURL } />
+        <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={startPosition} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage}>
+            <img src={ mediaURL } />
         </div>
       </div>
     ];

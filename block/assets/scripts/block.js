@@ -51,6 +51,7 @@ registerBlockType( 'easy-panorama/block', {
       default: __('Scroll left/right to pan through panorama.')
     }
   },
+
   edit: props => {
     const {
       isSelected,
@@ -96,6 +97,10 @@ registerBlockType( 'easy-panorama/block', {
       props.setAttributes( {
         containerHeight: Number(height)
       } );
+    };
+
+    const adjustStartPosition = (position) => {
+      return position / 10;
     };
 
     const onChangeStartPosition = (position) => {
@@ -153,9 +158,7 @@ registerBlockType( 'easy-panorama/block', {
       controls,
       isSelected && (
         <InspectorControls key="easypanorama-inspector">
-          <PanelBody
-            title={ __( 'Panorama Settings' ) }
-          >
+          <PanelBody title={ __( 'Panorama Settings' ) }>
             <TextControl
               label={ __( 'Panorama height' ) }
               help={ __('Insert the height for this panoramic image container.') }
@@ -171,21 +174,8 @@ registerBlockType( 'easy-panorama/block', {
               min={ 0 }
               max={ 10 }
             />
-            <ToggleControl
-              label={ __('Insert failure message') }
-              checked={ gracefulFailure }
-              onChange={ onChangeGracefulFailure }
-            />
-            <TextControl
-              label={ __( 'Failure message' ) }
-              help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
-              value={ failureMessage }
-              onChange={ onChangeFailureMessage }
-            />
           </PanelBody>
-          <PanelBody
-            title={ __( 'Image Settings' ) }
-          >
+          <PanelBody title={ __( 'Image Settings' ) }>
             <TextControl
               label={ __( 'Textual Alternative' ) }
               help={ __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.') }
@@ -199,10 +189,23 @@ registerBlockType( 'easy-panorama/block', {
               onChange={ onChangeMediaTitle }
             />
           </PanelBody>
+          <PanelBody title={ __('Advanced Settings')}>
+            <ToggleControl
+              label={ __('Insert failure message') }
+              checked={ gracefulFailure }
+              onChange={ onChangeGracefulFailure }
+            />
+            <TextControl
+              label={ __( 'Failure message' ) }
+              help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
+              value={ failureMessage }
+              onChange={ onChangeFailureMessage }
+            />
+          </PanelBody>
         </InspectorControls>
       ),
       <div className={ className }>
-        <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={startPosition} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage}>
+        <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage}>
             <img src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
         </div>
       </div>
@@ -221,8 +224,13 @@ registerBlockType( 'easy-panorama/block', {
         failureMessage
       }
     } = props;
+
     const panoramaStyle = {
       height: containerHeight + 'px'
+    };
+
+    const adjustStartPosition = (position) => {
+      return position / 10;
     };
 
     return (
@@ -230,7 +238,7 @@ registerBlockType( 'easy-panorama/block', {
         {
           mediaURL && (
             <figure>
-              <div className="easy-panorama" data-start-position={startPosition} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle}>
+              <div className="easy-panorama" data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle}>
                 <img className="easy-panorama-image" src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
               </div>
             </figure>

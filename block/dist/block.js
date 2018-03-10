@@ -100,6 +100,18 @@ registerBlockType('easy-panorama/block', {
       selector: 'img',
       attribute: 'src'
     },
+    mediaAlt: {
+      type: 'string',
+      source: 'attribute',
+      selector: 'img',
+      attribute: 'alt'
+    },
+    mediaTitle: {
+      type: 'string',
+      source: 'attribute',
+      selector: 'img',
+      attribute: 'title'
+    },
     containerHeight: {
       type: 'number',
       default: 400
@@ -123,6 +135,8 @@ registerBlockType('easy-panorama/block', {
         _props$attributes = props.attributes,
         mediaURL = _props$attributes.mediaURL,
         mediaID = _props$attributes.mediaID,
+        mediaAlt = _props$attributes.mediaAlt,
+        mediaTitle = _props$attributes.mediaTitle,
         containerHeight = _props$attributes.containerHeight,
         startPosition = _props$attributes.startPosition,
         gracefulFailure = _props$attributes.gracefulFailure,
@@ -132,12 +146,26 @@ registerBlockType('easy-panorama/block', {
     var onSelectImage = function onSelectImage(media) {
       props.setAttributes({
         mediaURL: media.url,
-        mediaID: media.id
+        mediaID: media.id,
+        mediaAlt: media.alt,
+        mediaTitle: media.title
       });
     };
 
     var panoramaStyle = {
       height: containerHeight + 'px'
+    };
+
+    var onChangeMediaAlt = function onChangeMediaAlt(alt) {
+      props.setAttributes({
+        mediaAlt: alt
+      });
+    };
+
+    var onChangeMediaTitle = function onChangeMediaTitle(title) {
+      props.setAttributes({
+        mediaTitle: title
+      });
     };
 
     var onChangeContainerHeight = function onChangeContainerHeight(height) {
@@ -231,16 +259,31 @@ registerBlockType('easy-panorama/block', {
           onChange: onChangeFailureMessage
         })
       ),
-      wp.element.createElement(PanelBody, {
-        title: __('Image Settings')
-      })
+      wp.element.createElement(
+        PanelBody,
+        {
+          title: __('Image Settings')
+        },
+        wp.element.createElement(TextControl, {
+          label: __('Textual Alternative'),
+          help: __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.'),
+          value: mediaAlt,
+          onChange: onChangeMediaAlt
+        }),
+        wp.element.createElement(TextControl, {
+          label: __('Image Title'),
+          help: __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.'),
+          value: mediaTitle,
+          onChange: onChangeMediaTitle
+        })
+      )
     ), wp.element.createElement(
       'div',
       { className: className },
       wp.element.createElement(
         'div',
         { style: panoramaStyle, className: 'panorama-image', 'data-paver': true, 'data-start-position': startPosition, 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage },
-        wp.element.createElement('img', { src: mediaURL })
+        wp.element.createElement('img', { src: mediaURL, alt: mediaAlt, title: mediaTitle })
       )
     )];
   },
@@ -248,6 +291,8 @@ registerBlockType('easy-panorama/block', {
     var className = props.className,
         _props$attributes2 = props.attributes,
         mediaURL = _props$attributes2.mediaURL,
+        mediaAlt = _props$attributes2.mediaAlt,
+        mediaTitle = _props$attributes2.mediaTitle,
         containerHeight = _props$attributes2.containerHeight,
         startPosition = _props$attributes2.startPosition,
         gracefulFailure = _props$attributes2.gracefulFailure,
@@ -266,7 +311,7 @@ registerBlockType('easy-panorama/block', {
         wp.element.createElement(
           'div',
           { className: 'easy-panorama', 'data-start-position': startPosition, 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle },
-          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL })
+          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle })
         )
       )
     );

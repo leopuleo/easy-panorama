@@ -22,6 +22,18 @@ registerBlockType( 'easy-panorama/block', {
       selector: 'img',
       attribute: 'src',
     },
+    mediaAlt: {
+      type: 'string',
+      source: 'attribute',
+      selector: 'img',
+      attribute: 'alt',
+    },
+    mediaTitle: {
+      type: 'string',
+      source: 'attribute',
+      selector: 'img',
+      attribute: 'title',
+    },
     containerHeight: {
       type: 'number',
       default: 400
@@ -46,6 +58,8 @@ registerBlockType( 'easy-panorama/block', {
       attributes: {
         mediaURL,
         mediaID,
+        mediaAlt,
+        mediaTitle,
         containerHeight,
         startPosition,
         gracefulFailure,
@@ -57,11 +71,25 @@ registerBlockType( 'easy-panorama/block', {
       props.setAttributes( {
         mediaURL: media.url,
         mediaID: media.id,
+        mediaAlt: media.alt,
+        mediaTitle: media.title
       } );
     };
 
     const panoramaStyle = {
       height: containerHeight + 'px'
+    };
+
+    const onChangeMediaAlt = (alt) => {
+      props.setAttributes( {
+        mediaAlt: alt
+      } );
+    };
+
+    const onChangeMediaTitle = (title) => {
+      props.setAttributes( {
+        mediaTitle: title
+      } );
     };
 
     const onChangeContainerHeight = (height) => {
@@ -158,12 +186,24 @@ registerBlockType( 'easy-panorama/block', {
           <PanelBody
             title={ __( 'Image Settings' ) }
           >
+            <TextControl
+              label={ __( 'Textual Alternative' ) }
+              help={ __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.') }
+              value={ mediaAlt }
+              onChange={ onChangeMediaAlt }
+            />
+            <TextControl
+              label={ __( 'Image Title' ) }
+              help={ __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.') }
+              value={ mediaTitle }
+              onChange={ onChangeMediaTitle }
+            />
           </PanelBody>
         </InspectorControls>
       ),
       <div className={ className }>
         <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={startPosition} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage}>
-            <img src={ mediaURL } />
+            <img src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
         </div>
       </div>
     ];
@@ -173,6 +213,8 @@ registerBlockType( 'easy-panorama/block', {
       className,
       attributes: {
         mediaURL,
+        mediaAlt,
+        mediaTitle,
         containerHeight,
         startPosition,
         gracefulFailure,
@@ -189,7 +231,7 @@ registerBlockType( 'easy-panorama/block', {
           mediaURL && (
             <figure>
               <div className="easy-panorama" data-start-position={startPosition} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle}>
-                <img className="easy-panorama-image" src={ mediaURL } />
+                <img className="easy-panorama-image" src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
               </div>
             </figure>
           )

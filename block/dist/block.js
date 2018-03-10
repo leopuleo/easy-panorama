@@ -82,7 +82,8 @@ var _wp$components = wp.components,
     IconButton = _wp$components.IconButton,
     RangeControl = _wp$components.RangeControl,
     ToggleControl = _wp$components.ToggleControl,
-    TextControl = _wp$components.TextControl;
+    TextControl = _wp$components.TextControl,
+    PanelBody = _wp$components.PanelBody;
 
 
 registerBlockType('easy-panorama/block', {
@@ -199,35 +200,39 @@ registerBlockType('easy-panorama/block', {
       InspectorControls,
       { key: 'easypanorama-inspector' },
       wp.element.createElement(
-        'h2',
-        null,
-        __('Panorama Settings')
+        PanelBody,
+        {
+          title: __('Panorama Settings')
+        },
+        wp.element.createElement(TextControl, {
+          label: __('Panorama height'),
+          help: __('Insert the height for this panoramic image container.'),
+          type: 'number',
+          value: containerHeight,
+          onChange: onChangeContainerHeight
+        }),
+        wp.element.createElement(RangeControl, {
+          label: __('Start position'),
+          help: __('Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).'),
+          value: startPosition,
+          onChange: onChangeStartPosition,
+          min: 0,
+          max: 10
+        }),
+        wp.element.createElement(ToggleControl, {
+          label: __('Insert failure message'),
+          checked: gracefulFailure,
+          onChange: onChangeGracefulFailure
+        }),
+        wp.element.createElement(TextControl, {
+          label: __('Failure message'),
+          help: __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.'),
+          value: failureMessage,
+          onChange: onChangeFailureMessage
+        })
       ),
-      wp.element.createElement(TextControl, {
-        label: __('Panorama height'),
-        help: __('Insert the height for this panoramic image container.'),
-        type: 'number',
-        value: containerHeight,
-        onChange: onChangeContainerHeight
-      }),
-      wp.element.createElement(RangeControl, {
-        label: __('Start position'),
-        help: __('Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).'),
-        value: startPosition,
-        onChange: onChangeStartPosition,
-        min: 0,
-        max: 10
-      }),
-      wp.element.createElement(ToggleControl, {
-        label: __('Insert failure message'),
-        checked: gracefulFailure,
-        onChange: onChangeGracefulFailure
-      }),
-      wp.element.createElement(TextControl, {
-        label: __('Failure message'),
-        help: __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.'),
-        value: failureMessage,
-        onChange: onChangeFailureMessage
+      wp.element.createElement(PanelBody, {
+        title: __('Image Settings')
       })
     ), wp.element.createElement(
       'div',

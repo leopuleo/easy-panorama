@@ -6,7 +6,7 @@ const {
   MediaUpload,
   InspectorControls
 } = wp.blocks;
-const { Button, Toolbar, IconButton, RangeControl, ToggleControl, TextControl } = wp.components;
+const { Button, Toolbar, IconButton, RangeControl, ToggleControl, TextControl, PanelBody } = wp.components;
 
 registerBlockType( 'easy-panorama/block', {
   title: __( 'Panorama' ),
@@ -125,33 +125,40 @@ registerBlockType( 'easy-panorama/block', {
       controls,
       isSelected && (
         <InspectorControls key="easypanorama-inspector">
-          <h2>{ __( 'Panorama Settings' ) }</h2>
-          <TextControl
-            label={ __( 'Panorama height' ) }
-            help={ __('Insert the height for this panoramic image container.') }
-            type={ 'number' }
-            value={ containerHeight }
-            onChange={ onChangeContainerHeight }
-          />
-          <RangeControl
-            label={ __( 'Start position' ) }
-            help={ __( 'Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).' ) }
-            value={ startPosition }
-            onChange={ onChangeStartPosition }
-            min={ 0 }
-            max={ 10 }
-          />
-          <ToggleControl
-            label={ __('Insert failure message') }
-            checked={ gracefulFailure }
-            onChange={ onChangeGracefulFailure }
-          />
-          <TextControl
-            label={ __( 'Failure message' ) }
-            help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
-            value={ failureMessage }
-            onChange={ onChangeFailureMessage }
-          />
+          <PanelBody
+            title={ __( 'Panorama Settings' ) }
+          >
+            <TextControl
+              label={ __( 'Panorama height' ) }
+              help={ __('Insert the height for this panoramic image container.') }
+              type={ 'number' }
+              value={ containerHeight }
+              onChange={ onChangeContainerHeight }
+            />
+            <RangeControl
+              label={ __( 'Start position' ) }
+              help={ __( 'Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).' ) }
+              value={ startPosition }
+              onChange={ onChangeStartPosition }
+              min={ 0 }
+              max={ 10 }
+            />
+            <ToggleControl
+              label={ __('Insert failure message') }
+              checked={ gracefulFailure }
+              onChange={ onChangeGracefulFailure }
+            />
+            <TextControl
+              label={ __( 'Failure message' ) }
+              help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
+              value={ failureMessage }
+              onChange={ onChangeFailureMessage }
+            />
+          </PanelBody>
+          <PanelBody
+            title={ __( 'Image Settings' ) }
+          >
+          </PanelBody>
         </InspectorControls>
       ),
       <div className={ className }>

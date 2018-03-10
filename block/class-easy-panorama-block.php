@@ -77,16 +77,16 @@ class EasyPanoramaBlock {
   public function gutenbergBlockEditorAssets() {
     wp_enqueue_script(
       'easy-panorama-block',
-      plugins_url( 'dist/block.build.js', __FILE__ ),
+      plugins_url('dist/block.build.js', __FILE__),
       array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
-      filemtime( plugin_dir_path( __FILE__ ) . 'dist/block.build.js' )
+      filemtime(plugin_dir_path(__FILE__) . 'dist/block.build.js')
     );
 
     wp_enqueue_style(
       'easy-panorama-block-editor',
-      plugins_url( 'dist/editor.css', __FILE__ ),
+      plugins_url('dist/editor.css', __FILE__),
       array( 'wp-edit-blocks' ),
-      filemtime( plugin_dir_path( __FILE__ ) . 'dist/editor.css' )
+      filemtime(plugin_dir_path(__FILE__) . 'dist/editor.css')
     );
   }
 }

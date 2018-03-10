@@ -77,9 +77,9 @@ class EasyPanoramaBlock {
   public function gutenbergBlockEditorAssets() {
     wp_enqueue_script(
       'easy-panorama-block',
-      plugins_url('dist/block.build.js', __FILE__),
-      array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
-      filemtime(plugin_dir_path(__FILE__) . 'dist/block.build.js')
+      plugins_url('dist/block.js', __FILE__),
+      array('wp-blocks', 'wp-i18n', 'wp-element'),
+      filemtime(plugin_dir_path(__FILE__) . 'dist/block.js')
     );
 
     wp_enqueue_style(

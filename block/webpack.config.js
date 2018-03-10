@@ -1,10 +1,14 @@
+const path = require('path');
+
 module.exports = {
   context: __dirname + "/assets/scripts",
-	entry: './block.js',
+	entry: {
+    'block': './block.js'
+  },
   devtool: "source-map",
 	output: {
-		path: __dirname + '/dist',
-		filename: 'block.build.js',
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].js',
 	},
 	module: {
 		loaders: [

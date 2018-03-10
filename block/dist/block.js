@@ -118,16 +118,25 @@ registerBlockType('easy-panorama/block', {
   },
   edit: function edit(props) {
     var isSelected = props.isSelected,
-        attributes = props.attributes,
-        className = props.className;
+        className = props.className,
+        _props$attributes = props.attributes,
+        mediaURL = _props$attributes.mediaURL,
+        mediaID = _props$attributes.mediaID,
+        containerHeight = _props$attributes.containerHeight,
+        startPosition = _props$attributes.startPosition,
+        gracefulFailure = _props$attributes.gracefulFailure,
+        failureMessage = _props$attributes.failureMessage;
 
-    console.log(attributes);
 
     var onSelectImage = function onSelectImage(media) {
       props.setAttributes({
         mediaURL: media.url,
         mediaID: media.id
       });
+    };
+
+    var panoramaStyle = {
+      height: containerHeight + 'px'
     };
 
     var onChangeContainerHeight = function onChangeContainerHeight(height) {
@@ -144,7 +153,7 @@ registerBlockType('easy-panorama/block', {
 
     var onChangeGracefulFailure = function onChangeGracefulFailure() {
       props.setAttributes({
-        gracefulFailure: !attributes.gracefulFailure
+        gracefulFailure: !gracefulFailure
       });
     };
 
@@ -154,7 +163,7 @@ registerBlockType('easy-panorama/block', {
       });
     };
 
-    if (!attributes.mediaURL) {
+    if (!mediaURL) {
       return [wp.element.createElement(ImagePlaceholder, {
         className: className,
         key: 'easypanorama-placeholder',
@@ -198,26 +207,26 @@ registerBlockType('easy-panorama/block', {
         label: __('Panorama height'),
         help: __('Insert the height for this panoramic image container.'),
         type: 'number',
-        value: attributes.containerHeight,
+        value: containerHeight,
         onChange: onChangeContainerHeight
       }),
       wp.element.createElement(RangeControl, {
         label: __('Start position'),
         help: __('Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).'),
-        value: attributes.startPosition,
+        value: startPosition,
         onChange: onChangeStartPosition,
         min: 0,
         max: 10
       }),
       wp.element.createElement(ToggleControl, {
         label: __('Insert failure message'),
-        checked: attributes.gracefulFailure,
+        checked: gracefulFailure,
         onChange: onChangeGracefulFailure
       }),
       wp.element.createElement(TextControl, {
         label: __('Failure message'),
         help: __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.'),
-        value: attributes.failureMessage,
+        value: failureMessage,
         onChange: onChangeFailureMessage
       })
     ), wp.element.createElement(
@@ -225,19 +234,19 @@ registerBlockType('easy-panorama/block', {
       { className: className },
       wp.element.createElement(
         'div',
-        { className: 'panorama-image' },
-        wp.element.createElement('img', { src: attributes.mediaURL })
+        { style: panoramaStyle, className: 'panorama-image', 'data-paver': true, 'data-start-position': startPosition, 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage },
+        wp.element.createElement('img', { src: mediaURL })
       )
     )];
   },
   save: function save(props) {
     var className = props.className,
-        _props$attributes = props.attributes,
-        mediaURL = _props$attributes.mediaURL,
-        containerHeight = _props$attributes.containerHeight,
-        startPosition = _props$attributes.startPosition,
-        gracefulFailure = _props$attributes.gracefulFailure,
-        failureMessage = _props$attributes.failureMessage;
+        _props$attributes2 = props.attributes,
+        mediaURL = _props$attributes2.mediaURL,
+        containerHeight = _props$attributes2.containerHeight,
+        startPosition = _props$attributes2.startPosition,
+        gracefulFailure = _props$attributes2.gracefulFailure,
+        failureMessage = _props$attributes2.failureMessage;
 
     var panoramaStyle = {
       height: containerHeight + 'px'
@@ -261,4 +270,4 @@ registerBlockType('easy-panorama/block', {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=block.build.js.map
+//# sourceMappingURL=block.js.map

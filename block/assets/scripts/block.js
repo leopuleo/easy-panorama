@@ -151,21 +151,26 @@ registerBlockType( 'easy-panorama/block', {
     const {
       className,
       attributes: {
-        mediaURL
+        mediaURL,
+        containerHeight,
+        startPosition,
+        gracefulFailure,
+        failureMessage
       }
     } = props;
-
     const panoramaStyle = {
-      height: '400px'
+      height: containerHeight + 'px'
     };
 
     return (
       <div className={ className }>
         {
           mediaURL && (
-            <div className="easy-panorama" style={panoramaStyle}>
-              <img className="easy-panorama-image" src={ mediaURL } />
-            </div>
+            <figure>
+              <div className="easy-panorama" data-start-position={startPosition} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle}>
+                <img className="easy-panorama-image" src={ mediaURL } />
+              </div>
+            </figure>
           )
         }
       </div>

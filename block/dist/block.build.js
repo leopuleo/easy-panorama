@@ -232,20 +232,28 @@ registerBlockType('easy-panorama/block', {
   },
   save: function save(props) {
     var className = props.className,
-        mediaURL = props.attributes.mediaURL;
-
+        _props$attributes = props.attributes,
+        mediaURL = _props$attributes.mediaURL,
+        containerHeight = _props$attributes.containerHeight,
+        startPosition = _props$attributes.startPosition,
+        gracefulFailure = _props$attributes.gracefulFailure,
+        failureMessage = _props$attributes.failureMessage;
 
     var panoramaStyle = {
-      height: '400px'
+      height: containerHeight + 'px'
     };
 
     return wp.element.createElement(
       'div',
       { className: className },
       mediaURL && wp.element.createElement(
-        'div',
-        { className: 'easy-panorama', style: panoramaStyle },
-        wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL })
+        'figure',
+        null,
+        wp.element.createElement(
+          'div',
+          { className: 'easy-panorama', 'data-start-position': startPosition, 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle },
+          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL })
+        )
       )
     );
   }

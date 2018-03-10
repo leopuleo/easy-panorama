@@ -74,11 +74,15 @@ var _wp$blocks = wp.blocks,
     registerBlockType = _wp$blocks.registerBlockType,
     ImagePlaceholder = _wp$blocks.ImagePlaceholder,
     BlockControls = _wp$blocks.BlockControls,
-    MediaUpload = _wp$blocks.MediaUpload;
+    MediaUpload = _wp$blocks.MediaUpload,
+    InspectorControls = _wp$blocks.InspectorControls;
 var _wp$components = wp.components,
     Button = _wp$components.Button,
     Toolbar = _wp$components.Toolbar,
-    IconButton = _wp$components.IconButton;
+    IconButton = _wp$components.IconButton,
+    RangeControl = _wp$components.RangeControl,
+    ToggleControl = _wp$components.ToggleControl,
+    TextControl = _wp$components.TextControl;
 
 
 registerBlockType('easy-panorama/block', {
@@ -94,6 +98,22 @@ registerBlockType('easy-panorama/block', {
       source: 'attribute',
       selector: 'img',
       attribute: 'src'
+    },
+    containerHeight: {
+      type: 'number',
+      default: 400
+    },
+    startPosition: {
+      type: 'number',
+      default: 5
+    },
+    gracefulFailure: {
+      type: 'bool',
+      default: true
+    },
+    failureMessage: {
+      type: 'string',
+      default: __('Scroll left/right to pan through panorama.')
     }
   },
   edit: function edit(props) {
@@ -102,10 +122,35 @@ registerBlockType('easy-panorama/block', {
         className = props.className;
 
     console.log(attributes);
+
     var onSelectImage = function onSelectImage(media) {
       props.setAttributes({
         mediaURL: media.url,
         mediaID: media.id
+      });
+    };
+
+    var onChangeContainerHeight = function onChangeContainerHeight(height) {
+      props.setAttributes({
+        containerHeight: Number(height)
+      });
+    };
+
+    var onChangeStartPosition = function onChangeStartPosition(position) {
+      props.setAttributes({
+        startPosition: position
+      });
+    };
+
+    var onChangeGracefulFailure = function onChangeGracefulFailure() {
+      props.setAttributes({
+        gracefulFailure: !attributes.gracefulFailure
+      });
+    };
+
+    var onChangeFailureMessage = function onChangeFailureMessage(message) {
+      props.setAttributes({
+        failureMessage: message
       });
     };
 
@@ -116,7 +161,7 @@ registerBlockType('easy-panorama/block', {
         icon: 'format-image',
         onSelectImage: onSelectImage
       })];
-    }
+    };
 
     var controls = isSelected && wp.element.createElement(
       BlockControls,
@@ -141,7 +186,41 @@ registerBlockType('easy-panorama/block', {
       )
     );
 
-    return [controls, wp.element.createElement(
+    return [controls, isSelected && wp.element.createElement(
+      InspectorControls,
+      { key: 'easypanorama-inspector' },
+      wp.element.createElement(
+        'h2',
+        null,
+        __('Panorama Settings')
+      ),
+      wp.element.createElement(TextControl, {
+        label: __('Panorama height'),
+        help: __('Insert the height for this panoramic image container.'),
+        type: 'number',
+        value: attributes.containerHeight,
+        onChange: onChangeContainerHeight
+      }),
+      wp.element.createElement(RangeControl, {
+        label: __('Start position'),
+        help: __('Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).'),
+        value: attributes.startPosition,
+        onChange: onChangeStartPosition,
+        min: 0,
+        max: 10
+      }),
+      wp.element.createElement(ToggleControl, {
+        label: __('Insert failure message'),
+        checked: attributes.gracefulFailure,
+        onChange: onChangeGracefulFailure
+      }),
+      wp.element.createElement(TextControl, {
+        label: __('Failure message'),
+        help: __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.'),
+        value: attributes.failureMessage,
+        onChange: onChangeFailureMessage
+      })
+    ), wp.element.createElement(
       'div',
       { className: className },
       wp.element.createElement(

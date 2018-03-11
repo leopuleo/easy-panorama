@@ -127,6 +127,10 @@ registerBlockType('easy-panorama/block', {
     failureMessage: {
       type: 'string',
       default: __('Scroll left/right to pan through panorama.')
+    },
+    displayMeta: {
+      type: 'bool',
+      default: false
     }
   },
 
@@ -141,7 +145,8 @@ registerBlockType('easy-panorama/block', {
         containerHeight = _props$attributes.containerHeight,
         startPosition = _props$attributes.startPosition,
         gracefulFailure = _props$attributes.gracefulFailure,
-        failureMessage = _props$attributes.failureMessage;
+        failureMessage = _props$attributes.failureMessage,
+        displayMeta = _props$attributes.displayMeta;
 
 
     var onSelectImage = function onSelectImage(media) {
@@ -197,6 +202,12 @@ registerBlockType('easy-panorama/block', {
       });
     };
 
+    var onChangeDisplayMeta = function onChangeDisplayMeta() {
+      props.setAttributes({
+        displayMeta: !displayMeta
+      });
+    };
+
     if (!mediaURL) {
       return [wp.element.createElement(ImagePlaceholder, {
         className: className,
@@ -249,20 +260,21 @@ registerBlockType('easy-panorama/block', {
           onChange: onChangeStartPosition,
           min: 0,
           max: 10
-        })
-      ),
-      wp.element.createElement(
-        PanelBody,
-        { title: __('Image Settings') },
-        wp.element.createElement(TextControl, {
-          label: __('Textual Alternative'),
-          help: __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.'),
+        }),
+        wp.element.createElement(ToggleControl, {
+          label: __('Show alt/title meta on overlay'),
+          checked: displayMeta,
+          onChange: onChangeDisplayMeta
+        }),
+        displayMeta && wp.element.createElement(TextControl, {
+          label: __('Title'),
+          help: __('Give a title to this image, it will be displayed over the image. This is the alt meta of the image.'),
           value: mediaAlt,
           onChange: onChangeMediaAlt
         }),
-        wp.element.createElement(TextControl, {
-          label: __('Image Title'),
-          help: __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.'),
+        displayMeta && wp.element.createElement(TextControl, {
+          label: __('Description'),
+          help: __('Give a description to this image, it will be displayed over the image. This is the title meta of the image.'),
           value: mediaTitle,
           onChange: onChangeMediaTitle
         })
@@ -275,7 +287,7 @@ registerBlockType('easy-panorama/block', {
           checked: gracefulFailure,
           onChange: onChangeGracefulFailure
         }),
-        wp.element.createElement(TextControl, {
+        gracefulFailure && wp.element.createElement(TextControl, {
           label: __('Failure message'),
           help: __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.'),
           value: failureMessage,
@@ -287,7 +299,7 @@ registerBlockType('easy-panorama/block', {
       { className: className },
       wp.element.createElement(
         'div',
-        { style: panoramaStyle, className: 'panorama-image', 'data-paver': true, 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage },
+        { style: panoramaStyle, className: 'panorama-image', 'data-paver': true, 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, 'data-meta': displayMeta },
         wp.element.createElement('img', { src: mediaURL, alt: mediaAlt, title: mediaTitle })
       )
     )];
@@ -301,7 +313,8 @@ registerBlockType('easy-panorama/block', {
         containerHeight = _props$attributes2.containerHeight,
         startPosition = _props$attributes2.startPosition,
         gracefulFailure = _props$attributes2.gracefulFailure,
-        failureMessage = _props$attributes2.failureMessage;
+        failureMessage = _props$attributes2.failureMessage,
+        displayMeta = _props$attributes2.displayMeta;
 
 
     var panoramaStyle = {
@@ -320,7 +333,7 @@ registerBlockType('easy-panorama/block', {
         null,
         wp.element.createElement(
           'div',
-          { className: 'easy-panorama', 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle },
+          { className: 'easy-panorama', 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle, 'data-meta': displayMeta },
           wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle })
         )
       )

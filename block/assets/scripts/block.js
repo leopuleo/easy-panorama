@@ -49,6 +49,10 @@ registerBlockType( 'easy-panorama/block', {
     failureMessage: {
       type: 'string',
       default: __('Scroll left/right to pan through panorama.')
+    },
+    displayMeta: {
+      type: 'bool',
+      default: false
     }
   },
 
@@ -64,7 +68,8 @@ registerBlockType( 'easy-panorama/block', {
         containerHeight,
         startPosition,
         gracefulFailure,
-        failureMessage
+        failureMessage,
+        displayMeta
       }
     } = props;
 
@@ -121,6 +126,12 @@ registerBlockType( 'easy-panorama/block', {
       } );
     }
 
+    const onChangeDisplayMeta = () => {
+      props.setAttributes( {
+        displayMeta: !displayMeta
+      } );
+    }
+
     if(!mediaURL) {
       return [
         <ImagePlaceholder
@@ -174,20 +185,27 @@ registerBlockType( 'easy-panorama/block', {
               min={ 0 }
               max={ 10 }
             />
-          </PanelBody>
-          <PanelBody title={ __( 'Image Settings' ) }>
-            <TextControl
-              label={ __( 'Textual Alternative' ) }
-              help={ __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.') }
-              value={ mediaAlt }
-              onChange={ onChangeMediaAlt }
+            <ToggleControl
+              label={ __('Show alt/title meta on overlay') }
+              checked={ displayMeta }
+              onChange={ onChangeDisplayMeta }
             />
-            <TextControl
-              label={ __( 'Image Title' ) }
-              help={ __('Describe the purpose of the image. Leave empty if the image is not a key part of the content.') }
-              value={ mediaTitle }
-              onChange={ onChangeMediaTitle }
-            />
+            { displayMeta && (
+              <TextControl
+                label={ __( 'Title' ) }
+                help={ __('Give a title to this image, it will be displayed over the image. This is the alt meta of the image.') }
+                value={ mediaAlt }
+                onChange={ onChangeMediaAlt }
+              />
+            )}
+            { displayMeta && (
+              <TextControl
+                label={ __( 'Description' ) }
+                help={ __('Give a description to this image, it will be displayed over the image. This is the title meta of the image.') }
+                value={ mediaTitle }
+                onChange={ onChangeMediaTitle }
+              />
+            )}
           </PanelBody>
           <PanelBody title={ __('Advanced Settings')}>
             <ToggleControl
@@ -195,17 +213,19 @@ registerBlockType( 'easy-panorama/block', {
               checked={ gracefulFailure }
               onChange={ onChangeGracefulFailure }
             />
-            <TextControl
-              label={ __( 'Failure message' ) }
-              help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
-              value={ failureMessage }
-              onChange={ onChangeFailureMessage }
-            />
+            { gracefulFailure && (
+               <TextControl
+                label={ __( 'Failure message' ) }
+                help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
+                value={ failureMessage }
+                onChange={ onChangeFailureMessage }
+              />
+            )}
           </PanelBody>
         </InspectorControls>
       ),
       <div className={ className }>
-        <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage}>
+        <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} data-meta={displayMeta}>
             <img src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
         </div>
       </div>
@@ -221,7 +241,8 @@ registerBlockType( 'easy-panorama/block', {
         containerHeight,
         startPosition,
         gracefulFailure,
-        failureMessage
+        failureMessage,
+        displayMeta
       }
     } = props;
 
@@ -238,7 +259,7 @@ registerBlockType( 'easy-panorama/block', {
         {
           mediaURL && (
             <figure>
-              <div className="easy-panorama" data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle}>
+              <div className="easy-panorama" data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle} data-meta={displayMeta}>
                 <img className="easy-panorama-image" src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
               </div>
             </figure>

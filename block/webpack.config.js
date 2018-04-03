@@ -1,9 +1,13 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtraneousFileCleanupPlugin = require('webpack-extraneous-file-cleanup-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  context: __dirname + "/assets/scripts",
+  context: path.resolve(__dirname, 'assets'),
 	entry: {
-    'block': './block.js'
+    'block': './scripts/block.js',
+    'style': './styles/block.scss'
   },
   devtool: "source-map",
 	output: {
@@ -11,12 +15,23 @@ module.exports = {
 		filename: '[name].js',
 	},
 	module: {
-		loaders: [
-			{
-				test: /.js$/,
-				loader: 'babel-loader',
-				exclude: /node_modules/,
-			},
-		],
+    rules: [
+      {
+        test: /.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      { // sass / scss loader for webpack
+        test: /\.(sass|scss)$/,
+        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader', 'postcss-loader'])
+      }
+    ],
 	},
+  plugins: [
+    new CleanWebpackPlugin([path.resolve(__dirname, 'dist')]),
+    new ExtractTextPlugin({ // define where to save the file
+      filename: '[name].css',
+      allChunks: true,
+    }),
+  ],
 };

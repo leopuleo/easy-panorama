@@ -1,8 +1,23 @@
 {
-  "name": "03-editable-esnext",
-  "version": "1.0.0",
+  "name": "easy-panorama",
+  "version": "1.1.0",
+  "author": "Leonardo Giacone <leonardo.giacone@gmail.com>",
   "license": "GPL-2.0-or-later",
+  "private": true,
   "main": "block.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/leopuleo/easy-panorama.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leopuleo/easy-panorama/issues"
+  },
+  "licenses": [
+    {
+      "type": "GPL-2.0-or-later",
+      "url": "https://www.gnu.org/licenses/gpl-2.0.en.html"
+    }
+  ],
   "devDependencies": {
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.25.0",

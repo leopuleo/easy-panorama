@@ -1,0 +1,10 @@
+.panorama-image {
+  height: 400px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  img {
+    transform: translate(50px, none);
+    height: 100%;
+    max-width: none;
+  }
+}

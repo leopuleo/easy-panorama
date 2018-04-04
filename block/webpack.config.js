@@ -7,7 +7,7 @@ module.exports = {
   context: path.resolve(__dirname, 'assets'),
 	entry: {
     'block': './scripts/block.js',
-    'style': './styles/block.scss'
+    'editor': './styles/editor.scss'
   },
   devtool: "source-map",
 	output: {

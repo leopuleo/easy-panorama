@@ -72,4 +72,4 @@
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=style.js.map
+//# sourceMappingURL=editor.js.map

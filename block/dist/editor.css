@@ -1,0 +1,9 @@
+.panorama-image {
+  height: 400px;
+  overflow-x: scroll;
+  overflow-y: hidden; }
+  .panorama-image img {
+    height: 100%;
+    max-width: none; }
+
+/*# sourceMappingURL=editor.css.map*/

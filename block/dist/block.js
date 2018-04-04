@@ -299,7 +299,7 @@ registerBlockType('easy-panorama/block', {
       { className: className },
       wp.element.createElement(
         'div',
-        { style: panoramaStyle, className: 'panorama-image', 'data-paver': true, 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, 'data-meta': displayMeta },
+        { style: panoramaStyle, className: 'panorama-image' },
         wp.element.createElement('img', { src: mediaURL, alt: mediaAlt, title: mediaTitle })
       )
     )];
@@ -334,7 +334,12 @@ registerBlockType('easy-panorama/block', {
         wp.element.createElement(
           'div',
           { className: 'easy-panorama', 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle, 'data-meta': displayMeta },
-          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle })
+          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle }),
+          wp.element.createElement(
+            'span',
+            { 'class': 'helper' },
+            __('Preview')
+          )
         )
       )
     );

@@ -160,9 +160,10 @@ registerBlockType( 'easy-panorama/block', {
     if(!mediaURL) {
       return [
         <ImagePlaceholder
+          icon="format-image"
+          label={ __( 'Panorama' ) }
           className={ className }
           key="easypanorama-placeholder"
-          icon="format-image"
           onSelectImage={ onSelectImage}
         />
       ]

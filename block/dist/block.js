@@ -234,9 +234,10 @@ registerBlockType('easy-panorama/block', {
 
     if (!mediaURL) {
       return [wp.element.createElement(ImagePlaceholder, {
+        icon: 'format-image',
+        label: __('Panorama'),
         className: className,
         key: 'easypanorama-placeholder',
-        icon: 'format-image',
         onSelectImage: onSelectImage
       })];
     };

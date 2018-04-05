@@ -20,7 +20,7 @@ const {
 
 registerBlockType( 'easy-panorama/block', {
   title: __( 'Panorama' ),
-  icon: 'format-image',
+  icon: 'move',
   category: 'layout',
   attributes: {
     mediaID: {

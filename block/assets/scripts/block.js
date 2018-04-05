@@ -65,6 +65,9 @@ registerBlockType( 'easy-panorama/block', {
       default: false
     }
   },
+  supports: {
+    html: false
+  },
 
   edit: props => {
     const {

@@ -135,6 +135,9 @@ registerBlockType('easy-panorama/block', {
       default: false
     }
   },
+  supports: {
+    html: false
+  },
 
   edit: function edit(props) {
     var isSelected = props.isSelected,

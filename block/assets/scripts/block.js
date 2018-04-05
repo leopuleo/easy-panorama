@@ -4,7 +4,8 @@ const {
   ImagePlaceholder,
   BlockControls,
   MediaUpload,
-  InspectorControls
+  InspectorControls,
+  createBlock
 } = wp.blocks;
 const {
   Button,
@@ -20,7 +21,7 @@ const {
 
 registerBlockType( 'easy-panorama/block', {
   title: __( 'Panorama' ),
-  icon: 'move',
+  icon: 'format-image',
   category: 'layout',
   attributes: {
     mediaID: {
@@ -64,6 +65,17 @@ registerBlockType( 'easy-panorama/block', {
       type: 'bool',
       default: false
     }
+  },
+  transforms: {
+    to: [
+      {
+        type: 'block',
+        blocks: [ 'core/image' ],
+        transform: ( { mediaID = '', mediaURL = '', mediaAlt = '', caption =  [] } ) => {
+          return createBlock( 'core/image', { mediaID, mediaURL, mediaAlt, caption } );
+        },
+      },
+    ],
   },
   supports: {
     html: false

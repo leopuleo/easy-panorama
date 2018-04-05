@@ -83,7 +83,9 @@ var _wp$components = wp.components,
     RangeControl = _wp$components.RangeControl,
     ToggleControl = _wp$components.ToggleControl,
     TextControl = _wp$components.TextControl,
-    PanelBody = _wp$components.PanelBody;
+    PanelBody = _wp$components.PanelBody,
+    Dashicon = _wp$components.Dashicon,
+    Tooltip = _wp$components.Tooltip;
 
 
 registerBlockType('easy-panorama/block', {
@@ -299,8 +301,21 @@ registerBlockType('easy-panorama/block', {
       { className: className },
       wp.element.createElement(
         'div',
-        { style: panoramaStyle, className: 'panorama-image' },
+        { style: panoramaStyle, className: 'panorama--image' },
         wp.element.createElement('img', { src: mediaURL, alt: mediaAlt, title: mediaTitle })
+      ),
+      wp.element.createElement(
+        'span',
+        { className: 'panorama--help-text' },
+        wp.element.createElement(
+          Tooltip,
+          { text: __('This is a preview, some features are not available.') },
+          wp.element.createElement(
+            'span',
+            { className: 'panorama--help-icon' },
+            wp.element.createElement(Dashicon, { size: '25', icon: 'info' })
+          )
+        )
       )
     )];
   },
@@ -334,12 +349,7 @@ registerBlockType('easy-panorama/block', {
         wp.element.createElement(
           'div',
           { className: 'easy-panorama', 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle, 'data-meta': displayMeta },
-          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle }),
-          wp.element.createElement(
-            'span',
-            { 'class': 'helper' },
-            __('Preview')
-          )
+          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle })
         )
       )
     );

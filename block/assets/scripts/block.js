@@ -6,7 +6,17 @@ const {
   MediaUpload,
   InspectorControls
 } = wp.blocks;
-const { Button, Toolbar, IconButton, RangeControl, ToggleControl, TextControl, PanelBody } = wp.components;
+const {
+  Button,
+  Toolbar,
+  IconButton,
+  RangeControl,
+  ToggleControl,
+  TextControl,
+  PanelBody,
+  Dashicon,
+  Tooltip
+} = wp.components;
 
 registerBlockType( 'easy-panorama/block', {
   title: __( 'Panorama' ),
@@ -225,9 +235,16 @@ registerBlockType( 'easy-panorama/block', {
         </InspectorControls>
       ),
       <div className={ className }>
-        <div style={panoramaStyle} className="panorama-image" data-paver data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} data-meta={displayMeta}>
-            <img src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
+        <div style={panoramaStyle} className="panorama--image">
+          <img src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
         </div>
+        <span className="panorama--help-text">
+          <Tooltip text={ __( 'This is a preview, some features are not available.' ) }>
+            <span className="panorama--help-icon">
+              <Dashicon size="25" icon="info" />
+            </span>
+          </Tooltip>
+        </span>
       </div>
     ];
   },

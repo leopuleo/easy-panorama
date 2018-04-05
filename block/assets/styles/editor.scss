@@ -1,5 +1,19 @@
 /* Easy Panorama Editor Styles */
-.panorama-image {
+.wp-block-easy-panorama-block {
+  position: relative;
+  .panorama--help-text {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .panorama--help-icon {
+    display: inline-block;
+    padding: 5px;
+    color: #fff;
+  }
+}
+
+.panorama--image {
   height: 400px;
   overflow-x: scroll;
   overflow-y: hidden;

@@ -240,6 +240,7 @@ class EasyPanorama {
     $plugin_block = new EasyPanoramaBlock($this->getPluginName(), $this->getVersion(), $this->getOptionsPanorama(), $this->getOptionsAdvanced());
 
     $this->loader->addAction('enqueue_block_editor_assets', $plugin_block, 'gutenbergBlockEditorAssets');
+    $this->loader->addAction('init', $plugin_block, 'gutenbergBlockInit');
   }
 
   /**

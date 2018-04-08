@@ -29,21 +29,12 @@ registerBlockType( 'easy-panorama/block', {
     },
     mediaURL: {
       type: 'string',
-      source: 'attribute',
-      selector: 'img',
-      attribute: 'src',
     },
     mediaAlt: {
       type: 'string',
-      source: 'attribute',
-      selector: 'img',
-      attribute: 'alt',
     },
     mediaTitle: {
       type: 'string',
-      source: 'attribute',
-      selector: 'img',
-      attribute: 'title',
     },
     containerHeight: {
       type: 'number',
@@ -74,6 +65,7 @@ registerBlockType( 'easy-panorama/block', {
     const {
       isSelected,
       className,
+      attributes,
       attributes: {
         mediaURL,
         mediaID,
@@ -86,6 +78,7 @@ registerBlockType( 'easy-panorama/block', {
         displayMeta
       }
     } = props;
+    console.log(attributes);
 
     const onSelectImage = media => {
       props.setAttributes( {
@@ -253,41 +246,8 @@ registerBlockType( 'easy-panorama/block', {
       </div>
     ];
   },
-  save: props => {
-    const {
-      className,
-      attributes: {
-        mediaURL,
-        mediaAlt,
-        mediaTitle,
-        containerHeight,
-        startPosition,
-        gracefulFailure,
-        failureMessage,
-        displayMeta
-      }
-    } = props;
-
-    const panoramaStyle = {
-      height: containerHeight + 'px'
-    };
-
-    const adjustStartPosition = (position) => {
-      return position / 10;
-    };
-
-    return (
-      <div className={ className }>
-        {
-          mediaURL && (
-            <figure>
-              <div className="easy-panorama" data-start-position={adjustStartPosition(startPosition)} data-graceful-failure={gracefulFailure} data-failure-message={failureMessage} style={panoramaStyle} data-meta={displayMeta}>
-                <img className="easy-panorama-image" src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
-              </div>
-            </figure>
-          )
-        }
-      </div>
-    );
-  }
-} );
+  save() {
+    // Rendering in PHP
+    return null;
+  },
+});

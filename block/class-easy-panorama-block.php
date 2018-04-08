@@ -91,14 +91,68 @@ class EasyPanoramaBlock {
   }
 
   /**
-   * Register Gutenberg Block PHP Callback
+   * Register Gutenberg Block defaults and callback
    *
    * @since    1.1.0
    * @access   public
    */
   public function gutenbergBlockInit() {
-    register_block_type( 'easy-panorama/block', array(
-      'render_callback' => 'shortcodeConfig',
+    register_block_type('easy-panorama/block', array(
+      'attributes'      => array(
+        'mediaID' => array(
+          'type'      =>'number'
+        ),
+        'mediaURL' => array(
+          'type'      =>'string'
+        ),
+        'mediaAlt' => array(
+          'type'      =>'string'
+        ),
+        'mediaTitle' => array(
+          'type'      =>'string'
+        ),
+        'containerHeight' => array(
+          'type'      =>'number',
+          'default'   => absint($this->options_panorama['containerHeight'])
+        ),
+        'startPosition' => array(
+          'type'      =>'number',
+          'default'   => (float)$this->options_panorama['startPosition']
+        ),
+        'gracefulFailure' => array(
+          'type'      => 'boolean',
+          'default'   => (bool)$this->options_panorama['gracefulFailure']
+        ),
+        'failureMessage' => array(
+          'type'      => 'string',
+          'default'   => sanitize_text_field($this->options_panorama['failureMessage'])
+        ),
+        'displayMeta' => array(
+          'type'      => 'boolean',
+          'default'   => (bool)$this->options_panorama['meta']
+        )
+      ),
+      'render_callback' => array($this, 'renderCallBack'),
     ));
+  }
+
+  /**
+   * Register Block Callback
+   *
+   * @since    1.1.0
+   * @access   public
+   * @var      array attributes
+   */
+  public function renderCallBack($atts) {
+    if(isset($atts['mediaURL'])) {
+      $html = '<div class="wp-block-easy-panorama-block">';
+      $html .= '<figure>';
+      $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . sanitize_text_field($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
+      $html .= '<img src="' . sanitize_text_field($atts['mediaURL']) . '" alt="' . sanitize_text_field($atts['mediaAlt']) . '" title="' . sanitize_text_field($atts['mediaTitle']) . '" />';
+      $html .= '</div>';
+      $html .= '</figure>';
+      $html .= '</div>';
+      return $html;
+    }
   }
 }

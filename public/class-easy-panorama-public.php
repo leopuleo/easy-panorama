@@ -214,7 +214,7 @@ class EasyPanoramaPublic {
         data-start-position="' . (float)$start_position . '"
         data-graceful-failure="' . (bool)$graceful_failure . '"
         data-failure-message="' . sanitize_text_field($failure_message) . '"
-        data-failure-message="' . sanitize_text_field($failure_message_insert) . '"
+        data-failure-message-insert="' . sanitize_text_field($failure_message_insert) . '"
         data-meta="' . (bool)$meta . '"
         data-minimum-overflow="' . absint($minimum_overflow) . '"
         data-start-position="' . (float)$start_position . '"

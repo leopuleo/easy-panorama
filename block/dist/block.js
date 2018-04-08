@@ -98,22 +98,13 @@ registerBlockType('easy-panorama/block', {
       type: 'number'
     },
     mediaURL: {
-      type: 'string',
-      source: 'attribute',
-      selector: 'img',
-      attribute: 'src'
+      type: 'string'
     },
     mediaAlt: {
-      type: 'string',
-      source: 'attribute',
-      selector: 'img',
-      attribute: 'alt'
+      type: 'string'
     },
     mediaTitle: {
-      type: 'string',
-      source: 'attribute',
-      selector: 'img',
-      attribute: 'title'
+      type: 'string'
     },
     containerHeight: {
       type: 'number',
@@ -143,6 +134,7 @@ registerBlockType('easy-panorama/block', {
   edit: function edit(props) {
     var isSelected = props.isSelected,
         className = props.className,
+        attributes = props.attributes,
         _props$attributes = props.attributes,
         mediaURL = _props$attributes.mediaURL,
         mediaID = _props$attributes.mediaID,
@@ -154,6 +146,7 @@ registerBlockType('easy-panorama/block', {
         failureMessage = _props$attributes.failureMessage,
         displayMeta = _props$attributes.displayMeta;
 
+    console.log(attributes);
 
     var onSelectImage = function onSelectImage(media) {
       props.setAttributes({
@@ -324,40 +317,9 @@ registerBlockType('easy-panorama/block', {
       )
     )];
   },
-  save: function save(props) {
-    var className = props.className,
-        _props$attributes2 = props.attributes,
-        mediaURL = _props$attributes2.mediaURL,
-        mediaAlt = _props$attributes2.mediaAlt,
-        mediaTitle = _props$attributes2.mediaTitle,
-        containerHeight = _props$attributes2.containerHeight,
-        startPosition = _props$attributes2.startPosition,
-        gracefulFailure = _props$attributes2.gracefulFailure,
-        failureMessage = _props$attributes2.failureMessage,
-        displayMeta = _props$attributes2.displayMeta;
-
-
-    var panoramaStyle = {
-      height: containerHeight + 'px'
-    };
-
-    var adjustStartPosition = function adjustStartPosition(position) {
-      return position / 10;
-    };
-
-    return wp.element.createElement(
-      'div',
-      { className: className },
-      mediaURL && wp.element.createElement(
-        'figure',
-        null,
-        wp.element.createElement(
-          'div',
-          { className: 'easy-panorama', 'data-start-position': adjustStartPosition(startPosition), 'data-graceful-failure': gracefulFailure, 'data-failure-message': failureMessage, style: panoramaStyle, 'data-meta': displayMeta },
-          wp.element.createElement('img', { className: 'easy-panorama-image', src: mediaURL, alt: mediaAlt, title: mediaTitle })
-        )
-      )
-    );
+  save: function save() {
+    // Rendering in PHP
+    return null;
   }
 });
 

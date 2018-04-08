@@ -92,10 +92,9 @@ class EasyPanoramaLoader {
    * @param     object        $component      A reference to the instance of the object on which the shortcode is defined.
    * @param     string        $callback       The name of the function that defines the shortcode.
    */
-  public function addShortcode($tag, $component, $callback, $priority = 10, $accepted_args = 2) {
+  public function addShortcode($tag, $component, $callback, $priority = 10, $accepted_args = 1) {
     $this->shortcodes = $this->add($this->shortcodes, $tag, $component, $callback, $priority, $accepted_args);
   }
-
 
   /**
    * A utility function that is used to register the actions and hooks into a single

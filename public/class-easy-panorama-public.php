@@ -161,23 +161,68 @@ class EasyPanoramaPublic {
    * @since    1.0.0
    * @access   public
    */
-  public function shortcodeConfig($attr) {
+  public function shortcodeConfig($atts) {
 
-    shortcode_atts(array('id' => '1'), $attr, 'easy_panorama');
+    // Setting default attributes for shortcode
+    $default = array(
+      'id'                      => '1',
+      'url'                     => '',
+      'title'                   => '',
+      'alt'                     => '',
+      'container_height'        => absint($this->options_panorama['containerHeight']),
+      'graceful_failure'        => (bool)$this->options_panorama['gracefulFailure'],
+      'failure_message'         => sanitize_text_field($this->options_panorama['failureMessage']),
+      'failure_message_insert'  => sanitize_text_field($this->options_panorama['failureMessageInsert']),
+      'meta'                    => (bool)$this->options_panorama['meta'],
+      'minimum_overflow'        => absint($this->options_panorama['minimumOverflow']),
+      'start_position'          => (float)$this->options_panorama['startPosition']
+    );
+
+    $atts = shortcode_atts(
+      $default,
+      $atts,
+      'easy_panorama'
+    );
 
     ob_start();
-    //Retrieve Panorama/attachment ID
-    $id = $attr['id'];
+    // Retrieve Panorama attributes
+    $id = $atts['id'];
+    $url = $atts['url'];
+    $title = $atts['title'];
+    $alt = $atts['alt'];
+    $height = $atts['container_height'];
+    $graceful_failure = $atts['graceful_failure'];
+    $failure_message = $atts['failure_message'];
+    $failure_message_insert = $atts['failure_message_insert'];
+    $meta = $atts['meta'];
+    $minimum_overflow = $atts['minimum_overflow'];
+    $start_position = $atts['start_position'];
 
     //Retrieve Panorama/attachment meta
-    $src = wp_get_attachment_url($id);
-    $title = get_the_title($id);
-    $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
-    $height = absint($this->options_panorama['containerHeight']);
+    if(empty($url)) {
+      $url = wp_get_attachment_url($id);
+    }
+    if(empty($title)) {
+      $title = get_the_title($id);
+    }
+    if(empty($alt)) {
+      $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
+    }
 
-    echo '<div class="easy-panorama" style="height:' . $height . 'px"><img src="' . $src . '" title="' . $title . '" alt="' . $alt . '"></div>';
+    echo '
+      <div class="easy-panorama"
+        data-start-position="' . (float)$start_position . '"
+        data-graceful-failure="' . (bool)$graceful_failure . '"
+        data-failure-message="' . sanitize_text_field($failure_message) . '"
+        data-failure-message="' . sanitize_text_field($failure_message_insert) . '"
+        data-meta="' . (bool)$meta . '"
+        data-minimum-overflow="' . absint($minimum_overflow) . '"
+        data-start-position="' . (float)$start_position . '"
+        style="height:' . absint($height) . 'px">
+        <img src="' . $url . '" title="' . sanitize_text_field($title) . '" alt="' . sanitize_text_field($alt) . '">
+      </div>
+    ';
+
     return ob_get_clean();
-
-    add_shortcode("easy_panorama", "shortcode_atts");
   }
 }

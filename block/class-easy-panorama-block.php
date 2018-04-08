@@ -100,23 +100,23 @@ class EasyPanoramaBlock {
     register_block_type('easy-panorama/block', array(
       'attributes'      => array(
         'mediaID' => array(
-          'type'      =>'number'
+          'type'      => 'number'
         ),
         'mediaURL' => array(
-          'type'      =>'string'
+          'type'      => 'string'
         ),
         'mediaAlt' => array(
           'type'      =>'string'
         ),
         'mediaTitle' => array(
-          'type'      =>'string'
+          'type'      => 'string'
         ),
         'containerHeight' => array(
-          'type'      =>'number',
+          'type'      => 'number',
           'default'   => absint($this->options_panorama['containerHeight'])
         ),
         'startPosition' => array(
-          'type'      =>'number',
+          'type'      => 'number',
           'default'   => (float)$this->options_panorama['startPosition']
         ),
         'gracefulFailure' => array(
@@ -144,7 +144,7 @@ class EasyPanoramaBlock {
    * @var      array attributes
    */
   public function renderCallBack($atts) {
-    if(isset($atts['mediaURL'])) {
+    if (isset($atts['mediaURL'])) {
       $html = '<div class="wp-block-easy-panorama-block">';
       $html .= '<figure>';
       $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . sanitize_text_field($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';

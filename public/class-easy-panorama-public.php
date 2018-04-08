@@ -199,13 +199,13 @@ class EasyPanoramaPublic {
     $start_position = $atts['start_position'];
 
     //Retrieve Panorama/attachment meta
-    if(empty($url)) {
+    if (empty($url)) {
       $url = wp_get_attachment_url($id);
     }
-    if(empty($title)) {
+    if (empty($title)) {
       $title = get_the_title($id);
     }
-    if(empty($alt)) {
+    if (empty($alt)) {
       $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
     }
 

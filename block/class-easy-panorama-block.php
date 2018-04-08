@@ -89,4 +89,16 @@ class EasyPanoramaBlock {
       filemtime(plugin_dir_path(__FILE__) . 'dist/editor.css')
     );
   }
+
+  /**
+   * Register Gutenberg Block PHP Callback
+   *
+   * @since    1.1.0
+   * @access   public
+   */
+  public function gutenbergBlockInit() {
+    register_block_type( 'easy-panorama/block', array(
+      'render_callback' => 'shortcodeConfig',
+    ));
+  }
 }

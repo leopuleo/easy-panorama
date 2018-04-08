@@ -16,7 +16,7 @@ const {
   TextControl,
   PanelBody,
   Dashicon,
-  Tooltip
+  Tooltip,
 } = wp.components;
 
 registerBlockType( 'easy-panorama/block', {
@@ -65,17 +65,6 @@ registerBlockType( 'easy-panorama/block', {
       type: 'bool',
       default: false
     }
-  },
-  transforms: {
-    to: [
-      {
-        type: 'block',
-        blocks: [ 'core/image' ],
-        transform: ( { mediaID = '', mediaURL = '', mediaAlt = '', caption =  [] } ) => {
-          return createBlock( 'core/image', { mediaID, mediaURL, mediaAlt, caption } );
-        },
-      },
-    ],
   },
   supports: {
     html: false

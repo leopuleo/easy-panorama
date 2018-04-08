@@ -136,24 +136,6 @@ registerBlockType('easy-panorama/block', {
       default: false
     }
   },
-  transforms: {
-    to: [{
-      type: 'block',
-      blocks: ['core/image'],
-      transform: function transform(_ref) {
-        var _ref$mediaID = _ref.mediaID,
-            mediaID = _ref$mediaID === undefined ? '' : _ref$mediaID,
-            _ref$mediaURL = _ref.mediaURL,
-            mediaURL = _ref$mediaURL === undefined ? '' : _ref$mediaURL,
-            _ref$mediaAlt = _ref.mediaAlt,
-            mediaAlt = _ref$mediaAlt === undefined ? '' : _ref$mediaAlt,
-            _ref$caption = _ref.caption,
-            caption = _ref$caption === undefined ? [] : _ref$caption;
-
-        return createBlock('core/image', { mediaID: mediaID, mediaURL: mediaURL, mediaAlt: mediaAlt, caption: caption });
-      }
-    }]
-  },
   supports: {
     html: false
   },
@@ -252,8 +234,8 @@ registerBlockType('easy-panorama/block', {
           onSelect: onSelectImage,
           type: 'image',
           value: _this.mediaID,
-          render: function render(_ref2) {
-            var open = _ref2.open;
+          render: function render(_ref) {
+            var open = _ref.open;
             return wp.element.createElement(IconButton, {
               className: 'components-toolbar__control',
               label: __('Edit image'),

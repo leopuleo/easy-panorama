@@ -1,28 +1,11 @@
 const { __ } = wp.i18n;
+
 const {
   registerBlockType,
-  ImagePlaceholder,
-  BlockControls,
-  MediaUpload,
-  InspectorControls,
   createBlock
 } = wp.blocks;
-const {
-  Button,
-  Toolbar,
-  IconButton,
-  RangeControl,
-  ToggleControl,
-  TextControl,
-  PanelBody,
-  Dashicon,
-  Tooltip,
-} = wp.components;
-
-const { withSelect } = wp.data;
 
 import PanoramaBlock from './block';
-
 
 registerBlockType( 'easy-panorama/block', {
   title: __( 'Panorama' ),
@@ -69,19 +52,75 @@ registerBlockType( 'easy-panorama/block', {
     from: [
       {
         type: 'shortcode',
-        // Shortcode tag can also be an array of shortcode aliases
         tag: 'easy_panorama',
         attributes: {
-          // An attribute can be source from the shortcode attributes
-          mediaURL: {
-            type: 'string',
+          id: {
+            type: 'number',
             shortcode: ( { named: { id } } ) => {
-                withSelect( ( select ) => {
-                  const { getMedia } = select( 'core' );
-                  console.log(getMedia(id));
-                })
+              return id;
             },
           },
+          url: {
+            type: 'string',
+            shortcode: ( { named: { url } } ) => {
+              return url;
+            },
+          },
+          title: {
+            type: 'string',
+            shortcode: ( { named: { title } } ) => {
+              return title;
+            },
+          },
+          alt: {
+            type: 'string',
+            shortcode: ( { named: { alt } } ) => {
+              return alt;
+            },
+          },
+          height: {
+            type: 'number',
+            shortcode: ( { named: { height } } ) => {
+              return height;
+            },
+          },
+          graceful_failure: {
+            type: 'bool',
+            shortcode: ( { named: { graceful_failure } } ) => {
+              return graceful_failure;
+            },
+          },
+          failure_message: {
+            type: 'string',
+            shortcode: ( { named: { failure_message } } ) => {
+              return failure_message;
+            },
+          },
+          failure_message_insert: {
+            type: 'string',
+            shortcode: ( { named: { failure_message_insert } } ) => {
+              return failure_message_insert;
+            },
+          },
+          meta: {
+            type: 'bool',
+            shortcode: ( { named: { meta } } ) => {
+              return meta;
+            },
+          },
+          minimum_overflow: {
+            type: 'number',
+            shortcode: ( { named: { minimum_overflow } } ) => {
+              return minimum_overflow;
+            },
+          },
+          start_position: {
+            type: 'number',
+            shortcode: ( { named: { start_position } } ) => {
+              return start_position;
+            },
+          },
+
         },
       },
     ]

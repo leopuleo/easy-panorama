@@ -1,12 +1,14 @@
 const { __ } = wp.i18n;
+
+const { Component } = wp.element;
+
 const {
-  registerBlockType,
   ImagePlaceholder,
   BlockControls,
   MediaUpload,
-  InspectorControls,
-  createBlock
+  InspectorControls
 } = wp.blocks;
+
 const {
   Button,
   Toolbar,
@@ -19,134 +21,101 @@ const {
   Tooltip,
 } = wp.components;
 
-registerBlockType( 'easy-panorama/block', {
-  title: __( 'Panorama' ),
-  icon: 'format-image',
-  category: 'layout',
-  attributes: {
-    mediaID: {
-      type: 'number',
-    },
-    mediaURL: {
-      type: 'string',
-    },
-    mediaAlt: {
-      type: 'string',
-    },
-    mediaTitle: {
-      type: 'string',
-    },
-    containerHeight: {
-      type: 'number',
-      default: 400
-    },
-    startPosition: {
-      type: 'number',
-      default: 5
-    },
-    gracefulFailure: {
-      type: 'bool',
-      default: true
-    },
-    failureMessage: {
-      type: 'string',
-      default: __('Scroll left/right to pan through panorama.')
-    },
-    displayMeta: {
-      type: 'bool',
-      default: false
-    }
-  },
-  supports: {
-    html: false
-  },
+class PanoramaBlock extends Component {
+  constructor() {
+    super( ...arguments );
+    this.onSelectImage = this.onSelectImage.bind( this );
+    this.onChangeMediaAlt = this.onChangeMediaAlt.bind( this );
+    this.onChangeMediaTitle = this.onChangeMediaTitle.bind( this );
+    this.onChangeContainerHeight = this.onChangeContainerHeight.bind( this );
+    this.onChangeStartPosition = this.onChangeStartPosition.bind( this );
+    this.onChangeGracefulFailure = this.onChangeGracefulFailure.bind( this );
+    this.onChangeFailureMessage = this.onChangeFailureMessage.bind( this );
+    this.onChangeDisplayMeta = this.onChangeDisplayMeta.bind( this );
+  }
 
-  edit: props => {
+  onSelectImage( media ) {
+    this.props.setAttributes( {
+      url: media.url,
+      id: media.id,
+      alt: media.alt,
+      title: media.title
+    } );
+  };
+
+  onChangeMediaAlt( alt ){
+    this.props.setAttributes( {
+      alt: alt
+    } );
+  };
+
+  onChangeMediaTitle( title ) {
+    this.props.setAttributes( {
+      title: title
+    } );
+  };
+
+  onChangeContainerHeight(height) {
+    this.props.setAttributes( {
+      containerHeight: Number(height)
+    } );
+  };
+
+  onChangeStartPosition( position ) {
+    this.props.setAttributes( {
+      startPosition: position
+    } );
+  };
+
+  onChangeGracefulFailure() {
+    const { attributes: { gracefulFailure }, setAttributes } = this.props;
+    setAttributes( {
+      gracefulFailure: !gracefulFailure
+    } );
+  };
+
+  onChangeFailureMessage( message ) {
+    this.props.setAttributes( {
+      failureMessage: message
+    } );
+  }
+
+  onChangeDisplayMeta() {
+    const { attributes: { displayMeta }, setAttributes } = this.props;
+    setAttributes( {
+      displayMeta: !displayMeta
+    } );
+  }
+
+  render() {
     const {
       isSelected,
       className,
-      attributes,
       attributes: {
-        mediaURL,
-        mediaID,
-        mediaAlt,
-        mediaTitle,
+        url,
+        id,
+        alt,
+        title,
         containerHeight,
         startPosition,
         gracefulFailure,
         failureMessage,
         displayMeta
       }
-    } = props;
-    console.log(attributes);
-
-    const onSelectImage = media => {
-      props.setAttributes( {
-        mediaURL: media.url,
-        mediaID: media.id,
-        mediaAlt: media.alt,
-        mediaTitle: media.title
-      } );
-    };
+    } = this.props;
 
     const panoramaStyle = {
       height: containerHeight + 'px'
     };
 
-    const onChangeMediaAlt = (alt) => {
-      props.setAttributes( {
-        mediaAlt: alt
-      } );
-    };
-
-    const onChangeMediaTitle = (title) => {
-      props.setAttributes( {
-        mediaTitle: title
-      } );
-    };
-
-    const onChangeContainerHeight = (height) => {
-      props.setAttributes( {
-        containerHeight: Number(height)
-      } );
-    };
-
-    const adjustStartPosition = (position) => {
-      return position / 10;
-    };
-
-    const onChangeStartPosition = (position) => {
-      props.setAttributes( {
-        startPosition: position
-      } );
-    };
-
-    const onChangeGracefulFailure = () => {
-      props.setAttributes( {
-        gracefulFailure: !gracefulFailure
-      } );
-    };
-
-    const onChangeFailureMessage = (message) => {
-      props.setAttributes( {
-        failureMessage: message
-      } );
-    }
-
-    const onChangeDisplayMeta = () => {
-      props.setAttributes( {
-        displayMeta: !displayMeta
-      } );
-    }
-
-    if(!mediaURL) {
+    if(!url) {
       return [
         <ImagePlaceholder
           icon="format-image"
           label={ __( 'Panorama' ) }
           className={ className }
           key="easypanorama-placeholder"
-          onSelectImage={ onSelectImage}
+          onSelectImage={ this.onSelectImage }
         />
       ]
     };
@@ -156,9 +125,9 @@ registerBlockType( 'easy-panorama/block', {
         <BlockControls key="easypanorama-controls">
           <Toolbar>
             <MediaUpload
-              onSelect={ onSelectImage }
+              onSelect={ this.onSelectImage }
               type="image"
-              value={ this.mediaID }
+              value={ this.id }
               render={ ( { open } ) => (
                 <IconButton
                   className="components-toolbar__control"
@@ -183,35 +152,35 @@ registerBlockType( 'easy-panorama/block', {
               help={ __('Insert the height for this panoramic image container.') }
               type={ 'number' }
               value={ containerHeight }
-              onChange={ onChangeContainerHeight }
+              onChange={ this.onChangeContainerHeight }
             />
             <RangeControl
               label={ __( 'Start position' ) }
               help={ __( 'Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).' ) }
               value={ startPosition }
-              onChange={ onChangeStartPosition }
+              onChange={ this.onChangeStartPosition }
               min={ 0 }
               max={ 10 }
             />
             <ToggleControl
               label={ __('Show alt/title meta on overlay') }
               checked={ displayMeta }
-              onChange={ onChangeDisplayMeta }
+              onChange={ this.onChangeDisplayMeta }
             />
             { displayMeta && (
               <TextControl
                 label={ __( 'Title' ) }
                 help={ __('Give a title to this image, it will be displayed over the image. This is the alt meta of the image.') }
-                value={ mediaAlt }
-                onChange={ onChangeMediaAlt }
+                value={ alt }
+                onChange={ this.onChangeMediaAlt }
               />
             )}
             { displayMeta && (
               <TextControl
                 label={ __( 'Description' ) }
                 help={ __('Give a description to this image, it will be displayed over the image. This is the title meta of the image.') }
-                value={ mediaTitle }
-                onChange={ onChangeMediaTitle }
+                value={ title }
+                onChange={ this.onChangeMediaTitle }
               />
             )}
           </PanelBody>
@@ -219,14 +188,14 @@ registerBlockType( 'easy-panorama/block', {
             <ToggleControl
               label={ __('Insert failure message') }
               checked={ gracefulFailure }
-              onChange={ onChangeGracefulFailure }
+              onChange={ this.onChangeGracefulFailure }
             />
             { gracefulFailure && (
                <TextControl
                 label={ __( 'Failure message' ) }
                 help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
                 value={ failureMessage }
-                onChange={ onChangeFailureMessage }
+                onChange={ this.onChangeFailureMessage }
               />
             )}
           </PanelBody>
@@ -234,7 +203,7 @@ registerBlockType( 'easy-panorama/block', {
       ),
       <div className={ className }>
         <div style={panoramaStyle} className="panorama--image">
-          <img src={ mediaURL } alt={ mediaAlt } title={ mediaTitle } />
+          <img src={ url } alt={ alt } title={ title } />
         </div>
         <span className="panorama--help-text">
           <Tooltip text={ __( 'This is a preview, some features are not available.' ) }>
@@ -245,9 +214,7 @@ registerBlockType( 'easy-panorama/block', {
         </span>
       </div>
     ];
-  },
-  save() {
-    // Rendering in PHP
-    return null;
-  },
-});
+  }
+}
+
+export default PanoramaBlock;

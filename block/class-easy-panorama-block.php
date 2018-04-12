@@ -99,16 +99,16 @@ class EasyPanoramaBlock {
   public function gutenbergBlockInit() {
     register_block_type('easy-panorama/block', array(
       'attributes'      => array(
-        'mediaID' => array(
+        'id' => array(
           'type'      => 'number'
         ),
-        'mediaURL' => array(
+        'url' => array(
           'type'      => 'string'
         ),
-        'mediaAlt' => array(
-          'type'      =>'string'
+        'alt' => array(
+          'type'      => 'string'
         ),
-        'mediaTitle' => array(
+        'title' => array(
           'type'      => 'string'
         ),
         'containerHeight' => array(
@@ -144,11 +144,11 @@ class EasyPanoramaBlock {
    * @var      array attributes
    */
   public function renderCallBack($atts) {
-    if (isset($atts['mediaURL'])) {
+    if (isset($atts['url'])) {
       $html = '<div class="wp-block-easy-panorama-block">';
       $html .= '<figure>';
       $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . sanitize_text_field($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
-      $html .= '<img src="' . sanitize_text_field($atts['mediaURL']) . '" alt="' . sanitize_text_field($atts['mediaAlt']) . '" title="' . sanitize_text_field($atts['mediaTitle']) . '" />';
+      $html .= '<img src="' . sanitize_text_field($atts['url']) . '" alt="' . sanitize_text_field($atts['alt']) . '" title="' . sanitize_text_field($atts['title']) . '" />';
       $html .= '</div>';
       $html .= '</figure>';
       $html .= '</div>';

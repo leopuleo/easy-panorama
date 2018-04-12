@@ -4,10 +4,10 @@ const ExtraneousFileCleanupPlugin = require('webpack-extraneous-file-cleanup-plu
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  context: path.resolve(__dirname, 'assets'),
+  context: path.resolve(__dirname, 'src'),
 	entry: {
-    'block': './scripts/block.js',
-    'editor': './styles/editor.scss'
+    'block': './index.js',
+    'editor': './editor.scss'
   },
   devtool: "source-map",
 	output: {

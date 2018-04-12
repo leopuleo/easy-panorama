@@ -69,26 +69,11 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block__ = __webpack_require__(4);
 var __ = wp.i18n.__;
 var _wp$blocks = wp.blocks,
     registerBlockType = _wp$blocks.registerBlockType,
-    ImagePlaceholder = _wp$blocks.ImagePlaceholder,
-    BlockControls = _wp$blocks.BlockControls,
-    MediaUpload = _wp$blocks.MediaUpload,
-    InspectorControls = _wp$blocks.InspectorControls,
     createBlock = _wp$blocks.createBlock;
-var _wp$components = wp.components,
-    Button = _wp$components.Button,
-    Toolbar = _wp$components.Toolbar,
-    IconButton = _wp$components.IconButton,
-    RangeControl = _wp$components.RangeControl,
-    ToggleControl = _wp$components.ToggleControl,
-    TextControl = _wp$components.TextControl,
-    PanelBody = _wp$components.PanelBody,
-    Dashicon = _wp$components.Dashicon,
-    Tooltip = _wp$components.Tooltip;
-var withSelect = wp.data.withSelect;
 
 
 
@@ -137,23 +122,97 @@ registerBlockType('easy-panorama/block', {
   transforms: {
     from: [{
       type: 'shortcode',
-      // Shortcode tag can also be an array of shortcode aliases
       tag: 'easy_panorama',
       attributes: {
-        // An attribute can be source from the shortcode attributes
-        mediaURL: {
-          type: 'string',
+        id: {
+          type: 'number',
           shortcode: function shortcode(_ref) {
             var id = _ref.named.id;
 
-            withSelect(function (select) {
-              var _select = select('core'),
-                  getMedia = _select.getMedia;
+            return id;
+          }
+        },
+        url: {
+          type: 'string',
+          shortcode: function shortcode(_ref2) {
+            var url = _ref2.named.url;
 
-              console.log(getMedia(id));
-            });
+            return url;
+          }
+        },
+        title: {
+          type: 'string',
+          shortcode: function shortcode(_ref3) {
+            var title = _ref3.named.title;
+
+            return title;
+          }
+        },
+        alt: {
+          type: 'string',
+          shortcode: function shortcode(_ref4) {
+            var alt = _ref4.named.alt;
+
+            return alt;
+          }
+        },
+        height: {
+          type: 'number',
+          shortcode: function shortcode(_ref5) {
+            var height = _ref5.named.height;
+
+            return height;
+          }
+        },
+        graceful_failure: {
+          type: 'bool',
+          shortcode: function shortcode(_ref6) {
+            var graceful_failure = _ref6.named.graceful_failure;
+
+            return graceful_failure;
+          }
+        },
+        failure_message: {
+          type: 'string',
+          shortcode: function shortcode(_ref7) {
+            var failure_message = _ref7.named.failure_message;
+
+            return failure_message;
+          }
+        },
+        failure_message_insert: {
+          type: 'string',
+          shortcode: function shortcode(_ref8) {
+            var failure_message_insert = _ref8.named.failure_message_insert;
+
+            return failure_message_insert;
+          }
+        },
+        meta: {
+          type: 'bool',
+          shortcode: function shortcode(_ref9) {
+            var meta = _ref9.named.meta;
+
+            return meta;
+          }
+        },
+        minimum_overflow: {
+          type: 'number',
+          shortcode: function shortcode(_ref10) {
+            var minimum_overflow = _ref10.named.minimum_overflow;
+
+            return minimum_overflow;
+          }
+        },
+        start_position: {
+          type: 'number',
+          shortcode: function shortcode(_ref11) {
+            var start_position = _ref11.named.start_position;
+
+            return start_position;
           }
         }
+
       }
     }]
   },
@@ -167,7 +226,10 @@ registerBlockType('easy-panorama/block', {
 });
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -195,7 +257,8 @@ var _wp$components = wp.components,
     TextControl = _wp$components.TextControl,
     PanelBody = _wp$components.PanelBody,
     Dashicon = _wp$components.Dashicon,
-    Tooltip = _wp$components.Tooltip;
+    Tooltip = _wp$components.Tooltip,
+    withAPIData = _wp$components.withAPIData;
 
 var PanoramaBlock = function (_Component) {
   _inherits(PanoramaBlock, _Component);
@@ -205,6 +268,7 @@ var PanoramaBlock = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (PanoramaBlock.__proto__ || Object.getPrototypeOf(PanoramaBlock)).apply(this, arguments));
 
+    _this.setImageData = _this.setImageData.bind(_this);
     _this.onSelectImage = _this.onSelectImage.bind(_this);
     _this.onChangeMediaAlt = _this.onChangeMediaAlt.bind(_this);
     _this.onChangeMediaTitle = _this.onChangeMediaTitle.bind(_this);
@@ -217,6 +281,44 @@ var PanoramaBlock = function (_Component) {
   }
 
   _createClass(PanoramaBlock, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props = this.props,
+          attributes = _props.attributes,
+          image = _props.image;
+
+      if (attributes.id) {
+        this.setImageData(image.data);
+      }
+    }
+  }, {
+    key: 'setImageData',
+    value: function setImageData(data) {
+      var _props2 = this.props,
+          _props2$attributes = _props2.attributes,
+          id = _props2$attributes.id,
+          url = _props2$attributes.url,
+          alt = _props2$attributes.alt,
+          title = _props2$attributes.title,
+          setAttributes = _props2.setAttributes;
+
+      if (!url) {
+        setAttributes({
+          url: data.source_url
+        });
+      }
+      if (!alt) {
+        setAttributes({
+          alt: data.alt_text
+        });
+      }
+      if (!title) {
+        setAttributes({
+          title: data.title.rendered
+        });
+      }
+    }
+  }, {
     key: 'onSelectImage',
     value: function onSelectImage(media) {
       this.props.setAttributes({
@@ -257,9 +359,9 @@ var PanoramaBlock = function (_Component) {
   }, {
     key: 'onChangeGracefulFailure',
     value: function onChangeGracefulFailure() {
-      var _props = this.props,
-          gracefulFailure = _props.attributes.gracefulFailure,
-          setAttributes = _props.setAttributes;
+      var _props3 = this.props,
+          gracefulFailure = _props3.attributes.gracefulFailure,
+          setAttributes = _props3.setAttributes;
 
       setAttributes({
         gracefulFailure: !gracefulFailure
@@ -275,9 +377,9 @@ var PanoramaBlock = function (_Component) {
   }, {
     key: 'onChangeDisplayMeta',
     value: function onChangeDisplayMeta() {
-      var _props2 = this.props,
-          displayMeta = _props2.attributes.displayMeta,
-          setAttributes = _props2.setAttributes;
+      var _props4 = this.props,
+          displayMeta = _props4.attributes.displayMeta,
+          setAttributes = _props4.setAttributes;
 
       setAttributes({
         displayMeta: !displayMeta
@@ -286,19 +388,19 @@ var PanoramaBlock = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props3 = this.props,
-          isSelected = _props3.isSelected,
-          className = _props3.className,
-          _props3$attributes = _props3.attributes,
-          url = _props3$attributes.url,
-          id = _props3$attributes.id,
-          alt = _props3$attributes.alt,
-          title = _props3$attributes.title,
-          containerHeight = _props3$attributes.containerHeight,
-          startPosition = _props3$attributes.startPosition,
-          gracefulFailure = _props3$attributes.gracefulFailure,
-          failureMessage = _props3$attributes.failureMessage,
-          displayMeta = _props3$attributes.displayMeta;
+      var _props5 = this.props,
+          isSelected = _props5.isSelected,
+          className = _props5.className,
+          _props5$attributes = _props5.attributes,
+          url = _props5$attributes.url,
+          id = _props5$attributes.id,
+          alt = _props5$attributes.alt,
+          title = _props5$attributes.title,
+          containerHeight = _props5$attributes.containerHeight,
+          startPosition = _props5$attributes.startPosition,
+          gracefulFailure = _props5$attributes.gracefulFailure,
+          failureMessage = _props5$attributes.failureMessage,
+          displayMeta = _props5$attributes.displayMeta;
 
 
       var panoramaStyle = {
@@ -420,7 +522,16 @@ var PanoramaBlock = function (_Component) {
   return PanoramaBlock;
 }(Component);
 
-/* harmony default export */ __webpack_exports__["a"] = (PanoramaBlock);
+/* harmony default export */ __webpack_exports__["a"] = (withAPIData(function (props) {
+  var id = props.attributes.id;
+
+  if (!id) {
+    return {};
+  }
+  return {
+    image: '/wp/v2/media/' + id
+  };
+})(PanoramaBlock));
 
 /***/ })
 /******/ ]);

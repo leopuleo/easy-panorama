@@ -19,11 +19,13 @@ const {
   PanelBody,
   Dashicon,
   Tooltip,
+  withAPIData
 } = wp.components;
 
 class PanoramaBlock extends Component {
   constructor() {
     super( ...arguments );
+    this.setImageData = this.setImageData.bind( this );
     this.onSelectImage = this.onSelectImage.bind( this );
     this.onChangeMediaAlt = this.onChangeMediaAlt.bind( this );
     this.onChangeMediaTitle = this.onChangeMediaTitle.bind( this );
@@ -32,6 +34,32 @@ class PanoramaBlock extends Component {
     this.onChangeGracefulFailure = this.onChangeGracefulFailure.bind( this );
     this.onChangeFailureMessage = this.onChangeFailureMessage.bind( this );
     this.onChangeDisplayMeta = this.onChangeDisplayMeta.bind( this );
+  }
+
+  componentDidMount() {
+    const { attributes, image } = this.props;
+    if( attributes.id ) {
+      this.setImageData(image.data)
+    }
+  }
+
+  setImageData ( data ) {
+    const { attributes: { id, url, alt, title }, setAttributes } = this.props;
+    if( !url ) {
+      setAttributes( {
+        url: data.source_url
+      })
+    }
+    if( !alt ) {
+      setAttributes( {
+        alt: data.alt_text
+      })
+    }
+    if( !title ) {
+      setAttributes( {
+        title: data.title.rendered
+      })
+    }
   }
 
   onSelectImage( media ) {
@@ -202,7 +230,7 @@ class PanoramaBlock extends Component {
         </InspectorControls>
       ),
       <div className={ className }>
-        <div style={panoramaStyle} className="panorama--image">
+        <div style={ panoramaStyle } className="panorama--image">
           <img src={ url } alt={ alt } title={ title } />
         </div>
         <span className="panorama--help-text">
@@ -217,4 +245,12 @@ class PanoramaBlock extends Component {
   }
 }
 
-export default PanoramaBlock;
+export default withAPIData( ( props ) => {
+  const { id } = props.attributes;
+  if ( !id ) {
+    return {};
+  }
+  return {
+    image: `/wp/v2/media/${ id }`,
+  };
+} )( PanoramaBlock );

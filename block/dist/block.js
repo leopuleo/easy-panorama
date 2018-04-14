@@ -214,6 +214,18 @@ registerBlockType('easy-panorama/block', {
         }
 
       }
+    }],
+    to: [{
+      type: 'block',
+      blocks: ['core/image'],
+      transform: function transform(_ref12) {
+        var id = _ref12.id,
+            url = _ref12.url,
+            alt = _ref12.alt,
+            title = _ref12.title;
+
+        return createBlock('core/image', { id: id, url: url, alt: alt, title: title });
+      }
     }]
   },
 

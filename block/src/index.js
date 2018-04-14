@@ -123,7 +123,16 @@ registerBlockType( 'easy-panorama/block', {
 
         },
       },
-    ]
+    ],
+    to: [
+      {
+        type: 'block',
+        blocks: [ 'core/image' ],
+        transform: ( { id, url, alt, title } ) => {
+          return createBlock( 'core/image', { id, url, alt, title } );
+        },
+      },
+    ],
   },
 
   edit: PanoramaBlock,

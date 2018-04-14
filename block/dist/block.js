@@ -280,7 +280,7 @@ var PanoramaBlock = function (_Component) {
 
   _createClass(PanoramaBlock, [{
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
+    value: function componentDidUpdate() {
       var image = this.props.image;
 
       if (image.data) {
@@ -404,7 +404,7 @@ var PanoramaBlock = function (_Component) {
         height: containerHeight + 'px'
       };
 
-      if (image.isLoading) {
+      if (image && image.isLoading) {
         return [wp.element.createElement(
           Placeholder,
           {
@@ -418,6 +418,30 @@ var PanoramaBlock = function (_Component) {
             ' ',
             __('Loading...'),
             ' '
+          )
+        )];
+      }
+
+      if (image && image.error) {
+        var status = image.error.status;
+
+        var message = __('Generic error');
+
+        if (status === 404) {
+          message = __('Image not found: invalid attachment ID.');
+        }
+
+        return [wp.element.createElement(
+          Placeholder,
+          {
+            icon: 'format-image',
+            label: __('Panorama'),
+            className: 'easypanorama-loading'
+          },
+          wp.element.createElement(
+            'span',
+            null,
+            message
           )
         )];
       }

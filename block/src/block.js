@@ -37,7 +37,7 @@ class PanoramaBlock extends Component {
     this.onChangeDisplayMeta = this.onChangeDisplayMeta.bind( this );
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     const { image } = this.props;
     if(image.data) {
       this.setImageData(image.data);
@@ -138,7 +138,7 @@ class PanoramaBlock extends Component {
       height: containerHeight + 'px'
     };
 
-    if ( image.isLoading ) {
+    if ( image && image.isLoading ) {
       return [
         <Placeholder
           icon="format-image"
@@ -146,6 +146,25 @@ class PanoramaBlock extends Component {
           className="easypanorama-loading"
         >
           <span> { __( 'Loading...' ) } </span>
+        </Placeholder>,
+      ];
+    }
+
+    if ( image && image.error ) {
+      const { error: { status } } = image;
+      let message = __( 'Generic error' );
+
+      if(status === 404) {
+        message = __( 'Image not found: invalid attachment ID.' );
+      }
+
+      return [
+        <Placeholder
+          icon="format-image"
+          label={ __( 'Panorama' ) }
+          className="easypanorama-loading"
+        >
+          <span>{ message }</span>
         </Placeholder>,
       ];
     }

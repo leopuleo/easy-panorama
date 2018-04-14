@@ -19,7 +19,9 @@ const {
   PanelBody,
   Dashicon,
   Tooltip,
-  withAPIData
+  withAPIData,
+  Spinner,
+  Placeholder
 } = wp.components;
 
 class PanoramaBlock extends Component {
@@ -36,10 +38,10 @@ class PanoramaBlock extends Component {
     this.onChangeDisplayMeta = this.onChangeDisplayMeta.bind( this );
   }
 
-  componentDidMount() {
-    const { attributes, image } = this.props;
-    if( attributes.id ) {
-      this.setImageData(image.data)
+  componentDidUpdate(prevProps, prevState) {
+    const { image } = this.props;
+    if(image.data) {
+      this.setImageData(image.data);
     }
   }
 
@@ -119,6 +121,7 @@ class PanoramaBlock extends Component {
     const {
       isSelected,
       className,
+      image,
       attributes: {
         url,
         id,
@@ -135,6 +138,14 @@ class PanoramaBlock extends Component {
     const panoramaStyle = {
       height: containerHeight + 'px'
     };
+
+    if ( image.isLoading ) {
+      return [
+        <Placeholder className="easypanorama-loading">
+          <Spinner />
+        </Placeholder>,
+      ];
+    }
 
     if(!url) {
       return [

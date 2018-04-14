@@ -69,7 +69,7 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block__ = __webpack_require__(1);
 var __ = wp.i18n.__;
 var _wp$blocks = wp.blocks,
     registerBlockType = _wp$blocks.registerBlockType,
@@ -226,10 +226,7 @@ registerBlockType('easy-panorama/block', {
 });
 
 /***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -258,7 +255,9 @@ var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
     Dashicon = _wp$components.Dashicon,
     Tooltip = _wp$components.Tooltip,
-    withAPIData = _wp$components.withAPIData;
+    withAPIData = _wp$components.withAPIData,
+    Spinner = _wp$components.Spinner,
+    Placeholder = _wp$components.Placeholder;
 
 var PanoramaBlock = function (_Component) {
   _inherits(PanoramaBlock, _Component);
@@ -281,26 +280,24 @@ var PanoramaBlock = function (_Component) {
   }
 
   _createClass(PanoramaBlock, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props = this.props,
-          attributes = _props.attributes,
-          image = _props.image;
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      var image = this.props.image;
 
-      if (attributes.id) {
+      if (image.data) {
         this.setImageData(image.data);
       }
     }
   }, {
-    key: 'setImageData',
+    key: "setImageData",
     value: function setImageData(data) {
-      var _props2 = this.props,
-          _props2$attributes = _props2.attributes,
-          id = _props2$attributes.id,
-          url = _props2$attributes.url,
-          alt = _props2$attributes.alt,
-          title = _props2$attributes.title,
-          setAttributes = _props2.setAttributes;
+      var _props = this.props,
+          _props$attributes = _props.attributes,
+          id = _props$attributes.id,
+          url = _props$attributes.url,
+          alt = _props$attributes.alt,
+          title = _props$attributes.title,
+          setAttributes = _props.setAttributes;
 
       if (!url) {
         setAttributes({
@@ -319,7 +316,7 @@ var PanoramaBlock = function (_Component) {
       }
     }
   }, {
-    key: 'onSelectImage',
+    key: "onSelectImage",
     value: function onSelectImage(media) {
       this.props.setAttributes({
         url: media.url,
@@ -329,110 +326,119 @@ var PanoramaBlock = function (_Component) {
       });
     }
   }, {
-    key: 'onChangeMediaAlt',
+    key: "onChangeMediaAlt",
     value: function onChangeMediaAlt(alt) {
       this.props.setAttributes({
         alt: alt
       });
     }
   }, {
-    key: 'onChangeMediaTitle',
+    key: "onChangeMediaTitle",
     value: function onChangeMediaTitle(title) {
       this.props.setAttributes({
         title: title
       });
     }
   }, {
-    key: 'onChangeContainerHeight',
+    key: "onChangeContainerHeight",
     value: function onChangeContainerHeight(height) {
       this.props.setAttributes({
         containerHeight: Number(height)
       });
     }
   }, {
-    key: 'onChangeStartPosition',
+    key: "onChangeStartPosition",
     value: function onChangeStartPosition(position) {
       this.props.setAttributes({
         startPosition: position
       });
     }
   }, {
-    key: 'onChangeGracefulFailure',
+    key: "onChangeGracefulFailure",
     value: function onChangeGracefulFailure() {
-      var _props3 = this.props,
-          gracefulFailure = _props3.attributes.gracefulFailure,
-          setAttributes = _props3.setAttributes;
+      var _props2 = this.props,
+          gracefulFailure = _props2.attributes.gracefulFailure,
+          setAttributes = _props2.setAttributes;
 
       setAttributes({
         gracefulFailure: !gracefulFailure
       });
     }
   }, {
-    key: 'onChangeFailureMessage',
+    key: "onChangeFailureMessage",
     value: function onChangeFailureMessage(message) {
       this.props.setAttributes({
         failureMessage: message
       });
     }
   }, {
-    key: 'onChangeDisplayMeta',
+    key: "onChangeDisplayMeta",
     value: function onChangeDisplayMeta() {
-      var _props4 = this.props,
-          displayMeta = _props4.attributes.displayMeta,
-          setAttributes = _props4.setAttributes;
+      var _props3 = this.props,
+          displayMeta = _props3.attributes.displayMeta,
+          setAttributes = _props3.setAttributes;
 
       setAttributes({
         displayMeta: !displayMeta
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props5 = this.props,
-          isSelected = _props5.isSelected,
-          className = _props5.className,
-          _props5$attributes = _props5.attributes,
-          url = _props5$attributes.url,
-          id = _props5$attributes.id,
-          alt = _props5$attributes.alt,
-          title = _props5$attributes.title,
-          containerHeight = _props5$attributes.containerHeight,
-          startPosition = _props5$attributes.startPosition,
-          gracefulFailure = _props5$attributes.gracefulFailure,
-          failureMessage = _props5$attributes.failureMessage,
-          displayMeta = _props5$attributes.displayMeta;
+      var _props4 = this.props,
+          isSelected = _props4.isSelected,
+          className = _props4.className,
+          image = _props4.image,
+          _props4$attributes = _props4.attributes,
+          url = _props4$attributes.url,
+          id = _props4$attributes.id,
+          alt = _props4$attributes.alt,
+          title = _props4$attributes.title,
+          containerHeight = _props4$attributes.containerHeight,
+          startPosition = _props4$attributes.startPosition,
+          gracefulFailure = _props4$attributes.gracefulFailure,
+          failureMessage = _props4$attributes.failureMessage,
+          displayMeta = _props4$attributes.displayMeta;
 
 
       var panoramaStyle = {
         height: containerHeight + 'px'
       };
 
+      if (image.isLoading) {
+        return [wp.element.createElement(
+          Placeholder,
+          { className: "easypanorama-loading" },
+          wp.element.createElement(Spinner, null)
+        )];
+      }
+
       if (!url) {
         return [wp.element.createElement(ImagePlaceholder, {
-          icon: 'format-image',
+          icon: "format-image",
           label: __('Panorama'),
           className: className,
-          key: 'easypanorama-placeholder',
+          key: "easypanorama-placeholder",
           onSelectImage: this.onSelectImage
         })];
       };
 
       var controls = isSelected && wp.element.createElement(
         BlockControls,
-        { key: 'easypanorama-controls' },
+        { key: "easypanorama-controls" },
         wp.element.createElement(
           Toolbar,
           null,
           wp.element.createElement(MediaUpload, {
             onSelect: this.onSelectImage,
-            type: 'image',
+            type: "image",
             value: this.id,
             render: function render(_ref) {
               var open = _ref.open;
               return wp.element.createElement(IconButton, {
-                className: 'components-toolbar__control',
+                className: "components-toolbar__control",
                 label: __('Edit image'),
-                icon: 'edit',
+                icon: "edit",
                 onClick: open
               });
             }
@@ -442,7 +448,7 @@ var PanoramaBlock = function (_Component) {
 
       return [controls, isSelected && wp.element.createElement(
         InspectorControls,
-        { key: 'easypanorama-inspector' },
+        { key: "easypanorama-inspector" },
         wp.element.createElement(
           PanelBody,
           { title: __('Panorama Settings') },
@@ -495,23 +501,23 @@ var PanoramaBlock = function (_Component) {
           })
         )
       ), wp.element.createElement(
-        'div',
+        "div",
         { className: className },
         wp.element.createElement(
-          'div',
-          { style: panoramaStyle, className: 'panorama--image' },
-          wp.element.createElement('img', { src: url, alt: alt, title: title })
+          "div",
+          { style: panoramaStyle, className: "panorama--image" },
+          wp.element.createElement("img", { src: url, alt: alt, title: title })
         ),
         wp.element.createElement(
-          'span',
-          { className: 'panorama--help-text' },
+          "span",
+          { className: "panorama--help-text" },
           wp.element.createElement(
             Tooltip,
             { text: __('This is a preview, some features are not available.') },
             wp.element.createElement(
-              'span',
-              { className: 'panorama--help-icon' },
-              wp.element.createElement(Dashicon, { size: '25', icon: 'info' })
+              "span",
+              { className: "panorama--help-icon" },
+              wp.element.createElement(Dashicon, { size: "25", icon: "info" })
             )
           )
         )
@@ -529,7 +535,7 @@ var PanoramaBlock = function (_Component) {
     return {};
   }
   return {
-    image: '/wp/v2/media/' + id
+    image: "/wp/v2/media/" + id
   };
 })(PanoramaBlock));
 

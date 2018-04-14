@@ -256,7 +256,6 @@ var _wp$components = wp.components,
     Dashicon = _wp$components.Dashicon,
     Tooltip = _wp$components.Tooltip,
     withAPIData = _wp$components.withAPIData,
-    Spinner = _wp$components.Spinner,
     Placeholder = _wp$components.Placeholder;
 
 var PanoramaBlock = function (_Component) {
@@ -280,7 +279,7 @@ var PanoramaBlock = function (_Component) {
   }
 
   _createClass(PanoramaBlock, [{
-    key: "componentDidUpdate",
+    key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
       var image = this.props.image;
 
@@ -289,7 +288,7 @@ var PanoramaBlock = function (_Component) {
       }
     }
   }, {
-    key: "setImageData",
+    key: 'setImageData',
     value: function setImageData(data) {
       var _props = this.props,
           _props$attributes = _props.attributes,
@@ -316,7 +315,7 @@ var PanoramaBlock = function (_Component) {
       }
     }
   }, {
-    key: "onSelectImage",
+    key: 'onSelectImage',
     value: function onSelectImage(media) {
       this.props.setAttributes({
         url: media.url,
@@ -326,35 +325,35 @@ var PanoramaBlock = function (_Component) {
       });
     }
   }, {
-    key: "onChangeMediaAlt",
+    key: 'onChangeMediaAlt',
     value: function onChangeMediaAlt(alt) {
       this.props.setAttributes({
         alt: alt
       });
     }
   }, {
-    key: "onChangeMediaTitle",
+    key: 'onChangeMediaTitle',
     value: function onChangeMediaTitle(title) {
       this.props.setAttributes({
         title: title
       });
     }
   }, {
-    key: "onChangeContainerHeight",
+    key: 'onChangeContainerHeight',
     value: function onChangeContainerHeight(height) {
       this.props.setAttributes({
         containerHeight: Number(height)
       });
     }
   }, {
-    key: "onChangeStartPosition",
+    key: 'onChangeStartPosition',
     value: function onChangeStartPosition(position) {
       this.props.setAttributes({
         startPosition: position
       });
     }
   }, {
-    key: "onChangeGracefulFailure",
+    key: 'onChangeGracefulFailure',
     value: function onChangeGracefulFailure() {
       var _props2 = this.props,
           gracefulFailure = _props2.attributes.gracefulFailure,
@@ -365,14 +364,14 @@ var PanoramaBlock = function (_Component) {
       });
     }
   }, {
-    key: "onChangeFailureMessage",
+    key: 'onChangeFailureMessage',
     value: function onChangeFailureMessage(message) {
       this.props.setAttributes({
         failureMessage: message
       });
     }
   }, {
-    key: "onChangeDisplayMeta",
+    key: 'onChangeDisplayMeta',
     value: function onChangeDisplayMeta() {
       var _props3 = this.props,
           displayMeta = _props3.attributes.displayMeta,
@@ -383,7 +382,7 @@ var PanoramaBlock = function (_Component) {
       });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props4 = this.props,
           isSelected = _props4.isSelected,
@@ -408,37 +407,47 @@ var PanoramaBlock = function (_Component) {
       if (image.isLoading) {
         return [wp.element.createElement(
           Placeholder,
-          { className: "easypanorama-loading" },
-          wp.element.createElement(Spinner, null)
+          {
+            icon: 'format-image',
+            label: __('Panorama'),
+            className: 'easypanorama-loading'
+          },
+          wp.element.createElement(
+            'span',
+            null,
+            ' ',
+            __('Loading...'),
+            ' '
+          )
         )];
       }
 
       if (!url) {
         return [wp.element.createElement(ImagePlaceholder, {
-          icon: "format-image",
+          icon: 'format-image',
           label: __('Panorama'),
           className: className,
-          key: "easypanorama-placeholder",
+          key: 'easypanorama-placeholder',
           onSelectImage: this.onSelectImage
         })];
       };
 
       var controls = isSelected && wp.element.createElement(
         BlockControls,
-        { key: "easypanorama-controls" },
+        { key: 'easypanorama-controls' },
         wp.element.createElement(
           Toolbar,
           null,
           wp.element.createElement(MediaUpload, {
             onSelect: this.onSelectImage,
-            type: "image",
+            type: 'image',
             value: this.id,
             render: function render(_ref) {
               var open = _ref.open;
               return wp.element.createElement(IconButton, {
-                className: "components-toolbar__control",
+                className: 'components-toolbar__control',
                 label: __('Edit image'),
-                icon: "edit",
+                icon: 'edit',
                 onClick: open
               });
             }
@@ -448,7 +457,7 @@ var PanoramaBlock = function (_Component) {
 
       return [controls, isSelected && wp.element.createElement(
         InspectorControls,
-        { key: "easypanorama-inspector" },
+        { key: 'easypanorama-inspector' },
         wp.element.createElement(
           PanelBody,
           { title: __('Panorama Settings') },
@@ -501,23 +510,23 @@ var PanoramaBlock = function (_Component) {
           })
         )
       ), wp.element.createElement(
-        "div",
+        'div',
         { className: className },
         wp.element.createElement(
-          "div",
-          { style: panoramaStyle, className: "panorama--image" },
-          wp.element.createElement("img", { src: url, alt: alt, title: title })
+          'div',
+          { style: panoramaStyle, className: 'panorama--image' },
+          wp.element.createElement('img', { src: url, alt: alt, title: title })
         ),
         wp.element.createElement(
-          "span",
-          { className: "panorama--help-text" },
+          'span',
+          { className: 'panorama--help-text' },
           wp.element.createElement(
             Tooltip,
             { text: __('This is a preview, some features are not available.') },
             wp.element.createElement(
-              "span",
-              { className: "panorama--help-icon" },
-              wp.element.createElement(Dashicon, { size: "25", icon: "info" })
+              'span',
+              { className: 'panorama--help-icon' },
+              wp.element.createElement(Dashicon, { size: '25', icon: 'info' })
             )
           )
         )
@@ -535,7 +544,7 @@ var PanoramaBlock = function (_Component) {
     return {};
   }
   return {
-    image: "/wp/v2/media/" + id
+    image: '/wp/v2/media/' + id
   };
 })(PanoramaBlock));
 

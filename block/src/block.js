@@ -20,7 +20,6 @@ const {
   Dashicon,
   Tooltip,
   withAPIData,
-  Spinner,
   Placeholder
 } = wp.components;
 
@@ -141,8 +140,12 @@ class PanoramaBlock extends Component {
 
     if ( image.isLoading ) {
       return [
-        <Placeholder className="easypanorama-loading">
-          <Spinner />
+        <Placeholder
+          icon="format-image"
+          label={ __( 'Panorama' ) }
+          className="easypanorama-loading"
+        >
+          <span> { __( 'Loading...' ) } </span>
         </Placeholder>,
       ];
     }

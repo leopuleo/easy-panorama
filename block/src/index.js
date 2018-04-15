@@ -5,6 +5,7 @@ const {
   createBlock
 } = wp.blocks;
 
+import './i18n.js';
 import './editor.scss';
 import PanoramaBlock from './block';
 

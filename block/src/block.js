@@ -248,17 +248,17 @@ class PanoramaBlock extends Component {
             { displayMeta && (
               <TextControl
                 label={ __( 'Title' ) }
-                help={ __('Give a title to this image, it will be displayed over the image. This is the alt meta of the image.') }
-                value={ alt }
-                onChange={ this.onChangeMediaAlt }
+                help={ __('Give a title to this image, it will be displayed over the image. This is the title meta of the image.') }
+                value={ title }
+                onChange={ this.onChangeMediaTitle }
               />
             ) }
             { displayMeta && (
               <TextControl
                 label={ __( 'Description' ) }
-                help={ __('Give a description to this image, it will be displayed over the image. This is the title meta of the image.') }
-                value={ title }
-                onChange={ this.onChangeMediaTitle }
+                help={ __('Give a description to this image, it will be displayed over the image. This is the alt meta of the image.') }
+                value={ alt }
+                onChange={ this.onChangeMediaAlt }
               />
             ) }
           </PanelBody>

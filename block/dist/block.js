@@ -70,6 +70,8 @@
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block__ = __webpack_require__(1);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var __ = wp.i18n.__;
 var _wp$blocks = wp.blocks,
     registerBlockType = _wp$blocks.registerBlockType,
@@ -121,6 +123,13 @@ registerBlockType('easy-panorama/block', {
   },
   transforms: {
     from: [{
+      type: 'block',
+      isMultiBlock: true,
+      blocks: ['core/image'],
+      transform: function transform(attributes) {
+        return createBlock.apply(undefined, ['easy-panorama/block'].concat(_toConsumableArray(attributes)));
+      }
+    }, {
       type: 'shortcode',
       tag: 'easy_panorama',
       attributes: {
@@ -295,7 +304,7 @@ var PanoramaBlock = function (_Component) {
     value: function componentDidUpdate() {
       var image = this.props.image;
 
-      if (image.data) {
+      if (image && image.data) {
         this.setImageData(image.data);
       }
     }

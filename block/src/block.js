@@ -39,7 +39,7 @@ class PanoramaBlock extends Component {
 
   componentDidUpdate() {
     const { image } = this.props;
-    if(image.data) {
+    if(image && image.data) {
       this.setImageData(image.data);
     }
   }

@@ -51,6 +51,14 @@ registerBlockType( 'easy-panorama/block', {
   transforms: {
     from: [
       {
+        type: 'block',
+        isMultiBlock: true,
+        blocks: [ 'core/image' ],
+        transform: ( attributes ) => {
+          return createBlock( 'easy-panorama/block', ...attributes );
+        },
+      },
+      {
         type: 'shortcode',
         tag: 'easy_panorama',
         attributes: {

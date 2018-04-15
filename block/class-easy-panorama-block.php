@@ -148,7 +148,7 @@ class EasyPanoramaBlock {
       $html = '<div class="wp-block-easy-panorama-block">';
       $html .= '<figure>';
       $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . sanitize_text_field($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
-      $html .= '<img src="' . sanitize_text_field($atts['url']) . '" alt="' . sanitize_text_field($atts['alt']) . '" title="' . sanitize_text_field($atts['title']) . '" />';
+      $html .= '<img src="' . esc_url($atts['url']) . '" alt="' . sanitize_text_field($atts['alt']) . '" title="' . sanitize_text_field($atts['title']) . '" />';
       $html .= '</div>';
       $html .= '</figure>';
       $html .= '</div>';

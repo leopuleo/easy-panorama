@@ -219,7 +219,7 @@ class EasyPanoramaPublic {
         data-minimum-overflow="' . absint($minimum_overflow) . '"
         data-start-position="' . (float)$start_position . '"
         style="height:' . absint($height) . 'px">
-        <img src="' . $url . '" title="' . sanitize_text_field($title) . '" alt="' . sanitize_text_field($alt) . '">
+        <img src="' . esc_url($url) . '" title="' . sanitize_text_field($title) . '" alt="' . sanitize_text_field($alt) . '">
       </div>
     ';
 

@@ -519,7 +519,7 @@ var PanoramaBlock = function (_Component) {
         { key: 'easypanorama-inspector' },
         wp.element.createElement(
           PanelBody,
-          { title: __('Panorama Settings') },
+          { title: __('Panorama settings') },
           wp.element.createElement(TextControl, {
             label: __('Panorama height'),
             help: __('Insert the height for this panoramic image container.'),
@@ -529,14 +529,14 @@ var PanoramaBlock = function (_Component) {
           }),
           wp.element.createElement(RangeControl, {
             label: __('Start position'),
-            help: __('Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).'),
+            help: __('Determines the start position of the panorama: insert a value from 0 (left) to 10 (right).'),
             value: startPosition,
             onChange: this.onChangeStartPosition,
             min: 0,
             max: 10
           }),
           wp.element.createElement(ToggleControl, {
-            label: __('Show alt/title meta on overlay'),
+            label: __('Show meta on overlay'),
             checked: displayMeta,
             onChange: this.onChangeDisplayMeta
           }),
@@ -555,7 +555,7 @@ var PanoramaBlock = function (_Component) {
         ),
         wp.element.createElement(
           PanelBody,
-          { title: __('Advanced Settings') },
+          { title: __('Advanced settings') },
           wp.element.createElement(ToggleControl, {
             label: __('Insert failure message'),
             checked: gracefulFailure,

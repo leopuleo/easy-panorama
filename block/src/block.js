@@ -207,7 +207,7 @@ class PanoramaBlock extends Component {
       controls,
       isSelected && (
         <InspectorControls key="easypanorama-inspector">
-          <PanelBody title={ __( 'Panorama Settings' ) }>
+          <PanelBody title={ __( 'Panorama settings' ) }>
             <TextControl
               label={ __( 'Panorama height' ) }
               help={ __('Insert the height for this panoramic image container.') }
@@ -217,14 +217,14 @@ class PanoramaBlock extends Component {
             />
             <RangeControl
               label={ __( 'Start position' ) }
-              help={ __( 'Determines the start position of the panorama. Insert a value from 0 (left) to 10 (right).' ) }
+              help={ __( 'Determines the start position of the panorama: insert a value from 0 (left) to 10 (right).' ) }
               value={ startPosition }
               onChange={ this.onChangeStartPosition }
               min={ 0 }
               max={ 10 }
             />
             <ToggleControl
-              label={ __('Show alt/title meta on overlay') }
+              label={ __('Show meta on overlay') }
               checked={ displayMeta }
               onChange={ this.onChangeDisplayMeta }
             />
@@ -245,7 +245,7 @@ class PanoramaBlock extends Component {
               />
             )}
           </PanelBody>
-          <PanelBody title={ __('Advanced Settings')}>
+          <PanelBody title={ __('Advanced settings')}>
             <ToggleControl
               label={ __('Insert failure message') }
               checked={ gracefulFailure }

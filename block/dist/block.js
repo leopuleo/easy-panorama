@@ -466,7 +466,7 @@ var PanoramaBlock = function (_Component) {
         height: containerHeight + 'px'
       };
 
-      if (image && image.isLoading) {
+      if (!url && image && image.isLoading) {
         return [wp.element.createElement(
           Placeholder,
           {
@@ -477,9 +477,7 @@ var PanoramaBlock = function (_Component) {
           wp.element.createElement(
             'span',
             null,
-            ' ',
-            __('Loading...'),
-            ' '
+            __('Loading...')
           )
         )];
       }

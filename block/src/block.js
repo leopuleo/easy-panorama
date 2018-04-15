@@ -155,14 +155,14 @@ class PanoramaBlock extends Component {
       height: containerHeight + 'px'
     };
 
-    if ( image && image.isLoading ) {
+    if ( !url && image && image.isLoading ) {
       return [
         <Placeholder
           icon="format-image"
           label={ __( 'Panorama' ) }
           className="easypanorama-loading"
         >
-          <span> { __( 'Loading...' ) } </span>
+          <span>{ __( 'Loading...' ) }</span>
         </Placeholder>,
       ];
     }

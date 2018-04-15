@@ -144,15 +144,38 @@ class EasyPanoramaBlock {
    * @var      array attributes
    */
   public function renderCallBack($atts) {
-    if (isset($atts['url'])) {
-      $html = '<div class="wp-block-easy-panorama-block">';
-      $html .= '<figure>';
-      $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . sanitize_text_field($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
-      $html .= '<img src="' . esc_url($atts['url']) . '" alt="' . sanitize_text_field($atts['alt']) . '" title="' . sanitize_text_field($atts['title']) . '" />';
-      $html .= '</div>';
-      $html .= '</figure>';
-      $html .= '</div>';
-      return $html;
+
+    if(!isset($atts['url'])) {
+      return;
     }
+
+    switch (true) {
+
+      case is_feed():
+        $html = '<div class="wp-block-easy-panorama-block">';
+        $html .= '<figure>';
+        $html .= '<img class="wp-image-' . absint($atts['id']) . '" src="' . esc_url($atts['url']) . '" alt="' . esc_attr($atts['alt']) . '" title="' . esc_attr($atts['title']) . '" />';
+        $html .= '</figure>';
+        $html .= '</div>';
+        break;
+
+      case is_amp_endpoint():
+        $image = wp_get_attachment_image_src(absint($atts['id']), 'full');
+        $srcset = wp_get_attachment_image_srcset(absint($atts['id']), 'full');
+        $html = '<amp-img src="' . esc_url($atts['url']) . '" alt="' . esc_attr($atts['alt']) . '" srcset="' . esc_html($srcset) . '" title="' . esc_attr($atts['title']) . '" width="' . esc_attr( $image[1] ) . '" height="' . esc_attr( $image[2] ) . '" layout="responsive"></amp-img>';
+        break;
+
+      default:
+        $html = '<div class="wp-block-easy-panorama-block">';
+        $html .= '<figure>';
+        $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . esc_attr($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
+        $html .= '<img class="wp-image-' . absint($atts['id']) . '" src="' . esc_url($atts['url']) . '" alt="' . esc_attr($atts['alt']) . '" title="' . esc_attr($atts['title']) . '" />';
+        $html .= '</div>';
+        $html .= '</figure>';
+        $html .= '</div>';
+        break;
+    }
+
+    return $html;
   }
 }

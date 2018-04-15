@@ -211,13 +211,13 @@ class EasyPanoramaPublic {
 
     echo '
       <div class="easy-panorama"
-        data-start-position="' . (float)$start_position . '"
         data-graceful-failure="' . (bool)$graceful_failure . '"
         data-failure-message="' . esc_attr($failure_message) . '"
         data-failure-message-insert="' . esc_attr($failure_message_insert) . '"
         data-meta="' . (bool)$meta . '"
         data-minimum-overflow="' . absint($minimum_overflow) . '"
-        data-start-position="' . (float)$start_position . '"
+        data-start-position="' . floatval($start_position) . '"
+        data-minimum-overflow="' . absint($start_position) . '"
         style="height:' . absint($height) . 'px">
         <img src="' . esc_url($url) . '" title="' . esc_attr($title) . '" alt="' . esc_attr($alt) . '">
       </div>

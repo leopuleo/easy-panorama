@@ -145,8 +145,8 @@ class EasyPanoramaPublic {
     $localize_var = array(
       'panorama' => array(
         'gracefulFailure' => (bool)$this->options_panorama['gracefulFailure'],
-        'failureMessage' => sanitize_text_field($this->options_panorama['failureMessage']),
-        'failureMessageInsert' => sanitize_text_field($this->options_panorama['failureMessageInsert']),
+        'failureMessage' => esc_attr($this->options_panorama['failureMessage']),
+        'failureMessageInsert' => esc_attr($this->options_panorama['failureMessageInsert']),
         'meta' => (bool)$this->options_panorama['meta'],
         'minimumOverflow' => absint($this->options_panorama['minimumOverflow']),
         'startPosition' => (float)$this->options_panorama['startPosition'],
@@ -171,8 +171,8 @@ class EasyPanoramaPublic {
       'alt'                     => '',
       'container_height'        => absint($this->options_panorama['containerHeight']),
       'graceful_failure'        => (bool)$this->options_panorama['gracefulFailure'],
-      'failure_message'         => sanitize_text_field($this->options_panorama['failureMessage']),
-      'failure_message_insert'  => sanitize_text_field($this->options_panorama['failureMessageInsert']),
+      'failure_message'         => esc_attr($this->options_panorama['failureMessage']),
+      'failure_message_insert'  => esc_attr($this->options_panorama['failureMessageInsert']),
       'meta'                    => (bool)$this->options_panorama['meta'],
       'minimum_overflow'        => absint($this->options_panorama['minimumOverflow']),
       'start_position'          => (float)$this->options_panorama['startPosition']

@@ -9,6 +9,7 @@ import PanoramaBlock from './block';
 
 registerBlockType( 'easy-panorama/block', {
   title: __( 'Panorama' ),
+  description: __('Panorama is a great way to share wide/panoramic images on your site.'),
   icon: 'format-image',
   category: 'layout',
   attributes: {

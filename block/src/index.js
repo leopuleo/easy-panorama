@@ -5,6 +5,7 @@ const {
   createBlock
 } = wp.blocks;
 
+import './editor.scss';
 import PanoramaBlock from './block';
 
 registerBlockType( 'easy-panorama/block', {

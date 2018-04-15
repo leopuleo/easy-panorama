@@ -145,8 +145,26 @@ registerBlockType( 'easy-panorama/block', {
 
   edit: PanoramaBlock,
 
-  save() {
-    // Rendering in PHP
-    return null;
-  },
+  save: props => {
+    const {
+      className,
+      attributes: {
+        id,
+        url,
+        alt,
+        title
+      }
+    } = props;
+    return (
+      <div className={ className }>
+        {
+          url && (
+            <figure>
+              <img className={`wp-image-${ id }`} src={ url } alt={ alt } title={ title } />
+            </figure>
+          )
+        }
+      </div>
+    );
+  }
 });

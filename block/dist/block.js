@@ -240,9 +240,23 @@ registerBlockType('easy-panorama/block', {
 
   edit: __WEBPACK_IMPORTED_MODULE_0__block__["a" /* default */],
 
-  save: function save() {
-    // Rendering in PHP
-    return null;
+  save: function save(props) {
+    var className = props.className,
+        _props$attributes = props.attributes,
+        id = _props$attributes.id,
+        url = _props$attributes.url,
+        alt = _props$attributes.alt,
+        title = _props$attributes.title;
+
+    return wp.element.createElement(
+      'div',
+      { className: className },
+      url && wp.element.createElement(
+        'figure',
+        null,
+        wp.element.createElement('img', { className: 'wp-image-' + id, src: url, alt: alt, title: title })
+      )
+    );
   }
 });
 

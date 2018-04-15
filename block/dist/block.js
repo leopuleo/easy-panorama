@@ -113,6 +113,14 @@ registerBlockType('easy-panorama/block', {
       type: 'string',
       default: __('Scroll left/right to pan through panorama.')
     },
+    failureMessageInsert: {
+      type: 'string',
+      default: 'after'
+    },
+    minimumOverflow: {
+      type: 'number',
+      default: 0
+    },
     displayMeta: {
       type: 'bool',
       default: false
@@ -287,6 +295,7 @@ var _wp$components = wp.components,
     RangeControl = _wp$components.RangeControl,
     ToggleControl = _wp$components.ToggleControl,
     TextControl = _wp$components.TextControl,
+    SelectControl = _wp$components.SelectControl,
     PanelBody = _wp$components.PanelBody,
     Dashicon = _wp$components.Dashicon,
     Tooltip = _wp$components.Tooltip,
@@ -309,6 +318,8 @@ var PanoramaBlock = function (_Component) {
     _this.onChangeStartPosition = _this.onChangeStartPosition.bind(_this);
     _this.onChangeGracefulFailure = _this.onChangeGracefulFailure.bind(_this);
     _this.onChangeFailureMessage = _this.onChangeFailureMessage.bind(_this);
+    _this.onChangeFailureMessageInsert = _this.onChangeFailureMessageInsert.bind(_this);
+    _this.onChangeMinimumOverflow = _this.onChangeMinimumOverflow.bind(_this);
     _this.onChangeDisplayMeta = _this.onChangeDisplayMeta.bind(_this);
     return _this;
   }
@@ -406,6 +417,20 @@ var PanoramaBlock = function (_Component) {
       });
     }
   }, {
+    key: 'onChangeFailureMessageInsert',
+    value: function onChangeFailureMessageInsert(position) {
+      this.props.setAttributes({
+        failureMessageInsert: position
+      });
+    }
+  }, {
+    key: 'onChangeMinimumOverflow',
+    value: function onChangeMinimumOverflow(value) {
+      this.props.setAttributes({
+        minimumOverflow: value
+      });
+    }
+  }, {
     key: 'onChangeDisplayMeta',
     value: function onChangeDisplayMeta() {
       var _props3 = this.props,
@@ -432,6 +457,8 @@ var PanoramaBlock = function (_Component) {
           startPosition = _props4$attributes.startPosition,
           gracefulFailure = _props4$attributes.gracefulFailure,
           failureMessage = _props4$attributes.failureMessage,
+          failureMessageInsert = _props4$attributes.failureMessageInsert,
+          minimumOverflow = _props4$attributes.minimumOverflow,
           displayMeta = _props4$attributes.displayMeta;
 
 
@@ -519,7 +546,7 @@ var PanoramaBlock = function (_Component) {
         { key: 'easypanorama-inspector' },
         wp.element.createElement(
           PanelBody,
-          { title: __('Panorama settings') },
+          { title: __('Panorama settings'), key: 'easypanorama-inspector-settings' },
           wp.element.createElement(TextControl, {
             label: __('Panorama height'),
             help: __('Insert the height for this panoramic image container.'),
@@ -555,14 +582,27 @@ var PanoramaBlock = function (_Component) {
         ),
         wp.element.createElement(
           PanelBody,
-          { title: __('Advanced settings') },
+          { title: __('Advanced settings'), key: 'easypanorama-inspector-advanced' },
+          wp.element.createElement(TextControl, {
+            label: __('Minimum overflow'),
+            help: __('The excess width in pixels the container must have before panorama kicks in.'),
+            type: 'number',
+            value: minimumOverflow,
+            onChange: this.onChangeMinimumOverflow
+          }),
           wp.element.createElement(ToggleControl, {
             label: __('Insert failure message'),
             checked: gracefulFailure,
             onChange: this.onChangeGracefulFailure
           }),
+          gracefulFailure && wp.element.createElement(SelectControl, {
+            label: __('Position'),
+            value: failureMessageInsert,
+            options: [{ value: 'after', label: 'After the panorama container' }, { value: 'before', label: 'Before the panorama container' }],
+            onChange: this.onChangeFailureMessageInsert
+          }),
           gracefulFailure && wp.element.createElement(TextControl, {
-            label: __('Failure message'),
+            label: __('Message'),
             help: __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.'),
             value: failureMessage,
             onChange: this.onChangeFailureMessage

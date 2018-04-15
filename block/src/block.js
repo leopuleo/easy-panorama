@@ -16,6 +16,7 @@ const {
   RangeControl,
   ToggleControl,
   TextControl,
+  SelectControl,
   PanelBody,
   Dashicon,
   Tooltip,
@@ -34,6 +35,8 @@ class PanoramaBlock extends Component {
     this.onChangeStartPosition = this.onChangeStartPosition.bind( this );
     this.onChangeGracefulFailure = this.onChangeGracefulFailure.bind( this );
     this.onChangeFailureMessage = this.onChangeFailureMessage.bind( this );
+    this.onChangeFailureMessageInsert = this.onChangeFailureMessageInsert.bind( this );
+    this.onChangeMinimumOverflow = this.onChangeMinimumOverflow.bind( this );
     this.onChangeDisplayMeta = this.onChangeDisplayMeta.bind( this );
   }
 
@@ -109,6 +112,18 @@ class PanoramaBlock extends Component {
     } );
   }
 
+  onChangeFailureMessageInsert( position ) {
+    this.props.setAttributes( {
+      failureMessageInsert: position
+    } );
+  }
+
+  onChangeMinimumOverflow( value ) {
+    this.props.setAttributes( {
+      minimumOverflow: value
+    })
+  }
+
   onChangeDisplayMeta() {
     const { attributes: { displayMeta }, setAttributes } = this.props;
     setAttributes( {
@@ -130,6 +145,8 @@ class PanoramaBlock extends Component {
         startPosition,
         gracefulFailure,
         failureMessage,
+        failureMessageInsert,
+        minimumOverflow,
         displayMeta
       }
     } = this.props;
@@ -207,7 +224,7 @@ class PanoramaBlock extends Component {
       controls,
       isSelected && (
         <InspectorControls key="easypanorama-inspector">
-          <PanelBody title={ __( 'Panorama settings' ) }>
+          <PanelBody title={ __( 'Panorama settings' ) } key="easypanorama-inspector-settings">
             <TextControl
               label={ __( 'Panorama height' ) }
               help={ __('Insert the height for this panoramic image container.') }
@@ -235,7 +252,7 @@ class PanoramaBlock extends Component {
                 value={ alt }
                 onChange={ this.onChangeMediaAlt }
               />
-            )}
+            ) }
             { displayMeta && (
               <TextControl
                 label={ __( 'Description' ) }
@@ -243,22 +260,40 @@ class PanoramaBlock extends Component {
                 value={ title }
                 onChange={ this.onChangeMediaTitle }
               />
-            )}
+            ) }
           </PanelBody>
-          <PanelBody title={ __('Advanced settings')}>
+          <PanelBody title={ __('Advanced settings')} key="easypanorama-inspector-advanced">
+            <TextControl
+              label={ __( 'Minimum overflow' ) }
+              help={ __('The excess width in pixels the container must have before panorama kicks in.') }
+              type={ 'number' }
+              value={ minimumOverflow }
+              onChange={ this.onChangeMinimumOverflow }
+            />
             <ToggleControl
               label={ __('Insert failure message') }
               checked={ gracefulFailure }
               onChange={ this.onChangeGracefulFailure }
             />
             { gracefulFailure && (
+              <SelectControl
+                label={ __( 'Position' ) }
+                value={ failureMessageInsert }
+                options={ [
+                  { value: 'after', label: 'After the panorama container' },
+                  { value: 'before', label: 'Before the panorama container' },
+                ] }
+                onChange={ this.onChangeFailureMessageInsert }
+              />
+            ) }
+            { gracefulFailure && (
                <TextControl
-                label={ __( 'Failure message' ) }
+                label={ __( 'Message' ) }
                 help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
                 value={ failureMessage }
                 onChange={ this.onChangeFailureMessage }
               />
-            )}
+            ) }
           </PanelBody>
         </InspectorControls>
       ),

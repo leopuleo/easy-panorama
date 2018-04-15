@@ -125,7 +125,15 @@ class EasyPanoramaBlock {
         ),
         'failureMessage' => array(
           'type'      => 'string',
-          'default'   => sanitize_text_field($this->options_panorama['failureMessage'])
+          'default'   => esc_attr($this->options_panorama['failureMessage'])
+        ),
+        'failureMessageInsert' => array(
+          'type'      => 'string',
+          'default'   => esc_attr($this->options_panorama['failureMessageInsert'])
+        ),
+        'minimumOverflow' => array(
+          'type'      => 'number',
+          'default'   => (float)$this->options_panorama['minimumOverflow']
         ),
         'displayMeta' => array(
           'type'      => 'boolean',
@@ -168,7 +176,7 @@ class EasyPanoramaBlock {
       default:
         $html = '<div class="wp-block-easy-panorama-block">';
         $html .= '<figure>';
-        $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . esc_attr($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
+        $html .= '<div class="easy-panorama" data-start-position="' . (float)$atts['startPosition'] . '" data-graceful-failure="' . (bool)$atts['gracefulFailure'] . '" data-failure-message="' . esc_attr($atts['failureMessage']) . '" data-meta="' . (bool)$atts['displayMeta'] . '" data-start-position="' . (float)$atts['startPosition'] . '" data-failure-message-insert="' . esc_attr($atts['failureMessageInsert']) . '" data-minimum-overflow="' . (float)$atts['minimumOverflow'] . '" style="height:' . absint($atts['containerHeight']) . 'px">';
         $html .= '<img class="wp-image-' . absint($atts['id']) . '" src="' . esc_url($atts['url']) . '" alt="' . esc_attr($atts['alt']) . '" title="' . esc_attr($atts['title']) . '" />';
         $html .= '</div>';
         $html .= '</figure>';

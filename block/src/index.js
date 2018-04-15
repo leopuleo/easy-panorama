@@ -40,6 +40,14 @@ registerBlockType( 'easy-panorama/block', {
       type: 'string',
       default: __('Scroll left/right to pan through panorama.')
     },
+    failureMessageInsert: {
+      type: 'string',
+      default: 'after'
+    },
+    minimumOverflow: {
+      type: 'number',
+      default: 0
+    },
     displayMeta: {
       type: 'bool',
       default: false

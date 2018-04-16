@@ -3,12 +3,13 @@ const webpack = require( 'webpack' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-// Set different CSS extraction for editor only and common block styles
+// Set different CSS extraction for editor only styles
 const blocksCSSPlugin = new ExtractTextPlugin( {
   filename: './editor.css',
 } );
 
-const cleanDist = new CleanWebpackPlugin( [
+// Clean /dist/ folder
+const cleanDistPlugin = new CleanWebpackPlugin( [
   path.resolve(__dirname, 'dist')
 ] );
 
@@ -59,7 +60,7 @@ module.exports = {
     ],
   },
   plugins: [
-    cleanDist,
+    cleanDistPlugin,
     blocksCSSPlugin
   ],
 };

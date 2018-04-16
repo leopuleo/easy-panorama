@@ -167,11 +167,11 @@ registerBlockType( 'easy-panorama/block', {
       }
     } = props;
     return (
-      <div className={ className }>
+      <div className={ className } key="easypanorama-block-save">
         {
           url && (
-            <figure>
-              <img className={`wp-image-${ id }`} src={ url } alt={ alt } title={ title } />
+            <figure key="easypanorama-block-save-figure">
+              <img key="easypanorama-block-save-image" className={`wp-image-${ id }`} src={ url } alt={ alt } title={ title } />
             </figure>
           )
         }

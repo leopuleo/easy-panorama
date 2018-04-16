@@ -41,8 +41,8 @@ class PanoramaBlock extends Component {
   }
 
   componentDidUpdate() {
-    const { image } = this.props;
-    if(image && image.data) {
+    const { attributes: { url }, image } = this.props;
+    if( !url && image && image.data ) {
       this.setImageData(image.data);
     }
   }
@@ -158,6 +158,7 @@ class PanoramaBlock extends Component {
     if ( !url && image && image.isLoading ) {
       return [
         <Placeholder
+          key="easypanorama-loading"
           icon="format-image"
           label={ __( 'Panorama' ) }
           className="easypanorama-loading"
@@ -177,9 +178,10 @@ class PanoramaBlock extends Component {
 
       return [
         <Placeholder
+          key="easypanorama-error"
           icon="format-image"
           label={ __( 'Panorama' ) }
-          className="easypanorama-loading"
+          className="easypanorama-error"
         >
           <span>{ message }</span>
         </Placeholder>,
@@ -189,10 +191,10 @@ class PanoramaBlock extends Component {
     if(!url) {
       return [
         <ImagePlaceholder
+          key="easypanorama-placeholder"
           icon="format-image"
           label={ __( 'Panorama' ) }
           className={ className }
-          key="easypanorama-placeholder"
           onSelectImage={ this.onSelectImage }
         />
       ]
@@ -201,13 +203,15 @@ class PanoramaBlock extends Component {
     const controls = (
       isSelected && (
         <BlockControls key="easypanorama-controls">
-          <Toolbar>
+          <Toolbar key="easypanorama-toolbar">
             <MediaUpload
+              key="easypanorama-mediaupload"
               onSelect={ this.onSelectImage }
               type="image"
               value={ this.id }
               render={ ( { open } ) => (
                 <IconButton
+                  key="easypanorama-openmedia"
                   className="components-toolbar__control"
                   label={ __( 'Edit image' ) }
                   icon="edit"
@@ -226,6 +230,7 @@ class PanoramaBlock extends Component {
         <InspectorControls key="easypanorama-inspector">
           <PanelBody title={ __( 'Panorama settings' ) } key="easypanorama-inspector-settings">
             <TextControl
+              key="easypanorama-control-containerHeight"
               label={ __( 'Panorama height' ) }
               help={ __('Insert the height for this panoramic image container.') }
               type={ 'number' }
@@ -233,6 +238,7 @@ class PanoramaBlock extends Component {
               onChange={ this.onChangeContainerHeight }
             />
             <RangeControl
+              key="easypanorama-control-startPosition"
               label={ __( 'Start position' ) }
               help={ __( 'Determines the start position of the panorama: insert a value from 0 (left) to 10 (right).' ) }
               value={ startPosition }
@@ -241,12 +247,14 @@ class PanoramaBlock extends Component {
               max={ 10 }
             />
             <ToggleControl
+              key="easypanorama-control-displayMeta"
               label={ __('Show meta on overlay') }
               checked={ displayMeta }
               onChange={ this.onChangeDisplayMeta }
             />
             { displayMeta && (
               <TextControl
+                key="easypanorama-control-title"
                 label={ __( 'Title' ) }
                 help={ __('Give a title to this image, it will be displayed over the image. This is the title meta of the image.') }
                 value={ title }
@@ -255,6 +263,7 @@ class PanoramaBlock extends Component {
             ) }
             { displayMeta && (
               <TextControl
+                key="easypanorama-control-alt"
                 label={ __( 'Description' ) }
                 help={ __('Give a description to this image, it will be displayed over the image. This is the alt meta of the image.') }
                 value={ alt }
@@ -264,6 +273,7 @@ class PanoramaBlock extends Component {
           </PanelBody>
           <PanelBody title={ __('Advanced settings')} key="easypanorama-inspector-advanced">
             <TextControl
+              key="easypanorama-control-minimumOverflow"
               label={ __( 'Minimum overflow' ) }
               help={ __('The excess width in pixels the container must have before panorama kicks in.') }
               type={ 'number' }
@@ -271,12 +281,14 @@ class PanoramaBlock extends Component {
               onChange={ this.onChangeMinimumOverflow }
             />
             <ToggleControl
+              key="easypanorama-control-gracefulFailure"
               label={ __('Insert failure message') }
               checked={ gracefulFailure }
               onChange={ this.onChangeGracefulFailure }
             />
             { gracefulFailure && (
               <SelectControl
+                key="easypanorama-control-failureMessageInsert"
                 label={ __( 'Position' ) }
                 value={ failureMessageInsert }
                 options={ [
@@ -288,6 +300,7 @@ class PanoramaBlock extends Component {
             ) }
             { gracefulFailure && (
                <TextControl
+                key="easypanorama-control-failureMessage"
                 label={ __( 'Message' ) }
                 help={ __('This message will appear in mobile devices with no gyroscopic data or no physical orientation support.') }
                 value={ failureMessage }
@@ -297,14 +310,14 @@ class PanoramaBlock extends Component {
           </PanelBody>
         </InspectorControls>
       ),
-      <div className={ className }>
-        <div style={ panoramaStyle } className="panorama--image">
-          <img src={ url } alt={ alt } title={ title } />
+      <div className={ className } key="easypanorama-block-editor">
+        <div style={ panoramaStyle } className="panorama--image" key="easypanorama-panorama-container">
+          <img src={ url } alt={ alt } title={ title } className={`wp-image-${ id }`} key="easypanorama-panorama-image"/>
         </div>
-        <span className="panorama--help-text">
-          <Tooltip text={ __( 'This is a preview, some features are not available.' ) }>
-            <span className="panorama--help-icon">
-              <Dashicon size="25" icon="info" />
+        <span className="panorama--help-text" key="easypanorama-block-help">
+          <Tooltip text={ __( 'This is a preview, some features are not available.' ) } key="easypanorama-block-help-tooltip">
+            <span className="panorama--help-icon" key="easypanorama-block-help-icon-container">
+              <Dashicon size="25" icon="info" key="easypanorama-block-help-icon"/>
             </span>
           </Tooltip>
         </span>

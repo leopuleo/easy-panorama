@@ -429,7 +429,6 @@ class EasyPanoramaAdmin {
     if (isset($input['containerHeight'])) {
       $valid_input['containerHeight'] = absint($input['containerHeight']);
     }
-
     if (isset($input['gracefulFailure'])) {
       $valid_input['gracefulFailure'] = (bool)($input['gracefulFailure']);
     }

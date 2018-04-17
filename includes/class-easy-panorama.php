@@ -236,11 +236,9 @@ class EasyPanorama {
    * @access   private
    */
   private function defineBlockHooks() {
-    if (function_exists('register_block_type')) {
-      $plugin_block = new EasyPanoramaBlock($this->getPluginName(), $this->getVersion(), $this->getOptionsPanorama(), $this->getOptionsAdvanced());
-      $this->loader->addAction('enqueue_block_editor_assets', $plugin_block, 'gutenbergBlockEditorAssets');
-      $this->loader->addAction('init', $plugin_block, 'gutenbergBlockInit');
-    }
+    $plugin_block = new EasyPanoramaBlock($this->getPluginName(), $this->getVersion(), $this->getOptionsPanorama(), $this->getOptionsAdvanced());
+    $this->loader->addAction('enqueue_block_editor_assets', $plugin_block, 'gutenbergBlockEditorAssets');
+    $this->loader->addAction('init', $plugin_block, 'gutenbergBlockInit');
   }
 
   /**

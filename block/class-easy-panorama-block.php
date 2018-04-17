@@ -75,6 +75,9 @@ class EasyPanoramaBlock {
    * @access   public
    */
   public function gutenbergBlockEditorAssets() {
+    if (!class_exists('WP_Block_Type_Registry')) {
+      return;
+    }
     wp_enqueue_script(
       'easy-panorama-block',
       plugins_url('dist/block.js', __FILE__),
@@ -97,6 +100,9 @@ class EasyPanoramaBlock {
    * @access   public
    */
   public function gutenbergBlockInit() {
+    if (!class_exists( 'WP_Block_Type_Registry')) {
+      return;
+    }
     register_block_type('easy-panorama/block', array(
       'attributes'      => array(
         'id' => array(

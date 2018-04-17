@@ -172,12 +172,6 @@ class EasyPanoramaBlock {
         $html .= '</div>';
         break;
 
-      case is_amp_endpoint():
-        $image = wp_get_attachment_image_src(absint($atts['id']), 'full');
-        $srcset = wp_get_attachment_image_srcset(absint($atts['id']), 'full');
-        $html = '<amp-img src="' . esc_url($atts['url']) . '" alt="' . esc_attr($atts['alt']) . '" srcset="' . esc_html($srcset) . '" title="' . esc_attr($atts['title']) . '" width="' . esc_attr($image[1]) . '" height="' . esc_attr($image[2]) . '" layout="responsive"></amp-img>';
-        break;
-
       default:
         $position = $atts['startPosition'] / 10;
         $html = '<div class="wp-block-easy-panorama-block">';

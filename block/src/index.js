@@ -5,6 +5,8 @@ const {
   createBlock
 } = wp.blocks;
 
+const { settings } = easyPanorama;
+
 import './i18n.js';
 import './editor.scss';
 import PanoramaBlock from './block';
@@ -29,31 +31,31 @@ registerBlockType( 'easy-panorama/block', {
     },
     containerHeight: {
       type: 'number',
-      default: 400
+      default: settings.containerHeight
     },
     startPosition: {
       type: 'number',
-      default: 5
+      default: settings.startPosition
     },
     gracefulFailure: {
       type: 'bool',
-      default: true
+      default: settings.gracefulFailure
     },
     failureMessage: {
       type: 'string',
-      default: __('Scroll left/right to pan through panorama.')
+      default: settings.failureMessage
     },
     failureMessageInsert: {
       type: 'string',
-      default: 'after'
+      default: settings.failureMessage
     },
     minimumOverflow: {
       type: 'number',
-      default: 0
+      default: settings.minimumOverflow
     },
     displayMeta: {
       type: 'bool',
-      default: false
+      default: settings.displayMeta
     }
   },
   supports: {

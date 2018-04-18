@@ -69,6 +69,25 @@ class EasyPanoramaBlock {
   }
 
   /**
+   * Return escaped values from database / default settings
+   *
+   * @since    1.1.0
+   * @access   private
+   */
+  private function defaultSettings() {
+    $defaultSettings = array(
+      'containerHeight' => absint($this->options_panorama['containerHeight']),
+      'startPosition' => absint($this->options_panorama['startPosition'] * 10),
+      'gracefulFailure' => (bool)$this->options_panorama['gracefulFailure'],
+      'failureMessage' => esc_attr($this->options_panorama['failureMessage']),
+      'failureMessageInsert' => esc_attr($this->options_panorama['failureMessageInsert']),
+      'minimumOverflow' => absint($this->options_panorama['minimumOverflow']),
+      'displayMeta' => (bool)$this->options_panorama['meta'],
+    );
+    return $defaultSettings;
+  }
+
+  /**
    * Register Gutenberg Block
    *
    * @since    1.1.0
@@ -79,18 +98,44 @@ class EasyPanoramaBlock {
       return;
     }
     wp_enqueue_script(
-      'easy-panorama-block',
+      $this->plugin_name . '-block',
       plugins_url('dist/block.js', __FILE__),
       array('wp-blocks', 'wp-i18n', 'wp-element'),
       filemtime(plugin_dir_path(__FILE__) . 'dist/block.js')
     );
 
+    wp_localize_script($this->plugin_name .'-block', 'easyPanorama', $this->localizeInitVar());
+
     wp_enqueue_style(
-      'easy-panorama-block-editor',
+      $this->plugin_name . '-block-editor',
       plugins_url('dist/editor.css', __FILE__),
       array( 'wp-edit-blocks' ),
       filemtime(plugin_dir_path(__FILE__) . 'dist/editor.css')
     );
+  }
+
+  /**
+   * Localize vars for Panorama Block Init
+   * Print vars stored in db and passed to js files
+   *
+   * @since    1.1.0
+   * @access   private
+   */
+
+  private function localizeInitVar() {
+    $settings = $this->defaultSettings();
+    $localize_var = array(
+      'settings' => array(
+        'containerHeight' => $settings['containerHeight'],
+        'startPosition' => $settings['startPosition'],
+        'gracefulFailure' => $settings['gracefulFailure'],
+        'failureMessage' => $settings['failureMessage'],
+        'failureMessageInsert' => $settings['failureMessageInsert'],
+        'minimumOverflow' => $settings['minimumOverflow'],
+        'displayMeta' => $settings['displayMeta'],
+      )
+    );
+    return $localize_var;
   }
 
   /**
@@ -103,6 +148,7 @@ class EasyPanoramaBlock {
     if (!class_exists( 'WP_Block_Type_Registry')) {
       return;
     }
+    $settings = $this->defaultSettings();
     register_block_type('easy-panorama/block', array(
       'attributes'      => array(
         'id' => array(
@@ -119,31 +165,31 @@ class EasyPanoramaBlock {
         ),
         'containerHeight' => array(
           'type'      => 'number',
-          'default'   => 400
+          'default'   => $settings['containerHeight']
         ),
         'startPosition' => array(
           'type'      => 'number',
-          'default'   => 5
+          'default'   => $settings['startPosition']
         ),
         'gracefulFailure' => array(
           'type'      => 'boolean',
-          'default'   => true
+          'default'   => $settings['gracefulFailure']
         ),
         'failureMessage' => array(
           'type'      => 'string',
-          'default'   => __('Scroll left/right to pan through panorama.', $this->plugin_name)
+          'default'   => $settings['failureMessage']
         ),
         'failureMessageInsert' => array(
           'type'      => 'string',
-          'default'   => 'after'
+          'default'   => $settings['failureMessageInsert']
         ),
         'minimumOverflow' => array(
           'type'      => 'number',
-          'default'   => 0
+          'default'   => $settings['minimumOverflow']
         ),
         'displayMeta' => array(
           'type'      => 'boolean',
-          'default'   => false
+          'default'   => $settings['displayMeta']
         )
       ),
       'render_callback' => array($this, 'renderCallBack'),

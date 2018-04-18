@@ -40,9 +40,16 @@ class PanoramaBlock extends Component {
     this.onChangeDisplayMeta = this.onChangeDisplayMeta.bind( this );
   }
 
+  componentDidMount() {
+    const { attributes: { url }, image } = this.props;
+    if( !url && image.data !== undefined ) {
+      this.setImageData(image.data);
+    }
+  }
+
   componentDidUpdate() {
     const { attributes: { url }, image } = this.props;
-    if( !url && image && image.data ) {
+    if( !url && image.data !== undefined ) {
       this.setImageData(image.data);
     }
   }
@@ -175,7 +182,6 @@ class PanoramaBlock extends Component {
       if(status === 404) {
         message = __( 'Image not found: invalid attachment ID.' );
       }
-
       return [
         <Placeholder
           key="easypanorama-error"

@@ -231,7 +231,7 @@ class PanoramaBlock extends Component {
           <PanelBody title={ __( 'Panorama settings' ) } key="easypanorama-inspector-settings">
             <TextControl
               key="easypanorama-control-containerHeight"
-              label={ __( 'Panorama height' ) }
+              label={ __( 'Container height' ) }
               help={ __('Insert the height for this panoramic image container.') }
               type={ 'number' }
               value={ containerHeight }
@@ -256,7 +256,6 @@ class PanoramaBlock extends Component {
               <TextControl
                 key="easypanorama-control-title"
                 label={ __( 'Title' ) }
-                help={ __('Give a title to this image, it will be displayed over the image. This is the title meta of the image.') }
                 value={ title }
                 onChange={ this.onChangeMediaTitle }
               />
@@ -265,7 +264,6 @@ class PanoramaBlock extends Component {
               <TextControl
                 key="easypanorama-control-alt"
                 label={ __( 'Description' ) }
-                help={ __('Give a description to this image, it will be displayed over the image. This is the alt meta of the image.') }
                 value={ alt }
                 onChange={ this.onChangeMediaAlt }
               />

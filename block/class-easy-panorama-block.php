@@ -145,7 +145,7 @@ class EasyPanoramaBlock {
    * @access   public
    */
   public function gutenbergBlockInit() {
-    if (!class_exists( 'WP_Block_Type_Registry')) {
+    if (!class_exists('WP_Block_Type_Registry')) {
       return;
     }
     $settings = $this->defaultSettings();

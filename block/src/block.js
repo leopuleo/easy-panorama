@@ -54,6 +54,11 @@ class PanoramaBlock extends Component {
     }
   }
 
+  /**
+   * @description Set component data from received params
+   * @param {object} Image data
+   * @return {array} Errors
+   */
   setImageData ( data ) {
     const { attributes: { url, alt, title }, setAttributes } = this.props;
     if( !url ) {
@@ -73,6 +78,10 @@ class PanoramaBlock extends Component {
     }
   }
 
+  /**
+   * @description Handle component image selection
+   * @param {object} Component media data
+   */
   onSelectImage( media ) {
     this.props.setAttributes( {
       url: media.url,
@@ -82,30 +91,50 @@ class PanoramaBlock extends Component {
     } );
   };
 
+  /**
+   * @description Handle component image alt update
+   * @param {string} Image alt
+   */
   onChangeMediaAlt( alt ){
     this.props.setAttributes( {
       alt: alt
     } );
   };
 
+  /**
+   * @description Handle component image title update
+   * @param {string} Image title
+   */
   onChangeMediaTitle( title ) {
     this.props.setAttributes( {
       title: title
     } );
   };
 
+  /**
+   * @description Handle component container height update
+   * @param {string} Container height
+   */
   onChangeContainerHeight(height) {
     this.props.setAttributes( {
       containerHeight: Number(height)
     } );
   };
 
+  /**
+   * @description Handle component startPosition update
+   * @param {string} startPosition
+   */
   onChangeStartPosition( position ) {
     this.props.setAttributes( {
       startPosition: position
     } );
   };
 
+  /**
+   * @description Handle component gracefulFailure update
+   * @param none
+   */
   onChangeGracefulFailure() {
     const { attributes: { gracefulFailure }, setAttributes } = this.props;
     setAttributes( {
@@ -113,24 +142,40 @@ class PanoramaBlock extends Component {
     } );
   };
 
+  /**
+   * @description Handle component failureMessage update
+   * @param {string} failureMessage
+   */
   onChangeFailureMessage( message ) {
     this.props.setAttributes( {
       failureMessage: message
     } );
   }
 
+  /**
+   * @description Handle component failureMessageInsert update
+   * @param {string} failureMessageInsert
+   */
   onChangeFailureMessageInsert( position ) {
     this.props.setAttributes( {
       failureMessageInsert: position
     } );
   }
 
+  /**
+   * @description Handle component minimumOverflow update
+   * @param {string} minimumOverflow
+   */
   onChangeMinimumOverflow( value ) {
     this.props.setAttributes( {
       minimumOverflow: value
     })
   }
 
+  /**
+   * @description Handle component displayMeta update
+   * @param none
+   */
   onChangeDisplayMeta() {
     const { attributes: { displayMeta }, setAttributes } = this.props;
     setAttributes( {

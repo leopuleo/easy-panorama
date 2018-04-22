@@ -132,10 +132,11 @@ class EasyPanorama {
    *
    * Include the following files that make up the plugin:
    *
-   * - Plugin_Name_Loader. Orchestrates the hooks of the plugin.
-   * - Plugin_Name_i18n. Defines internationalization functionality.
-   * - Plugin_Name_Admin. Defines all hooks for the admin area.
-   * - Plugin_Name_Public. Defines all hooks for the public side of the site.
+   * - EasyPanoramaLoader. Orchestrates the hooks of the plugin.
+   * - EasyPanoramai18n. Defines internationalization functionality.
+   * - EasyPanoramaAdmin. Defines all hooks for the admin area.
+   * - EasyPanoramaPublic. Defines all hooks for the public side of the site.
+   * - EasyPanoramaBlock. Defines all hooks for the Gutenberg side of the site.
    *
    * Create an instance of the loader which will be used to register the hooks
    * with WordPress.

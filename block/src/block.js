@@ -166,7 +166,7 @@ class PanoramaBlock extends Component {
       return [
         <Placeholder
           key="easypanorama-loading"
-          icon="format-image"
+          icon="cover-image"
           label={ __( 'Panorama' ) }
           className="easypanorama-loading"
         >
@@ -184,7 +184,7 @@ class PanoramaBlock extends Component {
       return [
         <Placeholder
           key="easypanorama-error"
-          icon="format-image"
+          icon="cover-image"
           label={ __( 'Panorama' ) }
           className="easypanorama-error"
         >
@@ -197,7 +197,7 @@ class PanoramaBlock extends Component {
       return [
         <ImagePlaceholder
           key="easypanorama-placeholder"
-          icon="format-image"
+          icon="cover-image"
           label={ __( 'Panorama' ) }
           className={ className }
           onSelectImage={ this.onSelectImage }

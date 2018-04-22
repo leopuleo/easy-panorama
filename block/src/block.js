@@ -42,20 +42,20 @@ class PanoramaBlock extends Component {
 
   componentDidMount() {
     const { attributes: { url }, image } = this.props;
-    if( !url && image.data !== undefined ) {
+    if( !url && image && image.data !== undefined ) {
       this.setImageData(image.data);
     }
   }
 
   componentDidUpdate() {
     const { attributes: { url }, image } = this.props;
-    if( !url && image.data !== undefined ) {
+    if( !url && image && image.data !== undefined ) {
       this.setImageData(image.data);
     }
   }
 
   setImageData ( data ) {
-    const { attributes: { id, url, alt, title }, setAttributes } = this.props;
+    const { attributes: { url, alt, title }, setAttributes } = this.props;
     if( !url ) {
       setAttributes( {
         url: data.source_url

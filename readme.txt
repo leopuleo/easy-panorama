@@ -1,11 +1,12 @@
-=== Plugin Name ===
+=== Easy Panorama ===
 Contributors: LeoPeo
+Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver, block, Gutenberg
 Donate link: https://paypal.me/LeonardoGiacone
-Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver
-Requires at least: 3.5.1
-Tested up to: 4.8
-Stable tag: 1.0.2
-License:  GPL-2.0+
+Requires at least: 4.5
+Tested up to: 4.9
+Requires PHP: 5.6
+Stable tag: 1.1.0
+License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 

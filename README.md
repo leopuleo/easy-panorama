@@ -7,7 +7,7 @@ Embed interactive wide/panoramic images on your site. Optimised for responsive l
 
 Easy Panorama plugin for WordPress websites allows you to display wide/panoramic images in a more accessible way: enjoy your panoramic photos scrolling them on the x-axis or moving your mobile device.
 
-The plugin provides you with a handy shortcode: insert panorama images in your content is so easy, just 3 clicks.
+You can start embedding your panoramic images using the handy **shortcode** (TinyMCE editor) or the new **Gutenberg Block**.
 
 Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin) :smile:.
 
@@ -17,6 +17,15 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 2. Customization of Paver appearance and behaviour from the Panorama Settings page.
 3. Other geek settings in the Advanced Settings page.
 4. [easy_panorama] shortcode to embed panoramic images with no hassle.
+5. Custom Gutenberg block for a better editing experience 🎉.
+
+## Requirements
+Easy Panorama requires:
+* [WordPress](https://wordpress.org/) >= 4.9
+* [PHP](https://secure.php.net/manual/en/install.php) >= 5.6
+* [Gutenberg](https://wordpress.org/plugins/gutenberg/) >= 2.7 (Required for the new Gutenberg block feature)
+* [Node](https://nodejs.org/en/) >= 8.9.X (Required for Gutenberg block development)
+* [Yarn](https://yarnpkg.com/en/docs/install#mac-stable) (Required for Gutenberg block development)
 
 ## Contribution
 There are many ways to contribute to this plugin:
@@ -28,3 +37,6 @@ There are many ways to contribute to this plugin:
 
 ## Support
 Visit the [WordPress.org](https://wordpress.org/support/plugin/easy-panorama) or [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).
+
+## Licence
+[GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.txt)

@@ -19,6 +19,27 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 4. [easy_panorama] shortcode to embed panoramic images with no hassle.
 5. Custom Gutenberg block for a better editing experience 🎉.
 
+## Shortcode (Classic WordPress editor)
+Include your favourite panoramic images in posts and pages using the **built-in shortcode functionality**.
+
+If you are using the classic WordPress editor (TinyMCE), you will find the *Add Panorama* button above the editor: click on the button and select the image you want to include. 
+The shortocode will be inserted in the editor and will be replaced by the panoramic viewer when you visit the website.
+
+You can customize the appereance and behavior of the panoramic viewer throught the Easy Panorama settings page or adding specific attributes to each shortcode: these will override the general settings.
+
+### Shortcode attributes cheat sheet:
+* `id`: attachment/image WordPress id *(number)* - **Required**
+* `url`: image url *(string)*
+* `meta`: determines whether a metadata overlay should be displayed *(boolean)*
+* `title`: image title, showed on overlay in case "Show image meta" ("meta" attribute) is set to true  *(string)*
+* `alt`: image alternative text, showed on overlay in case "Show image meta" ("meta" attribute) is set to true  *(string)*
+* `graceful_failure`: allows the display of failure message *(boolean)*
+* `failure_message`: this message will appear in mobile devices with no gyroscopic data or no physical orientation support *(string)*
+* `failure_message_insert`: the location where the failure message will be inserted *(before | after)*
+* `minimum_overflow`: the excess width the picture must have before panoramic viewer kicks in *(number)*
+* `start_position`: the start position of the panorama *(number from 0 to 1)*
+
+
 ## Requirements
 Easy Panorama requires:
 * [WordPress](https://wordpress.org/) >= 4.9

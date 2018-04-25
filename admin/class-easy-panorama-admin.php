@@ -239,7 +239,10 @@ class EasyPanoramaAdmin {
   // Section: Panorama Settings
   public function panoramaSectionRender() {
     ?>
-      <p><?php _e('This plugin uses <strong><a href="http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin" target="_blank">Paver</a></strong> In this page you can customize Paver behaviour. Discover more about <strong><a href="http://terrymun.github.io/paver/demo/usage-notes.html?source=easy-panorama-wp-plugin" target="_blank">Paver configuration options</a></strong>.', $this->plugin_name); ?><br>
+      <p><?php _e('This plugin uses <strong><a href="http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin" target="_blank">Paver</a></strong>, on this page you can customize Paver behaviour and panorama appearance.', $this->plugin_name); ?>
+        <?php _e('The values here below will be used as defaults for <strong>Gutenberg blocks</strong> and <code>[easy_panorama]</code> <strong>shortcodes</strong>.', $this->plugin_name); ?>
+        <?php _e('You will be able to customize the appearance of each block using the <strong>inspector control</strong> provided by Gutenberg.', $this->plugin_name); ?><br>
+        <?php _e('Discover more about <strong><a href="http://terrymun.github.io/paver/demo/usage-notes.html?source=easy-panorama-wp-plugin" target="_blank">Paver configuration options</a></strong>.', $this->plugin_name); ?><br>
       </p>
     <?php
   }
@@ -342,6 +345,7 @@ class EasyPanoramaAdmin {
         <li><?php _e('Customization of Paver appearance and behaviour from the <strong>Panorama Settings</strong> page.', $this->plugin_name); ?></li>
         <li><?php _e('Other geek settings in the <strong>Advanced Settings</strong> page.', $this->plugin_name); ?></li>
         <li><?php _e('<code>[easy_panorama]</code> shortcode to embed panoramic images with no hassle.', $this->plugin_name); ?></li>
+        <li><?php _e('Custom <strong>Gutenberg block</strong> for a better editing experience 🎉.', $this->plugin_name); ?></li>
       </ol>
       <hr>
 
@@ -429,7 +433,6 @@ class EasyPanoramaAdmin {
     if (isset($input['containerHeight'])) {
       $valid_input['containerHeight'] = absint($input['containerHeight']);
     }
-
     if (isset($input['gracefulFailure'])) {
       $valid_input['gracefulFailure'] = (bool)($input['gracefulFailure']);
     }

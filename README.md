@@ -43,6 +43,7 @@ You can customize the appearance and behaviour of the panoramic viewer through t
 * `start_position`: the start position of the panorama *(number from 0 to 1)*
 
 ## Block (Gutenberg editor)
+![Easy Panorama Block](https://www.adventuresbook.net/wp-content/uploads/2018/04/easy-panorama-gutenberg-block.gif)
 Include your favourite panoramic images in posts and pages using the **built-in block functionality**.
 
 If you are using the Gutenberg editor, you find the **Panorama** block ready to be embedded in your post.
@@ -56,6 +57,8 @@ You can customize the appearance and behaviour of each panoramic viewer thanks t
 * Transform "Image" blocks into "Panorama" blocks with one click.
 * Transform "Panorama" blocks into "Image" blocks with one click.
 * Transform previous inserted `[easy_panorama]` shortcodes into "Panorama" blocks with one click.
+
+![Easy Panorama Shortcode Transform](https://www.adventuresbook.net/wp-content/uploads/2018/04/easy-panorama-block-transform.gif)
 
 # Requirements
 Easy Panorama requires:

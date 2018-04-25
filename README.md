@@ -54,7 +54,6 @@ You can customize the appearance and behaviour of each panoramic viewer thanks t
 * Transform "Panorama" blocks into "Image" blocks with one click.
 * Transform previous inserted `[easy_panorama]` shortcodes into "Panorama" blocks with one click.
 
-
 # Requirements
 Easy Panorama requires:
 * [WordPress](https://wordpress.org/) >= 4.9

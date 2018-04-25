@@ -3,7 +3,7 @@
 
 Embed interactive wide/panoramic images on your site. Optimised for responsive layouts, it works great with devices equipped with motion sensors.
 
-## Description
+# Description
 
 Easy Panorama plugin for WordPress websites allows you to display wide/panoramic images in a more accessible way: enjoy your panoramic photos scrolling them on the x-axis or moving your mobile device.
 
@@ -11,7 +11,7 @@ You can start embedding your panoramic images using the handy **shortcode** (Tin
 
 Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin) :smile:.
 
-## Main features
+# Main features
 
 1. Enqueuing of Paver Javascript and CSS files.
 2. Customization of Paver appearance and behaviour from the Panorama Settings page.
@@ -23,9 +23,9 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 Include your favourite panoramic images in posts and pages using the **built-in shortcode functionality**.
 
 If you are using the classic WordPress editor (TinyMCE), you will find the *Add Panorama* button above the editor: click on the button and select the image you want to include. 
-The shortocode will be inserted in the editor and will be replaced by the panoramic viewer when you visit the website.
+The shortcode will be inserted in the editor and replaced by the panoramic viewer when you visit the website.
 
-You can customize the appereance and behavior of the panoramic viewer throught the Easy Panorama settings page or adding specific attributes to each shortcode: these will override the general settings.
+You can customize the appearance and behaviour of the panoramic viewer through the Easy Panorama settings page or adding specific attributes to each shortcode: these will override the general settings.
 
 ### Shortcode attributes cheat sheet:
 * `id`: attachment/image WordPress id *(number)* - **Required**
@@ -39,8 +39,23 @@ You can customize the appereance and behavior of the panoramic viewer throught t
 * `minimum_overflow`: the excess width the picture must have before panoramic viewer kicks in *(number)*
 * `start_position`: the start position of the panorama *(number from 0 to 1)*
 
+## Block (Gutenberg editor)
+Include your favourite panoramic images in posts and pages using the **built-in block functionality**.
 
-## Requirements
+If you are using the Gutenberg editor, you find the **Panorama** block ready to be embedded in your post.
+Search for "Panorama" within the blocks list, select it and choose the image you want to include.
+You can customize the appearance and behaviour of each panoramic viewer thanks to the Gutenberg Inspector Control.
+
+### Gutenberg Block features
+* Embed your panoramic/wide images in the new Gutenberg editor with no hassle.
+* Preview your panorama within the Gutenberg editor.
+* Customize the appearance and behaviour of each panoramic viewer thanks to the Gutenberg Inspector Control.
+* Transform "Image" blocks into "Panorama" blocks with one click.
+* Transform "Panorama" blocks into "Image" blocks with one click.
+* Transform previous inserted `[easy_panorama]` shortcodes into "Panorama" blocks with one click.
+
+
+# Requirements
 Easy Panorama requires:
 * [WordPress](https://wordpress.org/) >= 4.9
 * [PHP](https://secure.php.net/manual/en/install.php) >= 5.6
@@ -48,16 +63,16 @@ Easy Panorama requires:
 * [Node](https://nodejs.org/en/) >= 8.9.X (Required for Gutenberg block development)
 * [Yarn](https://yarnpkg.com/en/docs/install) (Required for Gutenberg block development)
 
-## Contribution
+# Contribution
 There are many ways to contribute to this plugin:
 
-1. Report a bug, submit pull request or new feature proposal: visit the [Github repo](https://github.com/leopuleo/easy-panorama).
+1. Report a bug, submit a pull request or new feature proposal: visit the [Github repo](https://github.com/leopuleo/easy-panorama).
 2. Translate it in your language: visit the [WordPress translation page](https://translate.wordpress.org/projects/wp-plugins/easy-panorama).
 3. Rate it 5 stars on [WordPress.org](https://wordpress.org/support/view/plugin-reviews/easy-panorama?filter=5#postform).
 4. [Buy me a beer! :beer:](//paypal.me/LeonardoGiacone)
 
-## Support
+# Support
 Visit the [WordPress.org](https://wordpress.org/support/plugin/easy-panorama) or [Github Issue Tracker](https://github.com/leopuleo/easy-panorama/issues).
 
-## Licence
+# Licence
 [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.txt)

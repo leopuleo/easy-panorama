@@ -100,7 +100,7 @@ class EasyPanoramaBlock {
     wp_enqueue_script(
       $this->plugin_name . '-block',
       plugins_url('dist/block.js', __FILE__),
-      array('wp-blocks', 'wp-i18n', 'wp-element'),
+      [ 'wp-blocks', 'wp-i18n', 'wp-editor', 'wp-components' ],
       filemtime(plugin_dir_path(__FILE__) . 'dist/block.js')
     );
 
@@ -109,7 +109,7 @@ class EasyPanoramaBlock {
     wp_enqueue_style(
       $this->plugin_name . '-block-editor',
       plugins_url('dist/editor.css', __FILE__),
-      array( 'wp-edit-blocks' ),
+      [ 'wp-edit-blocks' ],
       filemtime(plugin_dir_path(__FILE__) . 'dist/editor.css')
     );
   }

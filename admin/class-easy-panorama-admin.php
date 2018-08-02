@@ -419,7 +419,7 @@ class EasyPanoramaAdmin {
       </div>
     </form>
     <?php
-    }
+  }
 
   /**
    * Sanitize Panorama fields

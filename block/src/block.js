@@ -3,11 +3,11 @@ const { __ } = wp.i18n;
 const { Component } = wp.element;
 
 const {
-  ImagePlaceholder,
-  BlockControls,
+  MediaPlaceholder,
   MediaUpload,
+  BlockControls,
   InspectorControls
-} = wp.blocks;
+} = wp.editor
 
 const {
   Button,
@@ -240,12 +240,17 @@ class PanoramaBlock extends Component {
 
     if(!url) {
       return [
-        <ImagePlaceholder
+        <MediaPlaceholder
           key="easypanorama-placeholder"
           icon="cover-image"
-          label={ __( 'Panorama' ) }
+          labels={ {
+            title: __( 'Panorama' ),
+            name: __( 'images' ),
+          } }
           className={ className }
-          onSelectImage={ this.onSelectImage }
+          onSelect={ this.onSelectImage }
+          accept="image/*"
+          type="image"
         />
       ]
     };

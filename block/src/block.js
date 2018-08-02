@@ -207,7 +207,7 @@ class PanoramaBlock extends Component {
       height: containerHeight + 'px'
     };
 
-    if ( !url && image && image.isLoading ) {
+    if ( !url && image ) {
       return [
         <Placeholder
           key="easypanorama-loading"
@@ -238,7 +238,7 @@ class PanoramaBlock extends Component {
       ];
     }
 
-    if(!url) {
+    if(!url && !image) {
       return [
         <MediaPlaceholder
           key="easypanorama-placeholder"

@@ -5,7 +5,7 @@ Donate link: https://paypal.me/LeonardoGiacone
 Requires at least: 4.5
 Tested up to: 4.9
 Requires PHP: 5.6
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -115,6 +115,10 @@ No FAQs ready yet.
 4. Easy Panorama settings page
 
 == Changelog ==
+
+= 1.1.2 (03/08/2018) =
+* Bug fix: Updated from Gutenberg <code>wp.blocks</code> to <code>wp.editor</code>
+* Bug fix: Updated from Gutenberg <code>ImagePlaceholder</code> to <code>MediaPlaceholder</code>
 
 = 1.1.1 (02/05/2018) =
 * Bug fix: Paver dependencies are now enqueued in the right order

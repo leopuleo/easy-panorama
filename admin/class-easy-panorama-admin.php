@@ -418,7 +418,7 @@ class EasyPanoramaAdmin {
     ?>
       </div>
     </form>
-  <?php
+    <?php
   }
 
   /**

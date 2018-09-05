@@ -10,7 +10,6 @@ const {
 } = wp.editor
 
 const {
-  Button,
   Toolbar,
   IconButton,
   RangeControl,
@@ -20,9 +19,11 @@ const {
   PanelBody,
   Dashicon,
   Tooltip,
-  withAPIData,
   Placeholder
 } = wp.components;
+
+const { withSelect } = wp.data;
+
 
 class PanoramaBlock extends Component {
   constructor() {
@@ -49,8 +50,8 @@ class PanoramaBlock extends Component {
 
   componentDidUpdate() {
     const { attributes: { url }, image } = this.props;
-    if( !url && image && image.data !== undefined ) {
-      this.setImageData(image.data);
+    if( !url && image ) {
+      this.setImageData(image);
     }
   }
 
@@ -379,12 +380,10 @@ class PanoramaBlock extends Component {
   }
 }
 
-export default withAPIData( ( props ) => {
-  const { id } = props.attributes;
-  if ( !id ) {
-    return {};
-  }
-  return {
-    image: `/wp/v2/media/${ id }`,
-  };
+export default withSelect( ( select, ownProps ) => {
+	const { getMedia } = select( 'core' );
+  const { attributes: { id } } = ownProps;
+	return {
+		image: id ? getMedia( id ) : null,
+	};
 } )( PanoramaBlock );

@@ -221,24 +221,6 @@ class PanoramaBlock extends Component {
       ];
     }
 
-    if ( image && image.error ) {
-      const { error: { status } } = image;
-      let message = __( 'Block update failed, please try again later. ' ) + ` [${ status }]`;
-      if(status === 404) {
-        message = __( 'Image not found: invalid attachment ID.' ) + ` [${ status }]`;
-      }
-      return [
-        <Placeholder
-          key="easypanorama-error"
-          icon="cover-image"
-          label={ __( 'Panorama' ) }
-          className="easypanorama-error"
-        >
-          <span>{ message }</span>
-        </Placeholder>,
-      ];
-    }
-
     if(!url && !image) {
       return [
         <MediaPlaceholder

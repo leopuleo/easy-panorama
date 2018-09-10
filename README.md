@@ -25,7 +25,7 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 
 Include your favourite panoramic images in posts and pages using the **built-in shortcode functionality**.
 
-If you are using the classic WordPress editor (TinyMCE), you will find the *Add Panorama* button above the editor: click on the button and select the image you want to include. 
+If you are using the classic WordPress editor (TinyMCE), you will find the *Add Panorama* button above the editor: click on the button and select the image you want to include.
 The shortcode will be inserted in the editor and replaced by the panoramic viewer when you visit the website.
 
 You can customize the appearance and behaviour of the panoramic viewer through the Easy Panorama settings page or adding specific attributes to each shortcode: these will override the general settings.
@@ -64,7 +64,7 @@ You can customize the appearance and behaviour of each panoramic viewer thanks t
 Easy Panorama requires:
 * [WordPress](https://wordpress.org/) >= 4.9
 * [PHP](https://secure.php.net/manual/en/install.php) >= 5.6
-* [Gutenberg](https://wordpress.org/plugins/gutenberg/) >= 2.7 (Required for the new Gutenberg block feature)
+* [Gutenberg](https://wordpress.org/plugins/gutenberg/) >= 3.7 (Required for the new Gutenberg block feature)
 * [Node](https://nodejs.org/en/) >= 8.9.X (Required for Gutenberg block development)
 * [Yarn](https://yarnpkg.com/en/docs/install) (Required for Gutenberg block development)
 

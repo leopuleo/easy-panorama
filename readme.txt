@@ -72,7 +72,7 @@ Easy Panorama requires:
 
 [WordPress](https://wordpress.org/) >= 4.9
 [PHP](https://secure.php.net/manual/en/install.php) >= 5.6
-[Gutenberg](https://wordpress.org/plugins/gutenberg/) >= 2.7 (Required for the new Gutenberg block feature)
+[Gutenberg](https://wordpress.org/plugins/gutenberg/) >= 3.7 (Required for the new Gutenberg block feature)
 [Node](https://nodejs.org/en/) >= 8.9.X (Required for Gutenberg block development)
 [Yarn](https://yarnpkg.com/en/docs/install) (Required for Gutenberg block development)
 

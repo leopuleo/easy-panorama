@@ -18,6 +18,7 @@ install:
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
   - cd block && yarn && yarn run build
+  - echo $PWD
 
 deploy:
   provider: script

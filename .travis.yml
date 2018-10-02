@@ -18,11 +18,15 @@ install:
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
   - cd block && yarn && yarn run build
+  - echo $PWD
+
+before_deploy:
+  echo $PWD
 
 deploy:
   provider: script
   skip_cleanup: true
-  script: echo $PWD
+  script: cd .. bash .travis/deploy.sh
   on:
     branch: master
     php: 5.6

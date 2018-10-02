@@ -22,7 +22,7 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ".travis/deploy.sh"
+  script: bash .travis/deploy.sh
   on:
     branch: master
     php: 5.6

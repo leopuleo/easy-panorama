@@ -26,3 +26,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script: ./.travis/deploy.sh
+  on:
+    branch: master
+    php: 7.0

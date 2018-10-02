@@ -21,12 +21,11 @@ install:
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
   - cd block && yarn && yarn run build
-  - cd ..
 
 deploy:
   provider: script
   skip_cleanup: true
-  script: chmod +x ./deploy.sh && ./deploy.sh
+  script: ./.travis/deploy.sh
   on:
     branch: master
     php: 7.0

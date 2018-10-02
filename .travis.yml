@@ -33,5 +33,6 @@ deploy:
   skip_cleanup: true
   script: bash .travis/deploy.sh
   on:
+    all_branches: true
     tags: true
     php: 5.6

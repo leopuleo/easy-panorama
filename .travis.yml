@@ -21,6 +21,7 @@ install:
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
   - cd block && yarn && yarn run build
+  - cd ..
 
 deploy:
   provider: script

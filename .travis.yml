@@ -20,7 +20,7 @@ script:
   - cd block && yarn && yarn run build
 
 before_deploy:
-  echo $PWD
+  script: echo $PWD
 
 deploy:
   provider: script

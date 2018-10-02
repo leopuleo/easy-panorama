@@ -18,9 +18,6 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require squizlabs/php_codesniffer
 
-jobs:
-  include:
-    - stage: Test PHP
-      script: phpcs --standard=ruleset.xml --extensions=php -n -s .
-    - stage: Build Javascript
-      script: cd block && yarn && yarn run build
+script:
+  - phpcs --standard=ruleset.xml --extensions=php -n -s .
+  - cd block && yarn && yarn run build

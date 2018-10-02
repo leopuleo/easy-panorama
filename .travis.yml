@@ -21,3 +21,8 @@ install:
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
   - cd block && yarn && yarn run build
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ./.travis/deploy.sh

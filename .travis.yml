@@ -6,18 +6,6 @@ php:
   - 7.0
   - 7.1
 
-# Declare which versions of WordPress to test against.
-# Also declare whether or not to test in Multisite.
-env:
-  # Trunk
-  # @link https://github.com/WordPress/WordPress
-  - WP_VERSION=master WP_MULTISITE=0
-  - WP_VERSION=master WP_MULTISITE=1
-
-matrix:
-  allow_failures:
-    - php: nightly
-
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
   - export PATH="$HOME/.yarn/bin:$PATH"
@@ -30,6 +18,9 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require squizlabs/php_codesniffer
 
-script:
-  - phpcs --standard=ruleset.xml --extensions=php -n -s .
-  - cd block && yarn && yarn run build
+jobs:
+  include:
+    - stage: Test PHP
+      script: phpcs --standard=ruleset.xml --extensions=php -n -s .
+    - stage: Build Javascript
+      script: cd block && yarn && yarn run build

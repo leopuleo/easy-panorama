@@ -3,26 +3,15 @@ language: php
 php:
   - nightly
   - 5.6
-  - 5.5
-  - 5.4
   - 7.0
-  - hhvm
+  - 7.1
 
-# Declare which versions of WordPress to test against.
-# Also declare whether or not to test in Multisite.
-env:
-  # Trunk
-  # @link https://github.com/WordPress/WordPress
-  - WP_VERSION=master WP_MULTISITE=0
-  - WP_VERSION=master WP_MULTISITE=1
-  # WordPress 4.5
-  # @link https://github.com/WordPress/WordPress/tree/4.5-branch
-  - WP_VERSION=4.5 WP_MULTISITE=0
-  - WP_VERSION=4.5 WP_MULTISITE=1
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+  - export PATH="$HOME/.yarn/bin:$PATH"
 
-matrix:
-  allow_failures:
-    - php: nightly
+cache:
+  yarn: true
 
 install:
   - composer self-update && composer --version
@@ -31,3 +20,12 @@ install:
 
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
+  - cd block && yarn && yarn run build
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ./.travis/deploy.sh
+  on:
+    branch: master
+    php: 7.0

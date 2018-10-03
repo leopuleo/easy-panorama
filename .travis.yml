@@ -27,6 +27,7 @@ script:
 
 before_deploy:
   - cd $TRAVIS_BUILD_DIR
+  - zip $TRAVIS_BUILD_DIR${PLUGIN}-$TRAVIS_TAG.zip $TRAVIS_BUILD_DIR
 
 deploy:
   provider: script

@@ -15,10 +15,8 @@ if [[ -z "$TRAVIS_TAG" ]]; then
 	exit 0
 fi
 
-PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-PLUGIN_BUILDS_PATH="$PROJECT_ROOT/builds"
-PLUGIN_BUILD_CONFIG_PATH="$PROJECT_ROOT/build-cfg"
-ZIP_FILE="$PLUGIN_BUILDS_PATH/$PLUGIN-$TRAVIS_TAG.zip"
+zip -r $TRAVIS_BUILD_DIR${PLUGIN}-$TRAVIS_TAG.zip $TRAVIS_BUILD_DIR
+ZIP_FILE="$TRAVIS_BUILD_DIR/$PLUGIN-$TRAVIS_TAG.zip"
 
 # Ensure the zip file for the current version has been built
 if [ ! -f "$ZIP_FILE" ]; then

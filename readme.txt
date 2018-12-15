@@ -3,9 +3,9 @@ Contributors: LeoPeo
 Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver, block, gutenberg
 Donate link: https://paypal.me/LeonardoGiacone
 Requires at least: 4.5
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.6
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -115,6 +115,10 @@ No FAQs ready yet.
 4. Easy Panorama settings page
 
 == Changelog ==
+
+= 1.1.4 (15/12/2018) =
+* Bug fix: Added <code><MediaUploadCheck></code> + <code>allowedType</code> control
+* Design: Moved tooltip help icon at bottom/right corner of the block
 
 = 1.1.3 (05/08/2018) =
 * Bug fix: Replaced <code>withAPIData</code> with <code>withSelect</code>

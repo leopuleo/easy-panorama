@@ -23,8 +23,11 @@ before_install:
 
 install:
   - composer --version
+  - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - composer global require "squizlabs/php_codesniffer=*"
-  - php bin/phpcs -h
+
+before_script:
+  - phpcs --version
 
 script:
   - phpcs --standard=ruleset.xml --extensions=php -n -s .

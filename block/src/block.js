@@ -350,17 +350,17 @@ class PanoramaBlock extends Component {
           </PanelBody>
         </InspectorControls>
       ),
-      <div className={ className } key="easypanorama-block-editor">
-        <div style={ panoramaStyle } className="panorama--image" key="easypanorama-panorama-container">
-          <img src={ url } alt={ alt } title={ title } className={`wp-image-${ id }`} key="easypanorama-panorama-image"/>
+      <div className={ className } key="epblock">
+        <div style={ panoramaStyle } className="epblock__image-container" key="easypanorama-block">
+          <img src={ url } alt={ alt } title={ title } className={`wp-image-${ id }`} key="easypanorama-block-image"/>
         </div>
-        <span className="panorama--help-text" key="easypanorama-block-help">
+        <div className="epblock__help-text" key="easypanorama-block-help">
           <Tooltip text={ __( 'This is a preview, some features are not available.' ) } key="easypanorama-block-help-tooltip">
-            <span className="panorama--help-icon" key="easypanorama-block-help-icon-container">
+            <span className="epblock__help-icon" key="easypanorama-block-help-icon-container">
               <Dashicon size="25" icon="info" key="easypanorama-block-help-icon"/>
             </span>
           </Tooltip>
-        </span>
+        </div>
       </div>
     ];
   }

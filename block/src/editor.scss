@@ -1,24 +1,27 @@
 /* Easy Panorama Editor Styles */
-.wp-block-easy-panorama-block {
+.epblock {
   position: relative;
-  .panorama--help-text {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  .panorama--help-icon {
-    display: inline-block;
-    padding: 5px;
-    color: #fff;
-  }
-}
 
-.panorama--image {
-  height: 400px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  img {
-    height: 100%;
-    max-width: none;
+  &__image-container {
+    height: 400px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    img {
+      height: 100%;
+      max-width: none;
+    }
+  }
+
+  &__help-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    line-height: 0;
+  }
+
+  &__help-icon {
+    display: inline-block;
+    padding: 10px;
+    color: #fff;
   }
 }

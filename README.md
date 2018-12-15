@@ -7,7 +7,7 @@ Embed interactive wide/panoramic images on your site. Optimised for responsive l
 
 Easy Panorama plugin for WordPress websites allows you to display wide/panoramic images in a more accessible way: enjoy your panoramic photos scrolling them on the x-axis or moving your mobile device.
 
-You can start embedding your panoramic images using the handy **shortcode** (TinyMCE editor) or the new **Gutenberg Block**.
+You can start embedding your panoramic images using the handy **shortcode** (TinyMCE editor) or the new **Block**.
 
 Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=easy-panorama-wp-plugin) :smile:.
 
@@ -17,7 +17,7 @@ Easy Panorama uses the packed [Paver](http://terrymun.github.io/paver/?source=ea
 2. Customization of Paver appearance and behaviour from the Panorama Settings page.
 3. Other geek settings in the Advanced Settings page.
 4. [easy_panorama] shortcode to embed panoramic images with no hassle.
-5. Custom Gutenberg block for a better editing experience 🎉.
+5. Custom Panorama Block for a better editing experience 🎉.
 
 ## Shortcode (Classic WordPress editor)
 
@@ -46,14 +46,14 @@ You can customize the appearance and behaviour of the panoramic viewer through t
 ![Easy Panorama Block](https://www.adventuresbook.net/wp-content/uploads/2018/04/easy-panorama-gutenberg-block.gif)
 Include your favourite panoramic images in posts and pages using the **built-in block functionality**.
 
-If you are using the Gutenberg editor, you find the **Panorama** block ready to be embedded in your post.
+If you are using the Gutenberg editor (WordPress >= 5.0), you find the **Panorama** block ready to be embedded in your post.
 Search for "Panorama" within the blocks list, select it and choose the image you want to include.
-You can customize the appearance and behaviour of each panoramic viewer thanks to the Gutenberg Inspector Control.
+You can customize the appearance and behaviour of each panoramic viewer thanks to the Inspector Control.
 
-### Gutenberg Block features
-* Embed your panoramic/wide images in the new Gutenberg editor with no hassle.
-* Preview your panorama within the Gutenberg editor.
-* Customize the appearance and behaviour of each panoramic viewer thanks to the Gutenberg Inspector Control.
+### Block features
+* Embed your panoramic/wide images in the new editor with no hassle.
+* Preview your panorama within the editor.
+* Customize the appearance and behaviour of each panoramic viewer thanks to the Inspector Control.
 * Transform "Image" blocks into "Panorama" blocks with one click.
 * Transform "Panorama" blocks into "Image" blocks with one click.
 * Transform previous inserted `[easy_panorama]` shortcodes into "Panorama" blocks with one click.
@@ -62,11 +62,11 @@ You can customize the appearance and behaviour of each panoramic viewer thanks t
 
 # Requirements
 Easy Panorama requires:
-* [WordPress](https://wordpress.org/) >= 4.9
+* [WordPress](https://wordpress.org/) >= 4.5 (Required for TinyMCE shortcode)
+* [WordPress](https://wordpress.org/) >= 5.0 (Required for the new custom Panorama Block feature)
 * [PHP](https://secure.php.net/manual/en/install.php) >= 5.6
-* [Gutenberg](https://wordpress.org/plugins/gutenberg/) >= 2.7 (Required for the new Gutenberg block feature)
-* [Node](https://nodejs.org/en/) >= 8.9.X (Required for Gutenberg block development)
-* [Yarn](https://yarnpkg.com/en/docs/install) (Required for Gutenberg block development)
+* [Node](https://nodejs.org/en/) >= 8.9.X (Required for Block feature development)
+* [Yarn](https://yarnpkg.com/en/docs/install) (Required for Block feature development)
 
 # Contribution
 There are many ways to contribute to this plugin:

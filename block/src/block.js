@@ -5,6 +5,7 @@ const { Component } = wp.element;
 const {
   MediaPlaceholder,
   MediaUpload,
+  MediaUploadCheck,
   BlockControls,
   InspectorControls
 } = wp.editor
@@ -24,6 +25,7 @@ const {
 
 const { withSelect } = wp.data;
 
+const ALLOWED_MEDIA_TYPES = [ 'image' ];
 
 class PanoramaBlock extends Component {
   constructor() {
@@ -233,7 +235,7 @@ class PanoramaBlock extends Component {
           className={ className }
           onSelect={ this.onSelectImage }
           accept="image/*"
-          type="image"
+          allowedTypes={ ALLOWED_MEDIA_TYPES }
         />
       ]
     };
@@ -242,21 +244,23 @@ class PanoramaBlock extends Component {
       isSelected && (
         <BlockControls key="easypanorama-controls">
           <Toolbar key="easypanorama-toolbar">
-            <MediaUpload
-              key="easypanorama-mediaupload"
-              onSelect={ this.onSelectImage }
-              type="image"
-              value={ this.id }
-              render={ ( { open } ) => (
-                <IconButton
-                  key="easypanorama-openmedia"
-                  className="components-toolbar__control"
-                  label={ __( 'Edit image' ) }
-                  icon="edit"
-                  onClick={ open }
-                />
-              ) }
-            />
+            <MediaUploadCheck>
+              <MediaUpload
+                key="easypanorama-mediaupload"
+                onSelect={ this.onSelectImage }
+                allowedTypes={ ALLOWED_MEDIA_TYPES }
+                value={ this.id }
+                render={ ( { open } ) => (
+                  <IconButton
+                    key="easypanorama-openmedia"
+                    className="components-toolbar__control"
+                    label={ __( 'Edit image' ) }
+                    icon="edit"
+                    onClick={ open }
+                  />
+                ) }
+              />
+            </MediaUploadCheck>
           </Toolbar>
         </BlockControls>
       )

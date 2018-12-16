@@ -18,6 +18,9 @@
     <!-- Disable line length control -->
     <exclude name="Generic.Files.LineLength"/>
 
+    <!-- Disable side effects control -->
+    <exclude name="PSR1.Files.SideEffects"/>
+
     <!-- Disable PSR-2 indentation rules that are buggy with 2 spaces -->
     <exclude name="PSR2.ControlStructures.SwitchDeclaration.BreakIndent"/>
     <exclude name="PSR2.Methods.FunctionCallSignature.Indent"/>

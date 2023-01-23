@@ -78,11 +78,11 @@ class EasyPanoramaBlock {
     $defaultSettings = array(
       'containerHeight' => absint($this->options_panorama['containerHeight']),
       'startPosition' => absint($this->options_panorama['startPosition'] * 10),
-      'gracefulFailure' => (bool)$this->options_panorama['gracefulFailure'],
+      'gracefulFailure' => (bool)esc_attr($this->options_panorama['gracefulFailure']),
       'failureMessage' => esc_attr($this->options_panorama['failureMessage']),
       'failureMessageInsert' => esc_attr($this->options_panorama['failureMessageInsert']),
       'minimumOverflow' => absint($this->options_panorama['minimumOverflow']),
-      'displayMeta' => (bool)$this->options_panorama['meta'],
+      'displayMeta' => (bool)esc_attr($this->options_panorama['meta']),
     );
     return $defaultSettings;
   }

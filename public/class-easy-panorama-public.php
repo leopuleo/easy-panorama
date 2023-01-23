@@ -144,12 +144,12 @@ class EasyPanoramaPublic {
   public function localizeInitVar() {
     $localize_var = array(
       'panorama' => array(
-        'gracefulFailure' => (bool)$this->options_panorama['gracefulFailure'],
+        'gracefulFailure' => (bool)esc_attr($this->options_panorama['gracefulFailure']),
         'failureMessage' => esc_attr($this->options_panorama['failureMessage']),
         'failureMessageInsert' => esc_attr($this->options_panorama['failureMessageInsert']),
-        'meta' => (bool)$this->options_panorama['meta'],
+        'meta' => (bool)esc_attr($this->options_panorama['meta']),
         'minimumOverflow' => absint($this->options_panorama['minimumOverflow']),
-        'startPosition' => (float)$this->options_panorama['startPosition'],
+        'startPosition' => (float)number_format($this->options_panorama['startPosition'], 1, '.', ''),
       )
     );
     return $localize_var;
@@ -170,12 +170,12 @@ class EasyPanoramaPublic {
       'title'                   => '',
       'alt'                     => '',
       'container_height'        => absint($this->options_panorama['containerHeight']),
-      'graceful_failure'        => (bool)$this->options_panorama['gracefulFailure'],
+      'graceful_failure'        => (bool)esc_attr($this->options_panorama['gracefulFailure']),
       'failure_message'         => esc_attr($this->options_panorama['failureMessage']),
       'failure_message_insert'  => esc_attr($this->options_panorama['failureMessageInsert']),
-      'meta'                    => (bool)$this->options_panorama['meta'],
+      'meta'                    => (bool)esc_attr($this->options_panorama['meta']),
       'minimum_overflow'        => absint($this->options_panorama['minimumOverflow']),
-      'start_position'          => (float)$this->options_panorama['startPosition']
+      'start_position'          => (float)number_format($this->options_panorama['startPosition'], 1, '.', '')
     );
 
     $atts = shortcode_atts(
@@ -211,10 +211,10 @@ class EasyPanoramaPublic {
 
     echo '
       <div class="easy-panorama"
-        data-graceful-failure="' . (bool)$graceful_failure . '"
+        data-graceful-failure="' . (bool)esc_url($graceful_failure) . '"
         data-failure-message="' . esc_attr($failure_message) . '"
         data-failure-message-insert="' . esc_attr($failure_message_insert) . '"
-        data-meta="' . (bool)$meta . '"
+        data-meta="' . (bool)esc_url($meta) . '"
         data-minimum-overflow="' . absint($minimum_overflow) . '"
         data-start-position="' . floatval($start_position) . '"
         data-minimum-overflow="' . absint($start_position) . '"

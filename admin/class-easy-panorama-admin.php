@@ -250,7 +250,7 @@ class EasyPanoramaAdmin {
   public function containerHeightRender() {
     ?>
     <label>
-      <input id="easyPanorama_panorama[containerHeight]" type="number" name="easyPanorama_panorama[containerHeight]" value="<?php echo $this->options_panorama['containerHeight']; ?>" />
+      <input id="easyPanorama_panorama[containerHeight]" type="number" name="easyPanorama_panorama[containerHeight]" value="<?php echo esc_attr($this->options_panorama['containerHeight']); ?>" />
       <?php _e('px', $this->plugin_name); ?><br>
       <em><?php _e('Insert the height for all panoramic images container (Default: 400px).', $this->plugin_name); ?></em>
     </label>
@@ -271,7 +271,7 @@ class EasyPanoramaAdmin {
   public function failureMessageRender() {
     ?>
     <label>
-      <input id="easyPanorama_panorama[failureMessage]" type="text" name="easyPanorama_panorama[failureMessage]" value="<?php echo $this->options_panorama['failureMessage']; ?>" /><br>
+      <input id="easyPanorama_panorama[failureMessage]" type="text" name="easyPanorama_panorama[failureMessage]" value="<?php echo esc_attr($this->options_panorama['failureMessage']); ?>" /><br>
       <em><?php _e('This message will appear in mobile devices with no gyroscopic data or no physical orientation support. (Default: <code>Scroll left/right to pan through panorama.</code>).', $this->plugin_name); ?></em>
     </label>
     <?php
@@ -299,7 +299,7 @@ class EasyPanoramaAdmin {
   public function minimumOverflowRender() {
     ?>
     <label>
-      <input id="easyPanorama_panorama[minimumOverflow]" type="number" name="easyPanorama_panorama[minimumOverflow]" value="<?php echo $this->options_panorama['minimumOverflow'];?>" />
+      <input id="easyPanorama_panorama[minimumOverflow]" type="number" name="easyPanorama_panorama[minimumOverflow]" value="<?php echo esc_attr($this->options_panorama['minimumOverflow']);?>" />
       <?php _e('px', $this->plugin_name); ?><br>
       <em><?php _e('The excess width the picture must have before Paver kicks in (Default: 0px).', $this->plugin_name); ?></em>
     </label>

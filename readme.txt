@@ -5,7 +5,7 @@ Donate link: https://paypal.me/LeonardoGiacone
 Requires at least: 4.5
 Tested up to: 5.0
 Requires PHP: 5.6
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -115,6 +115,9 @@ No FAQs ready yet.
 4. Easy Panorama settings page
 
 == Changelog ==
+
+= 1.1.5 (23/01/2023) =
+* Bug fix: Sanitize and escape admin input fields. Thanks to [riodrwn](https://twitter.com/riodrwn)
 
 = 1.1.4 (15/12/2018) =
 * Bug fix: Added <code><MediaUploadCheck></code> + <code>allowedType</code> control

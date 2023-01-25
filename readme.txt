@@ -3,7 +3,7 @@ Contributors: LeoPeo
 Tags: image, panorama, panoramic image, shortcode, responsive, mobile, paver, block, gutenberg
 Donate link: https://paypal.me/LeonardoGiacone
 Requires at least: 4.5
-Tested up to: 5.0
+Tested up to: 6.1
 Requires PHP: 5.6
 Stable tag: 1.1.5
 License: GPL-2.0+
